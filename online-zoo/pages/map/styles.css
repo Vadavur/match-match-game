@@ -165,6 +165,27 @@
   color: #000;
 }
 
+.map__word {
+  display: flex;
+  position: relative;
+  justify-items: center;
+  align-items: center;
+  min-width: fit-content;
+  height: 47px;
+  margin: 7px;
+  font-family: Roboto, sans-serif;
+font-style: normal;
+font-weight: normal;
+font-size: 16px;
+line-height: 19px;
+text-align: center;
+color: #000000;
+}
+
+.map__item:hover .map__word {
+  display: none;
+}
+
 .item_alligator {
   position: absolute;
   top: 585px;
