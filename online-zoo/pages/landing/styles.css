@@ -5,23 +5,23 @@
 
 /* header ------------------------------------------------------------------------------------------------------------ */
 
-.page {
-  width: 100%;
-  margin: auto;
-  box-sizing: border-box;
+.header {
+  width: 1920;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  margin: auto;
 }
 
-.header {
+.header__flex {
   width: 1160px;
+  padding: 0 380px 0;
   height: 80px;
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  top: 0;
-  margin: auto;
-  position: absolute;
+  margin: 0 auto -80px;
+  z-index: 5;
 }
 
 .hidden-heading {
@@ -31,9 +31,12 @@
 }
 
 .header__logo {
+  margin-right: 57px;
+}
+
+.header__logo-img {
   width: 112px;
   height: 57px;
-  margin-right: 57px;
 }
 
 .header__nav {
@@ -98,15 +101,26 @@
 
 /* Watch your favorite animal online ------------------------------------------------------------------------------------------------------------ */
 
+.top__background-wrap{
+  width: 100%;
+  background: #59c3fb;
+}
+
 .main__top {
   width: 1920px;
   height: 700px;
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  background: orangered;
 }
+
 
 .top__content {
   margin-top: 210px;
   padding: 0 380px;
   position: absolute;
+  z-index: 5;
 }
 
 .top__heading {
@@ -160,7 +174,7 @@
       #59c3fb 100%
     ),
     no-repeat;
-  z-index: -1;
+  z-index: 1;
   overflow: hidden;
 }
 
@@ -168,7 +182,7 @@
   margin-right: 282.26px;
   width: 834px;
   height: 700px;
-  z-index: 3;
+  z-index: 4;
   position: absolute;
   right: 0;
 }
@@ -176,7 +190,7 @@
 .background__panda-0 {
   width: 693px;
   height: 645px;
-  z-index: 2;
+  z-index: 3;
   position: absolute;
   bottom: 0;
   right: 361px;
@@ -186,7 +200,7 @@
   margin-left: 219.02px;
   width: 1047px;
   height: 700px;
-  z-index: 1;
+  z-index: 2;
   position: absolute;
   left: 0;
 }
@@ -248,7 +262,7 @@
 /* Pets in zoo ------------------------------------------------------------------------------------------------------------ */
 
 .carousel-2__heading {
-  margin-top: 204px;
+  margin-top: 200px;
 }
 
 .carousel-2__wrapper {
@@ -256,7 +270,7 @@
   width: 1920px;
   height: 644px;
   padding: 0 380px;
-  margin: 74px auto 0;
+  margin: 76px auto 0;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -394,6 +408,7 @@
   align-items: center;
   justify-content: space-between;
 }
+
 .testimonials__grid {
   display: grid;
   grid-template-areas:
@@ -412,6 +427,7 @@
   grid-area: user-img;
   margin: 22px 10px 18px 20px;
 }
+
 .testimonials__user-name {
   grid-area: user-name;
   font-family: Roboto, sans-serif;
@@ -423,6 +439,7 @@
   position: relative;
   top: 31px;
 }
+
 .testimonials__money-logo {
   grid-area: money-logo;
   width: 12px;
@@ -430,6 +447,7 @@
   position: relative;
   top: 9px;
 }
+
 .testimonials__money-summ {
   grid-area: money-summ;
   font-family: Roboto, sans-serif;
@@ -441,6 +459,7 @@
   position: relative;
   top: 7px;
 }
+
 .testimonials__speech {
   grid-area: speech;
   width: 193px;
@@ -459,6 +478,120 @@
 }
 
 /* footer ------------------------------------------------------------------------------------------------------------ */
+.footer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 80px auto 0;
+  padding-top: 20px;
+  background-image: url(../../assets/images/footer_bg.png);
+  background-size: 1908px;
+  background-repeat: no-repeat;
+  background-position-y: -90px;
+  background-position-x: center;
+}
+
+.footer__background-wrap{
+  width: 100%;
+  background: #dff5b0;
+}
+
+.footer__grid {
+  width: 1160px;
+  height: 170px;
+  padding: 80px 380px 20px;
+  margin: 0 auto 0;
+  display: grid;
+  grid-template-areas:
+  "zoo-logo button button ul-1 ul-2"
+  "rss-logo yem-logo copyright copyright reference";
+  grid-template-rows: 46px auto;
+  grid-template-columns: 198px 174px 218px 256px auto;
+}
+
+.footer__logo {
+  grid-area: zoo-logo;
+}
+
+.footer__logo-img {
+  width: 98px;
+  height: 50px;
+}
+
+.btn_action_donate {
+  grid-area: button;
+  width: 230px;
+}
+
+.footer__nav {
+  width: 345px;
+  grid-area: ul-1;
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+
+.footer__nav-item {
+  display: block;
+  float: left;
+  width: 49%;
+  margin-bottom: 15px;
+}
+
+.footer__nav-link {
+  font-family: Roboto, sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 21px;
+  color: #000;
+  text-decoration: none;
+}
+
+.footer__contacts {
+  grid-area: ul-2;
+  display: flex;
+  justify-self: end;
+}
+
+.contacts__img {
+  margin-left: 10px;
+}
+
+.footer__rss-logo {
+  grid-area: rss-logo;
+  align-self: end;
+}
+
+.footer__yem-logo {
+  grid-area: yem-logo;
+  align-self: end;
+}
+
+.footer__copyright {
+  grid-area: copyright;
+  align-self: end;
+  font-family: Roboto, sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 21px;
+  color: #000;
+}
+
+.footer__reference {
+  grid-area: reference;
+  align-self: end;
+  justify-self: end;
+  font-family: Roboto, sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 21px;
+  color: #000;
+}
+
 /*  ------------------------------------------------------------------------------------------------------------ */
 
 /* * {
