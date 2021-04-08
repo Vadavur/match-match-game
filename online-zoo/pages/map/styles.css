@@ -114,8 +114,7 @@
   align-items: center;
 }
 
-
-.map__item:hover .item__logo{
+.map__item:hover .item__logo {
   transition: 0.5s;
 }
 
@@ -174,16 +173,22 @@
   height: 47px;
   margin: 7px;
   font-family: Roboto, sans-serif;
-font-style: normal;
-font-weight: normal;
-font-size: 16px;
-line-height: 19px;
-text-align: center;
-color: #000000;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 19px;
+  text-align: center;
+  color: #000000;
 }
 
 .map__item:hover .map__word {
   display: none;
+}
+
+.map__word_eagle{
+  position: relative;
+  top:0px;
+  left:-125px;
 }
 
 .item_alligator {
@@ -206,8 +211,37 @@ color: #000000;
   top: 685px;
   left: 75px;
 }
+.item_zoom {
+  position: absolute;
+  top: 857px;
+  left: 899px;
+}
+.item_country-name {
+  font-family: Roboto, sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 19px;
+  text-align: center;
+}
 
-.item__logo{
+.item_text-1 {
+  position: absolute;
+  top: 560px;
+  left: -379px;
+}
+.item_text-2 {
+  position: absolute;
+  top: 705px;
+  left: -67px;
+}
+.item_text-3 {
+  position: absolute;
+  top: 571px;
+  left: 252px;
+}
+
+.item__logo {
   display: block;
   width: 64px;
   height: 64px;
@@ -216,44 +250,37 @@ color: #000000;
   background-position: center;
 }
 
-
-
-.logo_alligator{
+.logo_alligator {
   background-image: url(../../assets/icons/alligator.png);
 }
 
-.logo_panda{
+.logo_panda {
   background-image: url(../../assets/icons/panda.png);
 }
 
-.logo_eagle{
+.logo_eagle {
   background-image: url(../../assets/icons/eagle.png);
 }
 
-.logo_gorilla{
+.logo_gorilla {
   background-image: url(../../assets/icons/gorilla.png);
 }
 
-
-
-.logo_alligator:hover{
+.logo_alligator:hover {
   background-image: url(../../assets/icons/alligator_selected.png);
 }
 
-.logo_panda:hover{
+.logo_panda:hover {
   background-image: url(../../assets/icons/panda_selected.png);
 }
 
-.logo_eagle:hover{
+.logo_eagle:hover {
   background-image: url(../../assets/icons/eagle_selected.png);
 }
 
-.logo_gorilla:hover{
+.logo_gorilla:hover {
   background-image: url(../../assets/icons/gorilla_selected.png);
 }
-
-
-
 
 /* main ------------------------------------------------------------------------------------------------------------ */
 
@@ -279,7 +306,6 @@ color: #000000;
 .text_uppercase {
   text-transform: uppercase;
 }
-
 
 /* Information ------------------------------------------------------------------------------------------------------------ */
 
