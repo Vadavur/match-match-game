@@ -2,6 +2,9 @@
   font-family: SceneW01-Black;
   src: url(../../assets/fonts/12309.ttf);
 }
+html {
+  font-size: 10px;
+}
 
 /* header ------------------------------------------------------------------------------------------------------------ */
 
@@ -61,7 +64,7 @@
 .nav__item {
   font-family: "Roboto", sans-serif;
   font-weight: 500;
-  font-size: 18px;
+  font-size: 1.8rem;
   line-height: 21.09px;
   letter-spacing: normal;
   color: #000;
@@ -159,7 +162,7 @@
   font-family: Roboto, sans-serif;
   font-style: normal;
   font-weight: normal;
-  font-size: 16px;
+  font-size: 1.6rem;
   line-height: 19px;
   color: #000;
 }
@@ -175,7 +178,7 @@
   font-family: Roboto, sans-serif;
   font-style: normal;
   font-weight: normal;
-  font-size: 16px;
+  font-size: 1.6rem;
   line-height: 19px;
   text-align: center;
   color: #000000;
@@ -185,10 +188,10 @@
   display: none;
 }
 
-.map__word_eagle{
+.map__word_eagle {
   position: relative;
-  top:0px;
-  left:-125px;
+  top: 0px;
+  left: -125px;
 }
 
 .item_alligator {
@@ -220,7 +223,7 @@
   font-family: Roboto, sans-serif;
   font-style: normal;
   font-weight: normal;
-  font-size: 16px;
+  font-size: 1.6rem;
   line-height: 19px;
   text-align: center;
 }
@@ -298,7 +301,7 @@
   font-family: Roboto, sans-serif;
   font-style: normal;
   font-weight: 500;
-  font-size: 40px;
+  font-size: 4rem;
   line-height: 47px;
   color: #000;
 }
@@ -360,7 +363,7 @@
   font-family: Roboto, sans-serif;
   font-style: normal;
   font-weight: normal;
-  font-size: 16px;
+  font-size: 1.6rem;
   line-height: 19px;
   color: #000;
 }
@@ -390,7 +393,7 @@
   font-family: Roboto, sans-serif;
   font-style: normal;
   font-weight: normal;
-  font-size: 16px;
+  font-size: 1.6rem;
   line-height: 19px;
   color: #000;
 }
@@ -400,7 +403,7 @@
   font-family: Roboto, sans-serif;
   font-style: normal;
   font-weight: normal;
-  font-size: 16px;
+  font-size: 1.6rem;
   line-height: 19px;
   color: #000;
 }
@@ -487,7 +490,7 @@
   color: #000;
   height: 51px;
   font-family: Roboto, sans-serif;
-  font-size: 18px;
+  font-size: 1.8rem;
   cursor: pointer;
   outline: none;
 }
@@ -519,7 +522,7 @@
   font-family: Roboto, sans-serif;
   font-style: normal;
   font-weight: normal;
-  font-size: 18px;
+  font-size: 1.8rem;
   line-height: 21px;
   color: #000;
   text-decoration: none;
@@ -560,7 +563,7 @@
   font-family: Roboto, sans-serif;
   font-style: normal;
   font-weight: normal;
-  font-size: 18px;
+  font-size: 1.8rem;
   line-height: 21px;
   color: #000;
 }
@@ -572,7 +575,7 @@
   font-family: Roboto, sans-serif;
   font-style: normal;
   font-weight: normal;
-  font-size: 18px;
+  font-size: 1.8rem;
   line-height: 21px;
   color: #000;
 }

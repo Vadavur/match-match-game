@@ -2,6 +2,9 @@
   font-family: SceneW01-Black;
   src: url(../../assets/fonts/12309.ttf);
 }
+html {
+  font-size: 10px;
+}
 
 /* header ------------------------------------------------------------------------------------------------------------ */
 
@@ -56,7 +59,7 @@
 .nav__item {
   font-family: "Roboto", sans-serif;
   font-weight: 500;
-  font-size: 18px;
+  font-size: 1.8rem;
   line-height: 21.09px;
   letter-spacing: normal;
   color: #000;
@@ -90,7 +93,7 @@
   font-family: Roboto, sans-serif;
   font-style: normal;
   font-weight: 500;
-  font-size: 40px;
+  font-size: 4rem;
   line-height: 47px;
   color: #000;
 }
@@ -127,7 +130,7 @@
   font-family: "SceneW01-Black", sans-serif;
   font-style: normal;
   font-weight: 900;
-  font-size: 70px;
+  font-size: 7rem;
   line-height: 84px;
   letter-spacing: 0.03em;
   color: #000;
@@ -140,7 +143,7 @@
   color: #000;
   height: 51px;
   font-family: Roboto, sans-serif;
-  font-size: 18px;
+  font-size: 1.8rem;
   cursor: pointer;
   outline: none;
 }
@@ -250,7 +253,7 @@
   font-family: Roboto, sans-serif;
   font-style: normal;
   font-weight: normal;
-  font-size: 16px;
+  font-size: 1.6rem;
   line-height: 130%;
   text-align: center;
   color: #000;
@@ -309,7 +312,7 @@
   font-family: Roboto;
   font-style: normal;
   font-weight: normal;
-  font-size: 16px;
+  font-size: 1.6rem;
   line-height: 19px;
   color: #ffffff;
   z-index: 2;
@@ -323,7 +326,7 @@
 }
 
 .carousel-2__img-link:hover .img__capture {
-  font-size: 18px;
+  font-size: 1.8rem;
   transition: 0.7s;
 }
 
@@ -383,7 +386,7 @@
   font-family: Roboto, sans-serif;
   font-style: normal;
   font-weight: normal;
-  font-size: 16px;
+  font-size: 1.6rem;
   line-height: 19px;
   text-align: center;
   color: #000000;
@@ -430,7 +433,7 @@
   font-family: Roboto, sans-serif;
   font-style: normal;
   font-weight: 500;
-  font-size: 16px;
+  font-size: 1.6rem;
   line-height: 19px;
   color: #000;
   position: relative;
@@ -450,7 +453,7 @@
   font-family: Roboto, sans-serif;
   font-style: normal;
   font-weight: 500;
-  font-size: 12px;
+  font-size: 1.2rem;
   line-height: 14px;
   color: #000;
   position: relative;
@@ -464,7 +467,7 @@
   font-family: Roboto, sans-serif;
   font-style: normal;
   font-weight: normal;
-  font-size: 16px;
+  font-size: 1.6rem;
   line-height: 19.2px;
   color: #000;
 }
@@ -486,7 +489,6 @@
 }
 
 .footer__background-wrap {
-
   width: 100%;
   position: relative;
   background: #dff5b0;
@@ -502,7 +504,7 @@
   overflow: hidden;
 }
 
-.footer__bg-img{
+.footer__bg-img {
   margin-top: -290px;
   margin-bottom: -350px;
   position: absolute;
@@ -556,7 +558,7 @@
   font-family: Roboto, sans-serif;
   font-style: normal;
   font-weight: normal;
-  font-size: 18px;
+  font-size: 1.8rem;
   line-height: 21px;
   color: #000;
   text-decoration: none;
@@ -576,7 +578,7 @@
   margin-left: 10px;
 }
 
-.contacts__img:hover{
+.contacts__img:hover {
   border-radius: 50%;
   box-shadow: 1px 1px 7px #59c3fb;
 }
@@ -597,7 +599,7 @@
   font-family: Roboto, sans-serif;
   font-style: normal;
   font-weight: normal;
-  font-size: 18px;
+  font-size: 1.8rem;
   line-height: 21px;
   color: #000;
 }
@@ -609,7 +611,7 @@
   font-family: Roboto, sans-serif;
   font-style: normal;
   font-weight: normal;
-  font-size: 18px;
+  font-size: 1.8rem;
   line-height: 21px;
   color: #000;
 }

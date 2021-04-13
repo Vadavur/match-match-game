@@ -2,7 +2,9 @@
   font-family: Bebas Neue;
   src: url(../../assets/fonts/bebas_neue_bold.ttf);
 }
-
+html {
+  font-size: 10px;
+}
 /* ------------------------------------------------------------------------------------------------------------ */
 
 .page {
@@ -33,7 +35,7 @@
   font-family: Bebas Neue;
   font-style: normal;
   font-weight: bold;
-  font-size: 70px;
+  font-size: 7rem;
   line-height: 70px;
   text-align: center;
   margin-top: -107px;
@@ -44,7 +46,7 @@
   font-family: Bebas Neue;
   font-style: normal;
   font-weight: bold;
-  font-size: 20px;
+  font-size: 2rem;
   line-height: 20px;
   text-align: center;
   margin-top: 15px;
