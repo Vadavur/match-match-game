@@ -180,12 +180,10 @@ html {
 }
 
 .background__drops-1 {
-  margin-right: 282.26px;
-  width: 834px;
-  height: 700px;
   z-index: 4;
   position: absolute;
-  right: 0;
+  right: 282px;
+  bottom: -37px;
 }
 
 .background__panda-0 {
@@ -198,12 +196,10 @@ html {
 }
 
 .background__drops-2 {
-  margin-left: 219.02px;
-  width: 1047px;
-  height: 700px;
   z-index: 2;
   position: absolute;
-  left: 0;
+  left: 219px;
+  bottom: -25px;
 }
 
 /* How it works ------------------------------------------------------------------------------------------------------------ */
