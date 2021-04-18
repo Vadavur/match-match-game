@@ -7,27 +7,26 @@ html {
 }
 /* header ------------------------------------------------------------------------------------------------------------ */
 
-.page {
-  position: relative;
-}
-
 .header {
-  width: 1920;
+  width: 1920px;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  justify-content: start;
   margin: auto;
+  transition: 2s;
+  transition-timing-function: cubic-bezier(-0.5, -1.5, 0.1, 1.5);
 }
 
 .header__flex {
   width: 1160px;
-  padding: 0 380px 0;
   height: 80px;
   display: flex;
   justify-content: flex-start;
   align-items: center;
   margin: 0 auto -80px;
   z-index: 5;
+  transition: 2s;
+  transition-timing-function: cubic-bezier(-0.5, -1.5, 0.1, 1.5);
 }
 
 .hidden-heading {
@@ -78,6 +77,49 @@ html {
     -1px -1px 0 #70cb0e, 0px 1px 0 #70cb0e, 1px -0px 0 #70cb0e,
     -1px 0px 0 #70cb0e, -0px -1px 0 #70cb0e;
   pointer-events: none;
+}
+
+.header__burger {
+  display: none;
+}
+
+@media (max-width: 1919px) {
+  .header {
+    width: 1200px;
+  }
+}
+
+@media (max-width: 1199px) {
+  .header {
+    width: 640px;
+  }
+  .header__flex {
+    width: 600px;
+    transition-timing-function: cubic-bezier(-0.5, -1.5, 0.1, 1.5);
+  }
+  .header__logo {
+    margin-right: 50px;
+  }
+}
+
+@media (max-width: 639px) {
+  .header {
+    width: 320px;
+  }
+
+  .header__flex {
+    width: 300px;
+    justify-content: space-between;
+  }
+
+  .header__nav {
+    display: none;
+  }
+
+  .header__burger {
+    display: initial;
+    cursor: pointer;
+  }
 }
 
 /* Sidebar ------------------------------------------------------------------------------------------------------------ */
@@ -329,62 +371,6 @@ html {
 
 /* footer ------------------------------------------------------------------------------------------------------------ */
 
-.footer {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: 80px auto 0;
-  padding-top: 20px;
-  position: relative;
-}
-
-.footer__background-wrap {
-  width: 100%;
-  position: relative;
-  background: #dff5b0;
-}
-
-.footer__bg {
-  box-sizing: border-box;
-  width: 1920px;
-  height: 700px;
-  padding: 0 380px;
-  position: absolute;
-  z-index: 1;
-  overflow: hidden;
-}
-
-.footer__bg-img {
-  margin-top: -290px;
-  margin-bottom: -350px;
-  position: absolute;
-  z-index: -1;
-  bottom: 349px;
-}
-
-.footer__grid {
-  width: 1160px;
-  height: 170px;
-  padding: 80px 380px 20px;
-  margin: 0 auto 0;
-  display: grid;
-  grid-template-areas:
-    "zoo-logo button button ul-1 ul-2"
-    "rss-logo yem-logo copyright copyright reference";
-  grid-template-rows: 46px auto;
-  grid-template-columns: 198px 174px 218px 256px auto;
-}
-
-.footer__logo {
-  grid-area: zoo-logo;
-}
-
-.footer__logo-img {
-  width: 98px;
-  height: 50px;
-}
-
 .btn_action_donate {
   grid-area: button;
   width: 230px;
@@ -410,11 +396,66 @@ html {
   box-shadow: inset 0px 0px 25px rgba(0, 0, 0, 0.8);
 }
 
+
+.footer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 80px auto 0;
+  padding-top: 20px;
+  position: relative;
+  background-image: url(../../assets/images/footer_bg_1920.png);
+  background-repeat: no-repeat;
+  background-position-x: center;
+  background-position-y: 2px;
+}
+
+.footer__background-wrap {
+  width: 100%;
+  position: relative;
+  background-color: #dff5b0;
+}
+
+.footer__bg {
+  width: 1920px;
+  height: 700px;
+  position: absolute;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.footer__grid {
+  width: 1160px;
+  height: 170px;
+  padding: 80px 0 20px;
+  margin: 0 auto 0;
+  display: grid;
+  grid-template-areas:
+    "zoo-logo button button ul-1 ul-2"
+    "rss-logo yem-logo copyright copyright reference";
+  grid-template-columns: 198px 174px 218px 256px auto;
+  grid-template-rows: 46px auto;
+}
+
+.footer__logo {
+  grid-area: zoo-logo;
+}
+
+.footer__logo-img {
+  width: 98px;
+  height: 50px;
+}
+
+.btn_action_donate {
+  grid-area: button;
+  width: 230px;
+  height: 50px;
+}
+
 .footer__nav {
   width: 345px;
   grid-area: ul-1;
-  margin: 0;
-  padding: 0;
   list-style-type: none;
 }
 
@@ -485,4 +526,194 @@ html {
   font-size: 1.8rem;
   line-height: 21px;
   color: #000;
+}
+
+@media (max-width: 1919px) {
+  .footer {
+    background-image: url(../../assets/images/footer_bg_1200.png);
+    background-position-y: -47px;
+  }
+  .footer__bg {
+    width: 1200px;
+  }
+}
+
+@media (max-width: 1199px) {
+  .footer {
+    background-image: url(../../assets/images/footer_bg_1200.png);
+    background-position-y: -47px;
+    background-position-x: center;
+    background-size: 200%;
+  }
+
+  .footer__bg {
+    width: 640px;
+  }
+
+  .footer__grid {
+    width: 640px;
+    height: 359px;
+    box-sizing: border-box;
+    padding: 80px 20px 20px;
+    grid-template-areas:
+      "zoo-logo ul-1 ul-1 ul-2"
+      "rss-logo rss-logo yem-logo button"
+      "reference reference reference reference"
+      "copyright copyright copyright copyright";
+    grid-template-columns: 155px 61px 150px 234px;
+    grid-template-rows: 107px 100px 23px 38px;
+  }
+
+  .footer__btn {
+    justify-self: end;
+  }
+
+  .btn_action_donate {
+    width: 207px;
+  }
+
+  .footer__nav {
+    width: 210px;
+    justify-self: start;
+  }
+
+  .contacts__img {
+    margin-left: 10px;
+  }
+
+  .footer__rss-logo {
+    grid-area: rss-logo;
+    align-self: start;
+    justify-self: start;
+  }
+
+  .footer__yem-logo {
+    grid-area: yem-logo;
+    align-self: start;
+    justify-self: start;
+  }
+
+  .footer__copyright {
+    align-self: center;
+    justify-self: center;
+  }
+
+  .footer__reference {
+    align-self: center;
+    justify-self: center;
+  }
+}
+
+@media (max-width: 639px) {
+  .footer {
+    background-image: url(../../assets/images/footer_bg_1200.png);
+    background-position-y: 0px;
+    background-position-x: 3px;
+    background-size: 100%;
+  }
+
+  .footer__bg {
+    width: 320px;
+  }
+
+  .footer__grid {
+    width: 320px;
+    height: 742px;
+    box-sizing: border-box;
+    padding: 80px 10px 20px;
+    grid-template-areas:
+      "zoo-logo zoo-logo"
+      "ul-1 ul-1"
+      "button button"
+      "ul-2 ul-2"
+      "rss-logo yem-logo"
+      "reference reference"
+      "copyright copyright";
+    grid-template-columns: auto auto;
+    grid-template-rows: 100px 179px 100px 90px 101px 31px 42px;
+    justify-items: center;
+    justify-content: center;
+  }
+
+  .footer__btn {
+    margin-right: -4px;
+  }
+  
+  .btn_action_donate {
+    width: 207px;
+    align-self: center;
+    justify-self: center;
+    position: relative;
+    left: 46px;
+  }
+
+  .footer__nav {
+    width: 210px;
+    justify-self: center;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .footer__nav-item {
+    float: initial;
+    width: 100%;
+    margin-bottom: 15px;
+  }
+
+  .footer__nav-item:nth-child(2) {
+    order: 2;
+  }
+
+  .footer__nav-item:nth-child(3) {
+    order: 1;
+  }
+
+  .footer__nav-item:nth-child(4) {
+    order: 3;
+  }
+
+  .footer__nav-link {
+    font-family: Roboto, sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 1.8rem;
+    line-height: 21px;
+    color: #000;
+    text-decoration: none;
+  }
+
+  .footer__contacts {
+    justify-self: center;
+    column-gap: 10px;
+  }
+
+  .contacts__img {
+    margin-left: 0px;
+  }
+
+  .footer__rss-logo {
+    grid-area: rss-logo;
+    justify-self: start;
+  }
+
+  .footer__yem-logo {
+    grid-area: yem-logo;
+    justify-self: end;
+  }
+
+  .footer__copyright {
+    width: 220px;
+    align-self: center;
+    justify-self: center;
+    text-align: center;
+  }
+
+  .footer__reference {
+    align-self: start;
+  }
+
+  .footer__copyright_and {
+    display: none;
+  }
 }
