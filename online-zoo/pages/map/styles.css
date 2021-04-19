@@ -152,7 +152,6 @@ html {
 
 .map {
   width: 100vw;
-  /* width: 1920px; */
   box-sizing: border-box;
   margin: auto;
   display: flex;
@@ -225,7 +224,6 @@ html {
   align-items: center;
   justify-content: center;
   width: fit-content;
-  /* min-width: 102px; */
   min-height: 47px;
   height: fit-content;
   background: #70cb0e;
@@ -530,119 +528,6 @@ html {
     right: 0px;
   }
 }
-/* .map__icons {
-  position: relative;
-}
-
-
-  .map__pointers {
-    position: relative;
-  }
-  
-  .map__item {
-    border-radius: 50%;
-    width: 64px;
-    height: 64px;
-    margin-bottom: 8px;
-    position: absolute;
-    display: flex;
-    align-items: center;
-  }
-  
-  .map__item:hover .item__logo {
-    transition: 0.5s;
-  }
-  
-  .map__item_selected {
-    box-shadow: none;
-  }
-  
-  .map__tooltip {
-    position: relative;
-    display: flex;
-    justify-items: center;
-    align-items: center;
-    min-width: fit-content;
-    height: 47px;
-    margin: 0;
-    display: none;
-  }
-  
-  .map__item:hover .map__tooltip {
-    display: flex;
-  }
-  
-  .tooltip__tip {
-    width: 9px;
-    height: 9px;
-  }
-  
-  .tooltip__text {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-width: 102px;
-    width: fit-content;
-    height: 47px;
-    background: #70cb0e;
-  }
-  
-  .tooltip__text {
-    text-align: center;
-    font-family: Roboto, sans-serif;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 1.6rem;
-    line-height: 19px;
-    color: #000;
-  }
-  
-  .map__word {
-    display: flex;
-    position: relative;
-    justify-items: center;
-    align-items: center;
-    min-width: fit-content;
-    height: 47px;
-    margin: 7px;
-    font-family: Roboto, sans-serif;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 1.6rem;
-    line-height: 19px;
-    text-align: center;
-    color: #000000;
-  }
-  
-  .map__item:hover .map__word {
-    display: none;
-  }
-  
-  .map__word_eagle {
-    position: relative;
-    top: 0px;
-    left: -125px;
-  }
-
-
-  .item_country-name {
-    font-family: Roboto, sans-serif;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 1.6rem;
-    line-height: 19px;
-    text-align: center;
-  }
-  .item__logo {
-    display: block;
-    width: 64px;
-    height: 64px;
-    border-radius: 50%;
-    background-repeat: no-repeat;
-    background-position: center;
-  } */
 
 /* main ------------------------------------------------------------------------------------------------------------ */
 
