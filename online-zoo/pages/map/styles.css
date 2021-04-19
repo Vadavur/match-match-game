@@ -11,6 +11,26 @@ html {
   background-color: #a7e1ff;
 }
 
+.btn {
+  background-color: #70cb0e;
+  border: 0px;
+  border-radius: 25.5px;
+  color: #000;
+  height: 51px;
+  font-family: Roboto, sans-serif;
+  font-size: 1.8rem;
+  cursor: pointer;
+  outline: none;
+}
+
+.btn:hover {
+  box-shadow: inset 0px 0px 10px rgba(0, 0, 0, 0.5);
+}
+
+.btn:active {
+  box-shadow: inset 0px 0px 25px rgba(0, 0, 0, 0.8);
+}
+
 /* header ------------------------------------------------------------------------------------------------------------ */
 
 .header {
@@ -128,10 +148,11 @@ html {
   }
 }
 
-/* Sidebar ------------------------------------------------------------------------------------------------------------ */
+/* Map ------------------------------------------------------------------------------------------------------------ */
 
 .map {
-  width: 1920px;
+  width: 100vw;
+  /* width: 1920px; */
   box-sizing: border-box;
   margin: auto;
   display: flex;
@@ -145,6 +166,8 @@ html {
   width: 1160px;
   height: 745px;
   margin-top: 180px;
+  transition: 0.5s;
+  overflow: hidden;
 }
 
 .map__icons {
@@ -157,13 +180,14 @@ html {
 }
 
 .map__item {
-  border-radius: 50%;
   width: 64px;
   height: 64px;
+  border-radius: 50%;
   margin-bottom: 8px;
   position: absolute;
   display: flex;
   align-items: center;
+  transition: 0.5s;
 }
 
 .map__item:hover .item__logo {
@@ -180,9 +204,9 @@ html {
   justify-items: center;
   align-items: center;
   min-width: fit-content;
-  height: 47px;
   margin: 0;
   display: none;
+  z-index: 10;
 }
 
 .map__item:hover .map__tooltip {
@@ -194,19 +218,24 @@ html {
   height: 9px;
 }
 
-.tooltip__text {
+.tooltip__text-wrapper {
   position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-width: 102px;
   width: fit-content;
-  height: 47px;
+  /* min-width: 102px; */
+  min-height: 47px;
+  height: fit-content;
   background: #70cb0e;
 }
 
 .tooltip__text {
+  box-sizing: border-box;
+  padding: 0 11px;
+  white-space: nowrap;
+  min-width: 102px;
   text-align: center;
   font-family: Roboto, sans-serif;
   font-style: normal;
@@ -214,6 +243,19 @@ html {
   font-size: 1.6rem;
   line-height: 19px;
   color: #000;
+}
+
+.tooltip__link {
+  text-decoration: none;
+}
+
+.tooltip__btn {
+  width: 147px;
+  height: 40px;
+  background-color: #ffb600;
+  border-radius: 20px;
+  display: none;
+  text-decoration: none;
 }
 
 .map__word {
@@ -240,34 +282,31 @@ html {
 .map__word_eagle {
   position: relative;
   top: 0px;
-  left: -125px;
+  left: -127px;
 }
 
 .item_alligator {
-  position: absolute;
   top: 585px;
   left: -280px;
 }
 .item_panda {
-  position: absolute;
-  top: 590px;
+  top: 589px;
   left: 342px;
 }
 .item_eagle {
-  position: absolute;
   top: 576px;
-  left: -505px;
+  left: -503px;
 }
 .item_gorilla {
-  position: absolute;
   top: 685px;
   left: 75px;
 }
 .item_zoom {
   position: absolute;
   top: 857px;
-  left: 899px;
+  right: 00px;
 }
+
 .item_country-name {
   font-family: Roboto, sans-serif;
   font-style: normal;
@@ -275,11 +314,12 @@ html {
   font-size: 1.6rem;
   line-height: 19px;
   text-align: center;
+  transition: 0.5s;
 }
 
 .item_text-1 {
   position: absolute;
-  top: 560px;
+  top: 558px;
   left: -379px;
 }
 .item_text-2 {
@@ -334,11 +374,12 @@ html {
   background-image: url(../../assets/icons/gorilla_selected.png);
 }
 
-@media (max-width: 1919px){
+@media (max-width: 1919px) {
   .map {
-    width: 1200px;
+    width: 100vw;
+    /* width: 1200px; */
   }
-  
+
   .map__img {
     width: 1160px;
     height: 745px;
@@ -346,25 +387,50 @@ html {
 
   .item_zoom {
     top: 857px;
-    left: 538px;
+  }
+
+  .item_alligator {
+    top: 582px;
+    left: -280px;
+  }
+  .item_panda {
+    top: 583px;
+    left: 342px;
+  }
+  .item_eagle {
+    top: 573px;
+    left: -506px;
+  }
+  .item_gorilla {
+    top: 683px;
+    left: 75px;
   }
 }
 
-@media (max-width: 1199px){
+@media (max-width: 1199px) {
   .map {
-    width: 640px;
+    width: 100vw;
+
+    /* width: 640px; */
   }
-  
+
   .map__img {
     width: 933px;
     height: 600px;
   }
-  
+
+  .map__item {
+    transition: none;
+  }
+
+  .item_country-name {
+    transition: none;
+  }
+
   .item_zoom {
     top: 712px;
-    left: 258px;
   }
-  
+
   .item_alligator {
     top: 491px;
     left: -221px;
@@ -377,7 +443,23 @@ html {
     top: 571px;
     left: 60px;
   }
-  
+
+  .item_eagle {
+    position: absolute;
+    top: 496px;
+    left: -417px;
+  }
+
+  .tooltip__text-wrapper {
+    padding: 0;
+    width: 169px;
+    height: 100px;
+  }
+
+  .tooltip__btn {
+    display: unset;
+  }
+
   .item_text-1 {
     position: absolute;
     top: 479px;
@@ -395,32 +477,57 @@ html {
   }
 }
 
-@media (max-width: 639px){
+@media (max-width: 639px) {
   .map {
-    width: 320px;
+    width: 100vw;
+    /* width: 320px; */
   }
-  
+
   .map__img {
     position: relative;
     left: 118px;
     bottom: 1px;
   }
-  
+
+  .map__item {
+    transition: none;
+  }
+
+  .item_country-name {
+    transition: none;
+  }
+
   .item_alligator {
     left: -102px;
   }
-  
+
   .item_gorilla {
-    left: 210px;
+    left: 180px;
   }
-  
+
+  .item_panda {
+    left: 336px;
+  }
+
+  .item_eagle {
+    left: -300px;
+  }
+
+  .item_text-1 {
+    top: 476px;
+    left: -198px;
+  }
+
   .item_text-2 {
-    position: absolute;
     left: 55px;
   }
 
+  .item_text-3 {
+    left: 305px;
+  }
+
   .item_zoom {
-    left: 98px;
+    right: 0px;
   }
 }
 /* .map__icons {
@@ -518,12 +625,7 @@ html {
     top: 0px;
     left: -125px;
   }
-  
-  .item_eagle {
-    position: absolute;
-    top: 576px;
-    left: -505px;
-  }
+
 
   .item_country-name {
     font-family: Roboto, sans-serif;
@@ -586,26 +688,6 @@ html {
 }
 
 /* footer ------------------------------------------------------------------------------------------------------------ */
-
-.btn {
-  background-color: #70cb0e;
-  border: 0px;
-  border-radius: 25.5px;
-  color: #000;
-  height: 51px;
-  font-family: Roboto, sans-serif;
-  font-size: 1.8rem;
-  cursor: pointer;
-  outline: none;
-}
-
-.btn:hover {
-  box-shadow: inset 0px 0px 10px rgba(0, 0, 0, 0.5);
-}
-
-.btn:active {
-  box-shadow: inset 0px 0px 25px rgba(0, 0, 0, 0.8);
-}
 
 .footer {
   width: 100%;
@@ -848,7 +930,7 @@ html {
   .footer__btn {
     margin-right: -4px;
   }
-  
+
   .btn_action_donate {
     width: 207px;
     align-self: center;
