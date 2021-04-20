@@ -1,0 +1,64 @@
+@font-face {
+  font-family: Bebas Neue;
+  src: url(../../assets/fonts/bebas_neue_bold.ttf);
+}
+html {
+  font-size: 10px;
+}
+/* ------------------------------------------------------------------------------------------------------------ */
+
+.page {
+  position: relative;
+}
+
+.hidden-heading {
+  position: absolute;
+  visibility: hidden;
+  z-index: -999;
+}
+
+.main {
+  width: 1920px;
+  height: 700px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 190px auto;
+  box-sizing: border-box;
+}
+
+.text_uppercase {
+  text-transform: uppercase;
+}
+
+.main__heading {
+  font-family: Bebas Neue;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 7rem;
+  line-height: 70px;
+  text-align: center;
+  margin-top: -107px;
+  color: #333333;
+}
+
+.main__link {
+  font-family: Bebas Neue;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 2rem;
+  line-height: 20px;
+  text-align: center;
+  margin-top: 15px;
+  color: #59c3fb;
+  text-decoration: none;
+}
+
+.main__link:hover {
+  text-shadow: 1px 1px 50px #5ba10f;
+}
+
+.main__ooops-img {
+  width: 675px;
+  height: 700px;
+}

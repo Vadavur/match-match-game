@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Online Zoo</title>
+    <link rel="shortcut icon" href="../../assets/icons/site_icon.png" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://meyerweb.com/eric/tools/css/reset/reset.css"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body class="page">
+    <header class="header">
+      <div class="header__flex">
+        <a href="../landing/index.html" class="header__logo">
+          <img
+            class="header__logo-img"
+            src="../../assets/icons/logo.png"
+            alt="Online Zoo"
+          />
+          <h1 class="hidden-heading">Online Zoo</h1>
+        </a>
+
+        <nav class="header__nav">
+          <ul class="nav__list">
+            <li>
+              <a href="../landing/index.html" class="nav__item"> About </a>
+            </li>
+            <li>
+              <a class="nav__item nav__item-highlighted"> Map </a>
+            </li>
+            <li>
+              <a href="../zoos/panda/index.html" class="nav__item"> Zoos </a>
+            </li>
+            <li>
+              <a href="../contacts/index.html" class="nav__item">
+                Contact us
+              </a>
+            </li>
+            <li>
+              <a
+                href="https://www.figma.com/file/aBvQMVmI665DtzprpiniuH/online-zoo?node-id=0%3A1"
+                class="lis__item nav__item"
+              >
+                Design
+              </a>
+            </li>
+          </ul>
+        </nav>
+        <div class="header__burger">
+          <img src="../../assets/icons/burger.svg" alt="Burger menu" />
+        </div>
+      </div>
+    </header>
+    <main class="main">
+      <section class="map">
+        <div class="map__pointers"></div>
+        <div class="map__icons">
+          <div class="map__item item_alligator">
+            <div>
+              <a
+                href="../zoos/alligator/index.html"
+                class="item__logo logo_alligator"
+              >
+              </a>
+            </div>
+            <div class="map__word text_uppercase">Alligator</div>
+            <div class="map__tooltip">
+              <img
+                class="tooltip__tip"
+                src="../../assets/icons/tooltip_tip.png"
+                alt=""
+              />
+              <div class="tooltip__text-wrapper">
+                <p class="tooltip__text text_uppercase">Alligator,</p>
+                <p class="tooltip__text">Florida, USA</p>
+                <a class="tooltip__link" href="../zoos/alligator/index.html">
+                  <button class="btn tooltip__btn">Watch online</button>
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="map__item item_panda">
+            <div>
+              <a href="../zoos/panda/index.html" class="item__logo logo_panda">
+              </a>
+            </div>
+            <div class="map__word text_uppercase">
+              Panda
+              <br />
+              bear
+            </div>
+            <div class="map__tooltip">
+              <img
+                class="tooltip__tip"
+                src="../../assets/icons/tooltip_tip.png"
+                alt=""
+              />
+              <div class="tooltip__text-wrapper">
+                <p class="tooltip__text text_uppercase">Panda,</p>
+                <p class="tooltip__text">China</p>
+                <a class="tooltip__link" href="../zoos/panda/index.html">
+                  <button class="btn tooltip__btn">Watch online</button>
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="map__item item_eagle">
+            <div>
+              <a href="../zoos/eagle/index.html" class="item__logo logo_eagle">
+              </a>
+            </div>
+            <div class="map__word text_uppercase map__word_eagle">Eagle</div>
+            <div class="map__tooltip">
+              <img
+                class="tooltip__tip"
+                src="../../assets/icons/tooltip_tip.png"
+                alt=""
+              />
+              <div class="tooltip__text-wrapper">
+                <p class="tooltip__text text_uppercase">Eagle,</p>
+                <p class="tooltip__text">California, USA</p>
+                <a class="tooltip__link" href="../zoos/eagle/index.html">
+                  <button class="btn tooltip__btn">Watch online</button>
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="map__item item_gorilla">
+            <div>
+              <a
+                href="../zoos/gorilla/index.html"
+                class="item__logo logo_gorilla"
+              >
+              </a>
+            </div>
+            <div class="map__word text_uppercase">Gorilla</div>
+            <div class="map__tooltip">
+              <img
+                class="tooltip__tip"
+                src="../../assets/icons/tooltip_tip.png"
+                alt=""
+              />
+              <div class="tooltip__text-wrapper">
+                <p class="tooltip__text text_uppercase">Gorilla,</p>
+                <p class="tooltip__text">Eastern DRC</p>
+                <a class="tooltip__link" href="../zoos/gorilla/index.html">
+                  <button class="btn tooltip__btn">Watch online</button>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <div class="map__item item_country-name">
+            <p class="item_text-1">USA</p>
+          </div>
+          <div class="map__item item_country-name">
+            <p class="item_text-2">Eastern<br />DRC.</p>
+          </div>
+          <div class="map__item item_country-name">
+            <p class="item_text-3">China</p>
+          </div>
+        </div>
+        <div class="map__item item_zoom">
+          <img src="../../assets/images/zoom.png" alt="" />
+        </div>
+        <img
+          class="map__img"
+          src="../../assets/images/map.png"
+          alt="World map"
+        />
+      </section>
+    </main>
+    <footer class="footer">
+      <div class="footer__background-wrap">
+        <div class="footer__grid">
+          <a href="../landing/index.html" class="footer__logo">
+            <img
+              class="footer__logo-img"
+              src="../../assets/icons/logo.png"
+              alt="Online zoo"
+            />
+          </a>
+          <a class="footer__btn">
+            <button class="btn btn_action_donate">Donate for volunteers</button>
+          </a>
+          <ul class="footer__nav">
+            <li class="footer__nav-item">
+              <a class="footer__nav-link" href="../landing/index.html">About</a>
+            </li>
+            <li class="footer__nav-item">
+              <a class="footer__nav-link" href="../contacts/index.html"
+                >Contact us</a
+              >
+            </li>
+            <li class="footer__nav-item">
+              <a class="footer__nav-link" href="../map/index.html">Map</a>
+            </li>
+            <li class="footer__nav-item">
+              <a class="footer__nav-link" href="">Feedback</a>
+            </li>
+          </ul>
+          <ul class="footer__contacts">
+            <li>
+              <a href="https://www.instagram.com/"
+                ><img
+                  class="contacts__img"
+                  src="../../assets/icons/insta.png"
+                  alt="Instagram logo"
+              /></a>
+            </li>
+            <li>
+              <a href="https://www.facebook.com/"
+                ><img
+                  class="contacts__img"
+                  src="../../assets/icons/facebook.png"
+                  alt="Facebook logo"
+              /></a>
+            </li>
+            <li>
+              <a href="https://www.twitter.com/"
+                ><img
+                  class="contacts__img"
+                  src="../../assets/icons/twitter.png"
+                  alt="Twitter logo"
+              /></a>
+            </li>
+            <li>
+              <a href="https://www.youtube.com/"
+                ><img
+                  class="contacts__img"
+                  src="../../assets/icons/youtube.png"
+                  alt="Youtube logo"
+              /></a>
+            </li>
+          </ul>
+          <img
+            class="footer__rss-logo"
+            src="../../assets/icons/rss_logo.png"
+            alt="Online zoo"
+            title="Rolling Scopes School"
+          />
+          <img
+            class="footer__yem-logo"
+            src="../../assets/icons/yem_logo.png"
+            alt="Online zoo"
+            title="Yem Digital"
+          />
+          <p class="footer__copyright">
+            Copyright ©RSSchool
+            <span class="footer__copyright_and">and</span> ©Yem Digital 2020 -
+            2021
+          </p>
+          <p class="footer__reference">Grigoreva Margarita</p>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
