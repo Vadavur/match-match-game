@@ -3,8 +3,7 @@ import { BaseComponent } from '../shared/base-component';
 import { PopupInput } from '../popup-input/popup-input';
 import { Button } from '../button/button';
 import { removePopup } from '../shared/remove-popup';
-import { putToDB } from '../shared/put-to-db';
-import { getFromDB } from '../shared/get-from-db';
+import { DataBase } from '../shared/data-base';
 // import { getPopupFormData } from './get-popup-form-data';
 
 export class PopupRegisterForm extends BaseComponent {
@@ -28,13 +27,14 @@ export class PopupRegisterForm extends BaseComponent {
 
     this.setPopupInputs();
 
-    function getData(): void {
+    async function getData(): Promise<void> {
       const newUser = {
-        eMail: 'email',
+        email: 'email',
         name: { first: 'fname', last: 'sname' },
       };
-      putToDB(newUser);
-      getFromDB('email', (a) => console.log(a));
+      await DataBase.putToDB(newUser).then(() =>
+        DataBase.getFromDB('email', (a) => console.log(a, '??'))
+      );
     }
 
     this.addUserButton = new Button(
