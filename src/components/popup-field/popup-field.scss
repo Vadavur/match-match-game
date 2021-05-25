@@ -1,0 +1,11 @@
+.popup-field {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  background-color: #00000070;
+  z-index: 99;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+}

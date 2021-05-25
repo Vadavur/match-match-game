@@ -1,0 +1,16 @@
+@font-face {
+  font-family: SceneW01-Black;
+  src: url(../../assets/fonts/12309.ttf);
+}
+
+$bodyColor: chocolate;
+$basicFont: "Roboto", sans-serif;
+
+body {
+  background-color: $bodyColor;
+  position: relative;
+}
+
+* {
+  font-family: $basicFont;
+}
