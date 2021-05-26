@@ -1,9 +1,20 @@
 .score-field {
   width: 100%;
   height: 100%;
+  box-sizing: border-box;
+  padding: 48px 98px 48px 56px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: #fff;
+}
+
+.score-field__element {
+  margin-bottom: 24px;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 30px;
+  letter-spacing: 0.15px;
+  color: #333333;
 }

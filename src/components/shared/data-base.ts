@@ -1,12 +1,9 @@
-interface UserInterfase {
-  email: string;
-  firstName: string;
-  lastName: string;
-  score?: number;
-}
+import { UserInterface } from './user-interface';
 
 export class DataBase {
   private static dbName = 'Vadavur';
+
+  private static dbVersion = 3;
 
   private static activateDB(
     transactionMode: IDBTransactionMode,
@@ -14,7 +11,10 @@ export class DataBase {
     keyPathName: string,
     someDBAction: (store: IDBObjectStore) => void
   ) {
-    const openRequest: IDBOpenDBRequest = indexedDB.open(DataBase.dbName, 3);
+    const openRequest: IDBOpenDBRequest = indexedDB.open(
+      DataBase.dbName,
+      DataBase.dbVersion
+    );
 
     openRequest.onupgradeneeded = () => {
       const db = openRequest.result;
@@ -41,7 +41,7 @@ export class DataBase {
   }
 
   public static async putToDB(
-    item: UserInterfase,
+    item: UserInterface,
     storeName: string
   ): Promise<void> {
     function putItemToDB(store: IDBObjectStore): void {
@@ -75,17 +75,17 @@ export class DataBase {
     DataBase.activateDB('readwrite', storeName, 'email', getItemFromDB);
   }
 
-  public static forEachItemInDB(
+  public static async forEachItemInDB(
     storeName: string,
-    callback: (request: IDBRequest) => void
-  ): void {
-    function getCursorFromDB(store: IDBObjectStore) {
+    callback: (request: UserInterface) => void
+  ): Promise<void> {
+    function setCallbackToCursor(store: IDBObjectStore) {
       const request: IDBRequest = store.openCursor();
 
       request.onsuccess = () => {
         const cursor = request.result;
         if (cursor) {
-          callback(cursor);
+          callback(cursor.value);
           cursor.continue();
         }
       };
@@ -93,65 +93,23 @@ export class DataBase {
         console.log('Error', request.error);
       };
     }
-    DataBase.activateDB('readwrite', storeName, 'email', getCursorFromDB);
+    DataBase.activateDB('readwrite', storeName, 'email', setCallbackToCursor);
   }
-  // public static async putToDBB(user: UserInterfase): Promise<void> {
-  //   const openRequest: IDBOpenDBRequest = indexedDB.open('Vadavur', 3);
 
-  //   openRequest.onupgradeneeded = () => {
-  //     const db = openRequest.result;
-  //     db.deleteObjectStore('users');
-  //     db.createObjectStore('users', { keyPath: 'email' });
-  //     // const store = db.createObjectStore('users', { keyPath: 'email' });
-  //     // store.createIndex('NameIndex', ['name.last', 'name.first']);
-  //   };
+  public static getAllFromDB(
+    storeName: string,
+    callback: (user: UserInterface[]) => void
+  ): void {
+    function getAllItemsFromDB(store: IDBObjectStore) {
+      const request: IDBRequest = store.getAll();
 
-  //   openRequest.onsuccess = () => {
-  //     const db = openRequest.result;
-  //     const tx = db.transaction('users', 'readwrite');
-  //     const store = tx.objectStore('users');
-  //     const request = store.put(user);
-
-  //     request.onsuccess = () => {};
-
-  //     request.onerror = () => {
-  //       console.log('Error', request.error);
-  //     };
-
-  //     tx.oncomplete = () => {
-  //       db.close();
-  //     };
-  //   };
-  // }
-
-  // public static getFromDBB(
-  //   email: string,
-  //   callback: (promisedUser: IDBRequest) => void
-  // ): void {
-  //   const openRequest: IDBOpenDBRequest = indexedDB.open('Vadavur', 3);
-
-  //   openRequest.onupgradeneeded = () => {
-  //     const db = openRequest.result;
-  //     db.deleteObjectStore('users');
-  //     db.createObjectStore('users', { keyPath: 'email' });
-  //     // const store = db.createObjectStore('users', { keyPath: 'email' });
-  //     // store.createIndex('NameIndex', ['name.last', 'name.first']);
-  //   };
-
-  //   openRequest.onsuccess = () => {
-  //     const db = openRequest.result;
-  //     const tx = db.transaction('users', 'readonly');
-  //     const store = tx.objectStore('users');
-
-  //     const promisedUser: IDBRequest = store.get(email);
-
-  //     promisedUser.onsuccess = () => {
-  //       callback(promisedUser.result);
-  //     };
-
-  //     tx.oncomplete = () => {
-  //       db.close();
-  //     };
-  //   };
-  // }
+      request.onsuccess = () => {
+        callback(request.result);
+      };
+      request.onerror = () => {
+        console.log('Error', request.error);
+      };
+    }
+    DataBase.activateDB('readwrite', storeName, 'email', getAllItemsFromDB);
+  }
 }

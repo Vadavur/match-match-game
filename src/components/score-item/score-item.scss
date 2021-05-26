@@ -1,0 +1,49 @@
+.score-item {
+  width: 846px;
+  height: 40px;
+  display: grid;
+  grid-template-areas:
+    "avatar name score"
+    "avatar email score";
+  grid-template-columns: 40px auto 87px;
+  grid-template-rows: 50% 50%;
+  background-color: #a7e1ff;
+  column-gap: 16px;
+  row-gap: 0px;
+  align-items: center;
+}
+
+.score-item__avatar {
+  grid-area: avatar;
+  width: 40px;
+  height: 40px;
+}
+
+.score-item__name {
+  grid-area: name;
+  font-size: 14px;
+  line-height: 21px;
+  letter-spacing: 0.1px;
+  color: #333333;
+}
+
+.score-item__email {
+  grid-area: email;
+  font-size: 12px;
+  line-height: 15px;
+  letter-spacing: 0.4px;
+  color: #333333;
+}
+
+.score-item__score {
+  grid-area: score;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 24px;
+  letter-spacing: 0.15px;
+  color: #00000087;
+}
+
+.score-item__score_value {
+  color: #2196f3;
+}
