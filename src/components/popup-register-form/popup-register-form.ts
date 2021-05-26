@@ -5,22 +5,16 @@ import { Button } from '../button/button';
 import { removePopup } from '../shared/remove-popup';
 import { DataBase } from '../shared/data-base';
 // import { getPopupFormData } from './get-popup-form-data';
+import { UserInterface } from '../shared/user-interface';
 
-interface PopupInputInterface {
+interface InputAttributesInterface {
   placeholder: string;
   name: string;
   instance?: PopupInput;
 }
 
-interface UserInterfase {
-  [index: string]: string;
-  email: string;
-  firstName: string;
-  lastName: string;
-}
-
 export class PopupRegisterForm extends BaseComponent {
-  private readonly popupInputs: PopupInputInterface[];
+  private readonly inputsAttributes: InputAttributesInterface[];
 
   private readonly addUserButton: Button;
 
@@ -32,7 +26,7 @@ export class PopupRegisterForm extends BaseComponent {
     super('form', ['popup-register-form']);
 
     this.formName = name;
-    this.popupInputs = [
+    this.inputsAttributes = [
       { placeholder: 'First Name', name: 'firstName' },
       { placeholder: 'Last Name', name: 'lastName' },
       { placeholder: 'E-mail', name: 'email' },
@@ -42,28 +36,10 @@ export class PopupRegisterForm extends BaseComponent {
 
     this.setPopupInputs();
 
-    function sendInputValuesToDB(event: Event): void {
-      event.preventDefault();
-      const form = document.forms[0];
-      const user: UserInterfase = { email: '', firstName: '', lastName: '' };
-      Array.from(form.elements).forEach((element) => {
-        if (element.tagName === 'INPUT') {
-          const inputElement = element as HTMLInputElement;
-          const inputName: string = inputElement.name;
-          if (inputElement) {
-            // && inputElement.name in user
-            user[inputName] = inputElement.value;
-          }
-        }
-      });
-      const USERS_DATABASE = 'users';
-      DataBase.putToDB(user, USERS_DATABASE);
-    }
-
     this.addUserButton = new Button(
       ['button_add-user'],
       'add user'.toUpperCase(),
-      (event: Event) => sendInputValuesToDB(event)
+      (event: Event) => this.sendInputValuesToDB(event)
     );
     this.cancelButton = new Button(
       ['button_cancel'],
@@ -76,7 +52,7 @@ export class PopupRegisterForm extends BaseComponent {
   }
 
   setPopupInputs(): void {
-    this.popupInputs.forEach((input) => {
+    this.inputsAttributes.forEach((input) => {
       input.instance = new PopupInput(input.placeholder);
       input.instance.element.setAttribute('type', 'text');
       input.instance.element.setAttribute('name', input.name);
@@ -86,6 +62,30 @@ export class PopupRegisterForm extends BaseComponent {
 
   isValid(): string {
     return this.formName; // plug
+  }
+
+  sendInputValuesToDB(event: Event): void {
+    event.preventDefault();
+    const user: UserInterface = {
+      email: '',
+      firstName: '',
+      lastName: '',
+      score: 0,
+    };
+    this.inputsAttributes.forEach((inputAttributes) => {
+      if (inputAttributes.instance) {
+        const input = inputAttributes.instance.element;
+        if (input.tagName === 'INPUT') {
+          const inputElement = input as HTMLInputElement;
+          const inputName: string = inputElement.name;
+          if (inputElement && inputElement.name in user) {
+            user[inputName] = inputElement.value;
+          }
+        }
+      }
+    });
+    const USERS_DATABASE = 'users';
+    DataBase.putToDB(user, USERS_DATABASE);
   }
 }
 
