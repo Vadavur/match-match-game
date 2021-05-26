@@ -20,10 +20,10 @@ export class ScoreList extends BaseComponent {
       user: UserInterface
     ): ScoreItemInterface {
       const newItemSource: ScoreItemInterface = {
-        avatar: 'src/assets/images/avatar-default.png',
         name: `${user.firstName} ${user.lastName}`,
         email: user.email,
-        score: user.score || 0,
+        score: user.score,
+        avatar: user.avatar,
       };
       return newItemSource;
     }
@@ -35,6 +35,11 @@ export class ScoreList extends BaseComponent {
       allItemSources.forEach((itemSource) => {
         const item = new ScoreItem(itemSource);
         list.appendChild(item.element);
+        const horizontalLine = new ScoreItem(itemSource);
+        horizontalLine.element.innerHTML =
+          '<hr class="score-item__break-line">';
+        horizontalLine.element.className = 'score-item_break';
+        list.appendChild(horizontalLine.element);
       });
     }
     DataBase.getAllFromDB('users', addItemSourceFromUserData);

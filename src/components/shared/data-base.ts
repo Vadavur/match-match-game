@@ -3,7 +3,7 @@ import { UserInterface } from './user-interface';
 export class DataBase {
   private static dbName = 'Vadavur';
 
-  private static dbVersion = 3;
+  private static dbVersion = 4;
 
   private static activateDB(
     transactionMode: IDBTransactionMode,

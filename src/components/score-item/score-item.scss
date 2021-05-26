@@ -1,5 +1,5 @@
 .score-item {
-  width: 846px;
+  width: 840px;
   height: 40px;
   display: grid;
   grid-template-areas:
@@ -7,7 +7,6 @@
     "avatar email score";
   grid-template-columns: 40px auto 87px;
   grid-template-rows: 50% 50%;
-  background-color: #a7e1ff;
   column-gap: 16px;
   row-gap: 0px;
   align-items: center;
@@ -46,4 +45,13 @@
 
 .score-item__score_value {
   color: #2196f3;
+}
+
+.score-item_break {
+  width: 840px;
+  height: 10px;
+}
+
+.score-item__break-line {
+  width: 840px;
 }

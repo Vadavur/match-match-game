@@ -71,6 +71,7 @@ export class PopupRegisterForm extends BaseComponent {
       firstName: '',
       lastName: '',
       score: 0,
+      avatar: 'src/assets/images/avatar-default.png',
     };
     this.inputsAttributes.forEach((inputAttributes) => {
       if (inputAttributes.instance) {
