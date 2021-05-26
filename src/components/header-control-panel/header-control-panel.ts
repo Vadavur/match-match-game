@@ -4,10 +4,7 @@ import { PopupField } from '../popup-field/popup-field';
 import { Button } from '../button/button';
 import { startGame } from '../shared/start-game';
 import { DataBase } from '../shared/data-base';
-
-export interface TogglerInterface {
-  gameState: 'noPlayer' | 'onStart' | 'onGame';
-}
+import { TogglerInterface, UserInterface } from '../shared/interfaces';
 
 export class HeaderControlPanel extends BaseComponent {
   public static controlElement: HTMLElement = new BaseComponent().element;
@@ -16,29 +13,35 @@ export class HeaderControlPanel extends BaseComponent {
     super('div', ['header-control-panel']);
   }
 
-  public static toggleControls(gameState: TogglerInterface): void {
+  public static toggleControls(): void {
+    function setControlPanel(
+      gameState: TogglerInterface | UserInterface
+    ): void {
+      switch (gameState as TogglerInterface) {
+        case { gameState: 'noPlayer' }:
+          HeaderControlPanel.createNoPlayerControls();
+          break;
+
+        case { gameState: 'onStart' }:
+          HeaderControlPanel.createOnStartControls();
+          break;
+
+        case { gameState: 'onGame' }:
+          HeaderControlPanel.createOnGameControls();
+          break;
+
+        default:
+          break;
+      }
+    }
     const GAME_STATE_DATABASE = 'gameState';
     const KEY_PATH = 'gameState';
-
-    DataBase.getFromDB('gameState', KEY_PATH, GAME_STATE_DATABASE, (a) =>
-      console.log(a, '??')
+    DataBase.getFromDB(
+      'gameState',
+      KEY_PATH,
+      GAME_STATE_DATABASE,
+      setControlPanel
     );
-    switch (gameState) {
-      case { gameState: 'noPlayer' }:
-        HeaderControlPanel.createNoPlayerControls();
-        break;
-
-      case { gameState: 'onStart' }:
-        HeaderControlPanel.createOnStartControls();
-        break;
-
-      case { gameState: 'onGame' }:
-        HeaderControlPanel.createOnGameControls();
-        break;
-
-      default:
-        break;
-    }
   }
 
   private static createNoPlayerControls() {

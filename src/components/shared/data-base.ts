@@ -1,4 +1,4 @@
-import { UserInterface } from './user-interface';
+import { UserInterface, TogglerInterface } from './interfaces';
 
 export class DataBase {
   private static dbName = 'Vadavur';
@@ -41,7 +41,7 @@ export class DataBase {
   }
 
   public static async putToDB(
-    item: UserInterface,
+    item: UserInterface | TogglerInterface,
     storeName: string,
     keyPathName: string
   ): Promise<void> {
@@ -62,7 +62,7 @@ export class DataBase {
     keyValue: string,
     storeName: string,
     keyPathName: string,
-    callback: (request: IDBRequest) => void
+    callback: (request: UserInterface | TogglerInterface) => void
   ): void {
     function getItemFromDB(store: IDBObjectStore) {
       const request: IDBRequest = store.get(keyValue);

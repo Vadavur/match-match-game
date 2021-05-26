@@ -5,7 +5,7 @@ import { Button } from '../button/button';
 import { removePopup } from '../shared/remove-popup';
 import { DataBase } from '../shared/data-base';
 // import { getPopupFormData } from './get-popup-form-data';
-import { UserInterface } from '../shared/user-interface';
+import { UserInterface } from '../shared/interfaces';
 
 interface InputAttributesInterface {
   placeholder: string;

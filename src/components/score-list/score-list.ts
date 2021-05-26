@@ -2,8 +2,7 @@ import './score-list.scss';
 import { DataBase } from '../shared/data-base';
 import { BaseComponent } from '../shared/base-component';
 import { ScoreItem } from '../score-item/score-item';
-import { UserInterface } from '../shared/user-interface';
-import { ScoreItemInterface } from '../shared/score-item-interface';
+import { UserInterface, ScoreItemInterface } from '../shared/interfaces';
 
 export class ScoreList extends BaseComponent {
   constructor() {
