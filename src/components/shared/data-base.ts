@@ -2,6 +2,7 @@ interface UserInterfase {
   email: string;
   firstName: string;
   lastName: string;
+  score?: number;
 }
 
 export class DataBase {
@@ -34,11 +35,17 @@ export class DataBase {
         db.close();
       };
     };
+    openRequest.onerror = () => {
+      console.log('Error', openRequest.error);
+    };
   }
 
-  public static async putToDB(user: UserInterfase): Promise<void> {
+  public static async putToDB(
+    item: UserInterfase,
+    storeName: string
+  ): Promise<void> {
     function putItemToDB(store: IDBObjectStore): void {
-      const request = store.put(user);
+      const request = store.put(item);
 
       request.onsuccess = () => {};
 
@@ -47,23 +54,47 @@ export class DataBase {
       };
     }
 
-    DataBase.activateDB('readwrite', 'users', 'email', putItemToDB);
+    DataBase.activateDB('readwrite', storeName, 'email', putItemToDB);
   }
 
   public static getFromDB(
-    keyPathName: string,
+    keyValue: string,
+    storeName: string,
     callback: (request: IDBRequest) => void
   ): void {
     function getItemFromDB(store: IDBObjectStore) {
-      const request: IDBRequest = store.get(keyPathName);
+      const request: IDBRequest = store.get(keyValue);
 
       request.onsuccess = () => {
         callback(request.result);
       };
+      request.onerror = () => {
+        console.log('Error', request.error);
+      };
     }
-    DataBase.activateDB('readwrite', 'users', 'email', getItemFromDB);
+    DataBase.activateDB('readwrite', storeName, 'email', getItemFromDB);
   }
 
+  public static forEachItemInDB(
+    storeName: string,
+    callback: (request: IDBRequest) => void
+  ): void {
+    function getCursorFromDB(store: IDBObjectStore) {
+      const request: IDBRequest = store.openCursor();
+
+      request.onsuccess = () => {
+        const cursor = request.result;
+        if (cursor) {
+          callback(cursor);
+          cursor.continue();
+        }
+      };
+      request.onerror = () => {
+        console.log('Error', request.error);
+      };
+    }
+    DataBase.activateDB('readwrite', storeName, 'email', getCursorFromDB);
+  }
   // public static async putToDBB(user: UserInterfase): Promise<void> {
   //   const openRequest: IDBOpenDBRequest = indexedDB.open('Vadavur', 3);
 

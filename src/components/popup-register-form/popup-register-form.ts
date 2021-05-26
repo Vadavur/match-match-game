@@ -13,7 +13,7 @@ interface PopupInputInterface {
 }
 
 interface UserInterfase {
-  [someString: string]: string;
+  [index: string]: string;
   email: string;
   firstName: string;
   lastName: string;
@@ -47,8 +47,9 @@ export class PopupRegisterForm extends BaseComponent {
         firstName: 'fname',
         lastName: 'sname',
       };
-      await DataBase.putToDB(newUser).then(() =>
-        DataBase.getFromDB('email', (a) => console.log(a, '??'))
+      const DATABASE = 'users';
+      await DataBase.putToDB(newUser, DATABASE).then(() =>
+        DataBase.getFromDB('email', DATABASE, (a) => console.log(a, '??'))
       );
     }
 
@@ -65,7 +66,8 @@ export class PopupRegisterForm extends BaseComponent {
           }
         }
       });
-      DataBase.putToDB(user);
+      const USERS_DATABASE = 'users';
+      DataBase.putToDB(user, USERS_DATABASE);
     }
 
     this.addUserButton = new Button(
