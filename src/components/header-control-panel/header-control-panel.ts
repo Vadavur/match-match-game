@@ -3,6 +3,7 @@ import { BaseComponent } from '../shared/base-component';
 import { PopupField } from '../popup-field/popup-field';
 import { Button } from '../button/button';
 import { startGame } from '../shared/start-game';
+import { DataBase } from '../shared/data-base';
 
 export interface TogglerInterface {
   gameState: 'noPlayer' | 'onStart' | 'onGame';
@@ -16,6 +17,12 @@ export class HeaderControlPanel extends BaseComponent {
   }
 
   public static toggleControls(gameState: TogglerInterface): void {
+    const GAME_STATE_DATABASE = 'gameState';
+    const KEY_PATH = 'gameState';
+
+    DataBase.getFromDB('gameState', KEY_PATH, GAME_STATE_DATABASE, (a) =>
+      console.log(a, '??')
+    );
     switch (gameState) {
       case { gameState: 'noPlayer' }:
         HeaderControlPanel.createNoPlayerControls();

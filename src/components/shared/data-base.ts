@@ -42,7 +42,8 @@ export class DataBase {
 
   public static async putToDB(
     item: UserInterface,
-    storeName: string
+    storeName: string,
+    keyPathName: string
   ): Promise<void> {
     function putItemToDB(store: IDBObjectStore): void {
       const request = store.put(item);
@@ -54,12 +55,13 @@ export class DataBase {
       };
     }
 
-    DataBase.activateDB('readwrite', storeName, 'email', putItemToDB);
+    DataBase.activateDB('readwrite', storeName, keyPathName, putItemToDB);
   }
 
   public static getFromDB(
     keyValue: string,
     storeName: string,
+    keyPathName: string,
     callback: (request: IDBRequest) => void
   ): void {
     function getItemFromDB(store: IDBObjectStore) {
@@ -72,11 +74,12 @@ export class DataBase {
         console.log('Error', request.error);
       };
     }
-    DataBase.activateDB('readwrite', storeName, 'email', getItemFromDB);
+    DataBase.activateDB('readwrite', storeName, keyPathName, getItemFromDB);
   }
 
   public static async forEachItemInDB(
     storeName: string,
+    keyPathName: string,
     callback: (request: UserInterface) => void
   ): Promise<void> {
     function setCallbackToCursor(store: IDBObjectStore) {
@@ -93,11 +96,17 @@ export class DataBase {
         console.log('Error', request.error);
       };
     }
-    DataBase.activateDB('readwrite', storeName, 'email', setCallbackToCursor);
+    DataBase.activateDB(
+      'readwrite',
+      storeName,
+      keyPathName,
+      setCallbackToCursor
+    );
   }
 
   public static getAllFromDB(
     storeName: string,
+    keyPathName: string,
     callback: (user: UserInterface[]) => void
   ): void {
     function getAllItemsFromDB(store: IDBObjectStore) {
@@ -110,6 +119,6 @@ export class DataBase {
         console.log('Error', request.error);
       };
     }
-    DataBase.activateDB('readwrite', storeName, 'email', getAllItemsFromDB);
+    DataBase.activateDB('readwrite', storeName, keyPathName, getAllItemsFromDB);
   }
 }

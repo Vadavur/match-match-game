@@ -42,6 +42,8 @@ export class ScoreList extends BaseComponent {
         list.appendChild(horizontalLine.element);
       });
     }
-    DataBase.getAllFromDB('users', addItemSourceFromUserData);
+    const USERS_DATABASE = 'users';
+    const KEY_PATH = 'email';
+    DataBase.getAllFromDB(USERS_DATABASE, KEY_PATH, addItemSourceFromUserData);
   }
 }

@@ -86,7 +86,8 @@ export class PopupRegisterForm extends BaseComponent {
       }
     });
     const USERS_DATABASE = 'users';
-    DataBase.putToDB(user, USERS_DATABASE);
+    const KEY_PATH = 'email';
+    DataBase.putToDB(user, USERS_DATABASE, KEY_PATH);
   }
 }
 
