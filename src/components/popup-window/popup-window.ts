@@ -10,7 +10,8 @@ export class PopupWindow extends BaseComponent {
     this.element.innerHTML = `
       <p class="popup-window__header">Register new Player</p>
     `;
-    this.popupRegisterForm = new PopupRegisterForm();
+    const FORM_NAME = 'registerForm';
+    this.popupRegisterForm = new PopupRegisterForm(FORM_NAME);
     this.element.appendChild(this.popupRegisterForm.element);
   }
 }

@@ -6,41 +6,72 @@ import { removePopup } from '../shared/remove-popup';
 import { DataBase } from '../shared/data-base';
 // import { getPopupFormData } from './get-popup-form-data';
 
+interface PopupInputInterface {
+  placeholder: string;
+  name: string;
+  instance?: PopupInput;
+}
+
+interface UserInterfase {
+  [someString: string]: string;
+  email: string;
+  firstName: string;
+  lastName: string;
+}
+
 export class PopupRegisterForm extends BaseComponent {
-  private readonly popupInputs: {
-    placeholder: string;
-    instance?: PopupInput;
-  }[];
+  private readonly popupInputs: PopupInputInterface[];
 
   private readonly addUserButton: Button;
 
   private readonly cancelButton: Button;
 
-  constructor() {
-    super('div', ['popup-register-form']);
+  private readonly formName: string;
 
+  constructor(name: string) {
+    super('form', ['popup-register-form']);
+
+    this.formName = name;
     this.popupInputs = [
-      { placeholder: 'First Name' },
-      { placeholder: 'Last Name' },
-      { placeholder: 'E-mail' },
+      { placeholder: 'First Name', name: 'firstName' },
+      { placeholder: 'Last Name', name: 'lastName' },
+      { placeholder: 'E-mail', name: 'email' },
     ];
 
-    this.setPopupInputs();
+    this.element.setAttribute('name', name);
 
+    this.setPopupInputs();
     async function getData(): Promise<void> {
       const newUser = {
         email: 'email',
-        name: { first: 'fname', last: 'sname' },
+        firstName: 'fname',
+        lastName: 'sname',
       };
       await DataBase.putToDB(newUser).then(() =>
         DataBase.getFromDB('email', (a) => console.log(a, '??'))
       );
     }
 
+    function sendInputValuesToDB(event: Event): void {
+      event.preventDefault();
+      const form = document.forms[0];
+      const user: UserInterfase = { email: '', firstName: '', lastName: '' };
+      Array.from(form.elements).forEach((element) => {
+        if (element.tagName === 'INPUT') {
+          const inputElement = element as HTMLInputElement;
+          const inputName: string = inputElement.name;
+          if (inputElement && inputElement.name in user) {
+            user[inputName] = inputElement.value;
+          }
+        }
+      });
+      DataBase.putToDB(user);
+    }
+
     this.addUserButton = new Button(
       ['button_add-user'],
       'add user'.toUpperCase(),
-      () => getData()
+      (event: Event) => sendInputValuesToDB(event)
     );
     this.cancelButton = new Button(
       ['button_cancel'],
@@ -58,6 +89,10 @@ export class PopupRegisterForm extends BaseComponent {
       input.instance.element.setAttribute('type', 'text');
       this.element.appendChild(input.instance.element);
     });
+  }
+
+  isValid(): string {
+    return this.formName; // plug
   }
 }
 
