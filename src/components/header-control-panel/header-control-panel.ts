@@ -4,7 +4,7 @@ import { PopupField } from '../popup-field/popup-field';
 import { Button } from '../button/button';
 import { startGame } from '../shared/start-game';
 import { DataBase } from '../shared/data-base';
-import { TogglerInterface, UserInterface } from '../shared/interfaces';
+import { GameTogglerInterface, UserInterface } from '../shared/interfaces';
 
 export class HeaderControlPanel extends BaseComponent {
   public static controlElement: HTMLElement = new BaseComponent().element;
@@ -15,18 +15,18 @@ export class HeaderControlPanel extends BaseComponent {
 
   public static toggleControls(): void {
     function setControlPanel(
-      gameState: TogglerInterface | UserInterface
+      gameToggler: GameTogglerInterface | UserInterface
     ): void {
-      switch (gameState as TogglerInterface) {
-        case { gameState: 'noPlayer' }:
+      switch ((gameToggler as GameTogglerInterface).gameState) {
+        case 'noPlayer':
           HeaderControlPanel.createNoPlayerControls();
           break;
 
-        case { gameState: 'onStart' }:
+        case 'onStart':
           HeaderControlPanel.createOnStartControls();
           break;
 
-        case { gameState: 'onGame' }:
+        case 'onGame':
           HeaderControlPanel.createOnGameControls();
           break;
 
@@ -35,11 +35,11 @@ export class HeaderControlPanel extends BaseComponent {
       }
     }
     const GAME_STATE_DATABASE = 'gameState';
-    const KEY_PATH = 'gameState';
+    const KEY_PATH = 'gameName';
     DataBase.getFromDB(
-      'gameState',
-      KEY_PATH,
+      'match-match',
       GAME_STATE_DATABASE,
+      KEY_PATH,
       setControlPanel
     );
   }

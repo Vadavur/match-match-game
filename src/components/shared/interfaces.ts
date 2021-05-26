@@ -7,7 +7,8 @@ export interface UserInterface {
   avatar: string;
 }
 
-export interface TogglerInterface {
+export interface GameTogglerInterface {
+  gameName: 'match-match';
   gameState: 'noPlayer' | 'onStart' | 'onGame';
 }
 
