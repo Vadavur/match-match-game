@@ -4,7 +4,7 @@ import { PopupField } from '../popup-field/popup-field';
 import { Button } from '../button/button';
 import { startGame } from '../shared/start-game';
 import { DataBase } from '../shared/data-base';
-import { GameTogglerInterface, UserInterface } from '../shared/interfaces';
+import { GameTogglerInterface, IndexedDataType } from '../shared/interfaces';
 
 export class HeaderControlPanel extends BaseComponent {
   public static controlElement: HTMLElement = new BaseComponent().element;
@@ -14,9 +14,7 @@ export class HeaderControlPanel extends BaseComponent {
   }
 
   public static toggleControlPanel(): void {
-    function setControlPanel(
-      gameToggler: GameTogglerInterface | UserInterface
-    ): void {
+    function setControlPanel(gameToggler: IndexedDataType): void {
       switch ((gameToggler as GameTogglerInterface).gameState) {
         case 'noPlayer':
           HeaderControlPanel.createNoPlayerControls();

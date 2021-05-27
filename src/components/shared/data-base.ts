@@ -2,6 +2,7 @@ import {
   UserInterface,
   GameTogglerInterface,
   GameSettingsInterface,
+  IndexedDataType,
 } from './interfaces';
 
 export class DataBase {
@@ -51,7 +52,7 @@ export class DataBase {
   }
 
   public static async putToDB(
-    item: UserInterface | GameTogglerInterface | GameSettingsInterface,
+    item: IndexedDataType,
     storeName: string,
     keyPathName: string
   ): Promise<void> {
@@ -72,9 +73,7 @@ export class DataBase {
     keyValue: string,
     storeName: string,
     keyPathName: string,
-    callback: (
-      request: UserInterface | GameTogglerInterface | GameSettingsInterface
-    ) => void
+    callback: (request: IndexedDataType) => void
   ): void {
     function getItemFromDB(store: IDBObjectStore) {
       const request: IDBRequest = store.get(keyValue);
@@ -92,7 +91,7 @@ export class DataBase {
   public static async forEachItemInDB(
     storeName: string,
     keyPathName: string,
-    callback: (request: UserInterface) => void
+    callback: (request: IndexedDataType) => void
   ): Promise<void> {
     function setCallbackToCursor(store: IDBObjectStore) {
       const request: IDBRequest = store.openCursor();
@@ -119,7 +118,7 @@ export class DataBase {
   public static getAllFromDB(
     storeName: string,
     keyPathName: string,
-    callback: (user: UserInterface[]) => void
+    callback: (user: IndexedDataType[]) => void
   ): void {
     function getAllItemsFromDB(store: IDBObjectStore) {
       const request: IDBRequest = store.getAll();

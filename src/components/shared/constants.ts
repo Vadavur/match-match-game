@@ -16,3 +16,9 @@ export const DATABASES = {
   gameSettings: { name: 'gameSettings', keyPath: 'settingName' },
   gameState: { name: 'gameState', keyPath: 'gameName' },
 };
+
+export const GAME_STATES = {
+  noPlayer: 'noPlayer',
+  onStart: 'onStart',
+  onGame: 'onGame',
+};

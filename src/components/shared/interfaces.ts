@@ -32,3 +32,8 @@ export interface CurrentPlayerInterface {
   score: number;
   avatar: string;
 }
+
+export type IndexedDataType =
+  | GameSettingsInterface
+  | UserInterface
+  | GameTogglerInterface;

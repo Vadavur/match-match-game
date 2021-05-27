@@ -2,7 +2,11 @@ import './score-list.scss';
 import { DataBase } from '../shared/data-base';
 import { BaseComponent } from '../shared/base-component';
 import { ScoreItem } from '../score-item/score-item';
-import { UserInterface, ScoreItemInterface } from '../shared/interfaces';
+import {
+  UserInterface,
+  ScoreItemInterface,
+  IndexedDataType,
+} from '../shared/interfaces';
 
 export class ScoreList extends BaseComponent {
   constructor() {
@@ -27,9 +31,9 @@ export class ScoreList extends BaseComponent {
       return newItemSource;
     }
 
-    function addItemSourceFromUserData(users: UserInterface[]) {
+    function addItemSourceFromUserData(users: IndexedDataType[]) {
       users.forEach((user) => {
-        allItemSources.push(getItemSourceFromUserData(user));
+        allItemSources.push(getItemSourceFromUserData(user as UserInterface));
       });
       allItemSources.forEach((itemSource) => {
         const item = new ScoreItem(itemSource);
