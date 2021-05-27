@@ -3,7 +3,7 @@ import { UserInterface, GameTogglerInterface } from './interfaces';
 export class DataBase {
   private static dbName = 'Vadavur';
 
-  private static dbVersion = 4;
+  private static dbVersion = 6;
 
   private static activateDB(
     transactionMode: IDBTransactionMode,
@@ -18,7 +18,9 @@ export class DataBase {
 
     openRequest.onupgradeneeded = () => {
       const db = openRequest.result;
-      db.deleteObjectStore(storeName);
+      if (db.objectStoreNames.contains(storeName)) {
+        db.deleteObjectStore(storeName);
+      }
       db.createObjectStore(storeName, { keyPath: keyPathName });
       // const store = db.createObjectStore('users', { keyPath: 'email' });
       // store.createIndex('NameIndex', ['name.last', 'name.first']);
@@ -36,6 +38,10 @@ export class DataBase {
       };
     };
     openRequest.onerror = () => {
+      const db = openRequest.result;
+      if (!db.objectStoreNames.contains(storeName)) {
+        db.createObjectStore(storeName);
+      }
       console.log('Error', openRequest.error);
     };
   }

@@ -1,6 +1,6 @@
 import './score-item.scss';
 import { BaseComponent } from '../shared/base-component';
-import { ScoreItemInterface } from '../shared/score-item-interface';
+import { ScoreItemInterface } from '../shared/interfaces';
 
 export class ScoreItem extends BaseComponent {
   constructor(itemSource: ScoreItemInterface) {
