@@ -20,9 +20,8 @@ export interface ScoreItemInterface {
 }
 
 export interface GameSettingsInterface {
-  gameName: 'match-match';
-  cardsType: 'cars' | 'animals' | 'programming';
-  gameDifficulty: '4x4' | '6x6' | '8x8';
+  settingName: 'string';
+  settingValue: 'string';
 }
 
 export interface CurrentPlayerInterface {
