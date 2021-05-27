@@ -1,9 +1,4 @@
-import {
-  UserInterface,
-  GameTogglerInterface,
-  GameSettingsInterface,
-  IndexedDataType,
-} from './interfaces';
+import { IndexedDataType } from './interfaces';
 
 export class DataBase {
   private static dbName = 'Vadavur';

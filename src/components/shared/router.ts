@@ -4,6 +4,7 @@ import { ScoreField } from '../score-field/score-field';
 import { SettingsField } from '../settings-field/settings-field';
 import { RootField } from '../root-field/root-field';
 import { BaseComponent } from './base-component';
+import { ROUTE_PATHS } from './constants';
 
 export class Router {
   private readonly routes: {
@@ -13,10 +14,10 @@ export class Router {
 
   constructor() {
     this.routes = [
-      { path: 'about-me', NewFieldElementClass: AboutField },
-      { path: 'game-settings', NewFieldElementClass: SettingsField },
-      { path: 'best-score', NewFieldElementClass: ScoreField },
-      { path: 'playground', NewFieldElementClass: GameField },
+      { path: ROUTE_PATHS.aboutMe, NewFieldElementClass: AboutField },
+      { path: ROUTE_PATHS.gameSettings, NewFieldElementClass: SettingsField },
+      { path: ROUTE_PATHS.bestScore, NewFieldElementClass: ScoreField },
+      { path: ROUTE_PATHS.playground, NewFieldElementClass: GameField },
     ];
 
     document.addEventListener('click', (event: Event) => {

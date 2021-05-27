@@ -22,3 +22,10 @@ export const GAME_STATES = {
   onStart: 'onStart',
   onGame: 'onGame',
 };
+
+export const ROUTE_PATHS = {
+  aboutMe: 'about-me',
+  gameSettings: 'game-settings',
+  bestScore: 'best-score',
+  playground: 'playground',
+};
