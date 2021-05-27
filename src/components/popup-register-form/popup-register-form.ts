@@ -4,8 +4,8 @@ import { PopupInput } from '../popup-input/popup-input';
 import { Button } from '../button/button';
 import { removePopup } from '../shared/remove-popup';
 import { DataBase } from '../shared/data-base';
-// import { getPopupFormData } from './get-popup-form-data';
 import { UserInterface } from '../shared/interfaces';
+import { DATABASES } from '../shared/constants';
 
 interface InputAttributesInterface {
   placeholder: string;
@@ -39,7 +39,7 @@ export class PopupRegisterForm extends BaseComponent {
     this.addUserButton = new Button(
       ['button_add-user'],
       'add user'.toUpperCase(),
-      (event: Event) => this.sendInputValuesToDB(event)
+      (event: Event) => this.submitUserData(event)
     );
     this.cancelButton = new Button(
       ['button_cancel'],
@@ -60,8 +60,30 @@ export class PopupRegisterForm extends BaseComponent {
     });
   }
 
-  isValid(): string {
-    return this.formName; // plug
+  isValid(): boolean {
+    return !!this.formName; // plug
+  }
+
+  noOtherSameEmailUser(): boolean {
+    return !!this.formName; // plug
+  }
+
+  showError(): boolean {
+    return !!this.formName; // plug
+  }
+
+  static setCurrentUser(event: Event): void {
+    // plug
+  }
+
+  submitUserData(event: Event): void {
+    if (this.isValid() && this.noOtherSameEmailUser()) {
+      this.sendInputValuesToDB(event);
+      PopupRegisterForm.setCurrentUser(event);
+      removePopup(event);
+    } else {
+      this.showError();
+    }
   }
 
   sendInputValuesToDB(event: Event): void {
@@ -85,9 +107,7 @@ export class PopupRegisterForm extends BaseComponent {
         }
       }
     });
-    const USERS_DATABASE = 'users';
-    const KEY_PATH = 'email';
-    DataBase.putToDB(user, USERS_DATABASE, KEY_PATH);
+    DataBase.putToDB(user, DATABASES.users.name, DATABASES.users.keyPath);
   }
 }
 

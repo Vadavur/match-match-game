@@ -41,8 +41,6 @@ export class DataBase {
       };
     };
     openRequest.onerror = () => {
-      const db = openRequest.result;
-
       console.log('Error', openRequest.error);
     };
   }

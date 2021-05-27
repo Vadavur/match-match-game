@@ -7,6 +7,15 @@ export interface UserInterface {
   avatar: string;
 }
 
+export interface CurrentPlayerInterface {
+  gameName: 'match-match';
+  email: string;
+  firstName: string;
+  lastName: string;
+  score: number;
+  avatar: string;
+}
+
 export interface GameTogglerInterface {
   gameName: 'match-match';
   gameState: 'noPlayer' | 'onStart' | 'onGame';
@@ -22,15 +31,6 @@ export interface ScoreItemInterface {
 export interface GameSettingsInterface {
   settingName: string;
   option: string;
-}
-
-export interface CurrentPlayerInterface {
-  gameName: 'match-match';
-  email: string;
-  firstName: string;
-  lastName: string;
-  score: number;
-  avatar: string;
 }
 
 export type IndexedDataType =

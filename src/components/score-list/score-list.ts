@@ -7,6 +7,7 @@ import {
   ScoreItemInterface,
   IndexedDataType,
 } from '../shared/interfaces';
+import { DATABASES } from '../shared/constants';
 
 export class ScoreList extends BaseComponent {
   constructor() {
@@ -45,8 +46,11 @@ export class ScoreList extends BaseComponent {
         list.appendChild(horizontalLine.element);
       });
     }
-    const USERS_DATABASE = 'users';
     const KEY_PATH = 'email';
-    DataBase.getAllFromDB(USERS_DATABASE, KEY_PATH, addItemSourceFromUserData);
+    DataBase.getAllFromDB(
+      DATABASES.users.name,
+      DATABASES.users.keyPath,
+      addItemSourceFromUserData
+    );
   }
 }

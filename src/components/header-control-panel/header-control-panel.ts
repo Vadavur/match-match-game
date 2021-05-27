@@ -5,6 +5,7 @@ import { Button } from '../button/button';
 import { startGame } from '../shared/start-game';
 import { DataBase } from '../shared/data-base';
 import { GameTogglerInterface, IndexedDataType } from '../shared/interfaces';
+import { DATABASES } from '../shared/constants';
 
 export class HeaderControlPanel extends BaseComponent {
   public static controlElement: HTMLElement = new BaseComponent().element;
@@ -32,12 +33,11 @@ export class HeaderControlPanel extends BaseComponent {
           break;
       }
     }
-    const GAME_STATE_DATABASE = 'gameState';
-    const KEY_PATH = 'gameName';
+
     DataBase.getFromDB(
       'match-match',
-      GAME_STATE_DATABASE,
-      KEY_PATH,
+      DATABASES.gameState.name,
+      DATABASES.gameState.keyPath,
       setControlPanel
     );
   }

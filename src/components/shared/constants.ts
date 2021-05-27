@@ -18,9 +18,9 @@ export const DATABASES = {
 };
 
 export const GAME_STATES = {
-  noPlayer: 'noPlayer',
-  onStart: 'onStart',
-  onGame: 'onGame',
+  noPlayer: { gameName: 'match-match', gameState: 'noPlayer' },
+  onStart: { gameName: 'match-match', gameState: 'onStart' },
+  onGame: { gameName: 'match-match', gameState: 'onGame' },
 };
 
 export const ROUTE_PATHS = {
@@ -29,3 +29,5 @@ export const ROUTE_PATHS = {
   bestScore: 'best-score',
   playground: 'playground',
 };
+
+export const GAME_TITLE = 'Match-match game';
