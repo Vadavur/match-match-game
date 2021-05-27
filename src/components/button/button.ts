@@ -9,7 +9,6 @@ export class Button extends BaseComponent {
   ) {
     super('button', styles);
     this.element.innerHTML = buttonText.toUpperCase();
-    // this.element.setAttribute('data-path', dataPath);
     this.element.addEventListener('click', buttonAction);
   }
 }

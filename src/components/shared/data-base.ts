@@ -1,4 +1,8 @@
-import { UserInterface, GameTogglerInterface } from './interfaces';
+import {
+  UserInterface,
+  GameTogglerInterface,
+  GameSettingsInterface,
+} from './interfaces';
 
 export class DataBase {
   private static dbName = 'Vadavur';
@@ -47,7 +51,7 @@ export class DataBase {
   }
 
   public static async putToDB(
-    item: UserInterface | GameTogglerInterface,
+    item: UserInterface | GameTogglerInterface | GameSettingsInterface,
     storeName: string,
     keyPathName: string
   ): Promise<void> {
@@ -68,7 +72,9 @@ export class DataBase {
     keyValue: string,
     storeName: string,
     keyPathName: string,
-    callback: (request: UserInterface | GameTogglerInterface) => void
+    callback: (
+      request: UserInterface | GameTogglerInterface | GameSettingsInterface
+    ) => void
   ): void {
     function getItemFromDB(store: IDBObjectStore) {
       const request: IDBRequest = store.get(keyValue);

@@ -20,8 +20,8 @@ export interface ScoreItemInterface {
 }
 
 export interface GameSettingsInterface {
-  settingName: 'string';
-  settingValue: 'string';
+  settingName: string;
+  option: string;
 }
 
 export interface CurrentPlayerInterface {

@@ -8,7 +8,7 @@ export class SelectInput extends BaseComponent {
   constructor(
     name: string,
     optionValues: string[],
-    onChangeFunction: () => void
+    onChangeFunction: (event: Event) => void
   ) {
     super('select', ['select-input']);
     this.element.setAttribute('type', 'select');

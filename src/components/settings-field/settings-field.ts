@@ -1,7 +1,8 @@
 import './settings-field.scss';
-import { BaseComponent } from '../shared/base-component';
 import { SelectInput } from '../select-input/select-input';
-import { GAME_SETTINGS } from '../shared/constants';
+import { BaseComponent } from '../shared/base-component';
+import { DataBase } from '../shared/data-base';
+import { GAME_SETTINGS, DATABASES } from '../shared/constants';
 
 export class SettingsField extends BaseComponent {
   private readonly gameDifficultySelectInputs: SelectInput[] = [];
@@ -11,7 +12,7 @@ export class SettingsField extends BaseComponent {
     GAME_SETTINGS.forEach((setting, index) => {
       this.gameDifficultySelectInputs.push(
         new SelectInput(
-          setting.name,
+          setting.settingName,
           setting.options,
           SettingsField.setGameSetting
         )
@@ -20,5 +21,12 @@ export class SettingsField extends BaseComponent {
     });
   }
 
-  public static setGameSetting() {}
+  private static setGameSetting(event: Event) {
+    const eventElement = event.target as HTMLSelectElement;
+    DataBase.putToDB(
+      { settingName: eventElement.name, option: eventElement.value },
+      DATABASES.gameSettings.name,
+      DATABASES.gameSettings.keyPath
+    );
+  }
 }

@@ -2,11 +2,17 @@ import {} from './interfaces';
 
 export const GAME_SETTINGS = [
   {
-    name: 'gameDifficulty',
+    settingName: 'gameDifficulty',
     options: ['4x4', '6x6', '8x8'],
   },
   {
-    name: 'cardsType',
+    settingName: 'cardsType',
     options: ['cars', 'animals', 'programming'],
   },
 ];
+
+export const DATABASES = {
+  users: { name: 'users', keyPath: 'email' },
+  gameSettings: { name: 'gameSettings', keyPath: 'settingName' },
+  gameState: { name: 'gameState', keyPath: 'gameName' },
+};
