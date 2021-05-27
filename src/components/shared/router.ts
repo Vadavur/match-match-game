@@ -19,8 +19,6 @@ export class Router {
       { path: 'playground', NewFieldElementClass: GameField },
     ];
 
-    this.changeRootField();
-
     document.addEventListener('click', (event: Event) => {
       const currentState = window.history.state;
       this.setHistoryState(event);

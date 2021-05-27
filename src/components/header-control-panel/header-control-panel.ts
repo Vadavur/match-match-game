@@ -13,7 +13,7 @@ export class HeaderControlPanel extends BaseComponent {
     super('div', ['header-control-panel']);
   }
 
-  public static toggleControls(): void {
+  public static toggleControlPanel(): void {
     function setControlPanel(
       gameToggler: GameTogglerInterface | UserInterface
     ): void {
