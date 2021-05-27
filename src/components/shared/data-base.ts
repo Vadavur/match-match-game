@@ -1,9 +1,10 @@
 import { IndexedDataType } from './interfaces';
+import { DATABASES } from './constants';
 
 export class DataBase {
   private static dbName = 'Vadavur';
 
-  private static dbVersion = 6;
+  private static dbVersion = 8;
 
   private static activateDB(
     transactionMode: IDBTransactionMode,
@@ -18,12 +19,14 @@ export class DataBase {
 
     openRequest.onupgradeneeded = () => {
       const db = openRequest.result;
-      if (db.objectStoreNames.contains(storeName)) {
-        db.deleteObjectStore(storeName);
-      }
-      db.createObjectStore(storeName, { keyPath: keyPathName });
-      // const store = db.createObjectStore('users', { keyPath: 'email' });
-      // store.createIndex('NameIndex', ['name.last', 'name.first']);
+      Object.entries(DATABASES).forEach((database) => {
+        if (db.objectStoreNames.contains(database[1].name)) {
+          db.deleteObjectStore(database[1].name);
+        }
+        db.createObjectStore(database[1].name, {
+          keyPath: database[1].keyPath,
+        });
+      });
     };
 
     openRequest.onsuccess = () => {
@@ -39,9 +42,7 @@ export class DataBase {
     };
     openRequest.onerror = () => {
       const db = openRequest.result;
-      if (!db.objectStoreNames.contains(storeName)) {
-        db.createObjectStore(storeName);
-      }
+
       console.log('Error', openRequest.error);
     };
   }
