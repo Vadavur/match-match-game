@@ -19,7 +19,7 @@ export const DATABASES = {
 };
 
 export const GAME_STATES = {
-  noPlayer: { gameName: 'match-match', gameState: 'noPlayer' },
+  noUser: { gameName: 'match-match', gameState: 'noUser' },
   onStart: { gameName: 'match-match', gameState: 'onStart' },
   onGame: { gameName: 'match-match', gameState: 'onGame' },
 };
@@ -31,4 +31,4 @@ export const ROUTE_PATHS = {
   playground: 'playground',
 };
 
-export const GAME_TITLE = 'Match-match game';
+export const MM_GAME = { title: 'Match-match game', name: 'match-match' };

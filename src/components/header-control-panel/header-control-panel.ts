@@ -1,6 +1,7 @@
 import './header-control-panel.scss';
 import { BaseComponent } from '../shared/base-component';
 import { PopupField } from '../popup-field/popup-field';
+import { CurrentUserAvatar } from '../current-user-avatar/current-user-avatar';
 import { Button } from '../button/button';
 import { startGame } from '../shared/start-game';
 import { DataBase } from '../shared/data-base';
@@ -17,7 +18,7 @@ export class HeaderControlPanel extends BaseComponent {
   public static toggleControlPanel(): void {
     function setControlPanel(gameToggler: IndexedDataType): void {
       switch ((gameToggler as GameTogglerInterface).gameState) {
-        case 'noPlayer':
+        case 'noUser':
           HeaderControlPanel.createNoPlayerControls();
           break;
 
@@ -51,14 +52,14 @@ export class HeaderControlPanel extends BaseComponent {
     HeaderControlPanel.controlElement.innerHTML = '';
     HeaderControlPanel.createStartGameButton();
     HeaderControlPanel.createExitGameButton();
-    HeaderControlPanel.createPlayerAvatar();
+    HeaderControlPanel.createUserAvatar();
   }
 
   private static createOnGameControls(): void {
     HeaderControlPanel.controlElement.innerHTML = '';
     HeaderControlPanel.createStopGameButton();
     HeaderControlPanel.createExitGameButton();
-    HeaderControlPanel.createPlayerAvatar();
+    HeaderControlPanel.createUserAvatar();
   }
 
   private static createRegisterButton(): void {
@@ -84,12 +85,10 @@ export class HeaderControlPanel extends BaseComponent {
   }
 
   private static createStopGameButton(): void {
-    function stopGame(): void {}
-
     const stopGameButton = new Button(
       ['button_stop-game'],
       'stop game',
-      stopGame
+      HeaderControlPanel.stopGame
     );
     stopGameButton.element.setAttribute('data-path', 'best-score');
     HeaderControlPanel.controlElement.appendChild(stopGameButton.element);
@@ -103,15 +102,13 @@ export class HeaderControlPanel extends BaseComponent {
     HeaderControlPanel.controlElement.appendChild(exitGameButton.element);
   }
 
-  private static createPlayerAvatar(): void {
-    function stopGame(): void {}
+  private static createUserAvatar(): void {
+    const userAvatar = new CurrentUserAvatar();
 
-    const exitGameButton = new Button(
-      ['button_stop-game'],
-      'stop game',
-      stopGame
-    );
+    HeaderControlPanel.controlElement.appendChild(userAvatar.element);
+  }
 
-    HeaderControlPanel.controlElement.appendChild(exitGameButton.element);
+  private static stopGame(): void {
+    const plug = 'plug'; // plug
   }
 }

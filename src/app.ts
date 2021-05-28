@@ -5,14 +5,14 @@ import { GameTogglerInterface } from './components/shared/interfaces';
 import {
   GAME_STATES,
   DATABASES,
-  GAME_TITLE,
+  MM_GAME,
   ROUTE_PATHS,
 } from './components/shared/constants';
 
 export class App {
   constructor(private readonly rootElement: HTMLElement) {
     DataBase.putToDB(
-      GAME_STATES.noPlayer as GameTogglerInterface,
+      GAME_STATES.noUser as GameTogglerInterface,
       DATABASES.gameState.name,
       DATABASES.gameState.keyPath
     ).then(() => {
@@ -20,7 +20,7 @@ export class App {
       this.rootElement.appendChild(pageField.element);
       window.history.pushState(
         ROUTE_PATHS.aboutMe,
-        GAME_TITLE,
+        MM_GAME.title,
         ROUTE_PATHS.aboutMe
       );
       const router = new Router();

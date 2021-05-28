@@ -4,7 +4,7 @@ import { ScoreField } from '../score-field/score-field';
 import { SettingsField } from '../settings-field/settings-field';
 import { RootField } from '../root-field/root-field';
 import { BaseComponent } from './base-component';
-import { ROUTE_PATHS, GAME_TITLE } from './constants';
+import { ROUTE_PATHS, MM_GAME } from './constants';
 
 export class Router {
   private readonly routes: {
@@ -39,7 +39,7 @@ export class Router {
     const newRoute: Router['routes'][0] | null = this.getRouteByPath(dataPath);
 
     if (newRoute && newRoute.path !== window.history.state) {
-      window.history.pushState(newRoute.path, GAME_TITLE, newRoute.path);
+      window.history.pushState(newRoute.path, MM_GAME.title, newRoute.path);
     }
   }
 
