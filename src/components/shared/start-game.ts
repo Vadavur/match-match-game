@@ -17,4 +17,4 @@ export function startGame(): void {
   ).then(() => {
     document.dispatchEvent(toggleControlEvent);
   });
-} // plug
+}

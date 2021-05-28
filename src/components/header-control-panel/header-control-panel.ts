@@ -4,6 +4,7 @@ import { CurrentUserAvatar } from '../current-user-avatar/current-user-avatar';
 import { Button } from '../button/button';
 import { startGame } from '../shared/start-game';
 import { stopGame } from '../shared/stop-game';
+import { exitGame } from '../shared/exit-game';
 import { showPopup } from '../shared/show-popup';
 import { DataBase } from '../shared/data-base';
 import { GameStateInterface, IndexedDataType } from '../shared/interfaces';
@@ -21,7 +22,7 @@ export class HeaderControlPanel extends BaseComponent {
     function setControlPanel(gameToggler: IndexedDataType): void {
       switch ((gameToggler as GameStateInterface).gameState) {
         case GAME_STATES.noUser.gameState:
-          HeaderControlPanel.createNoPlayerControls();
+          HeaderControlPanel.createNoUserControls();
           break;
 
         case GAME_STATES.onStart.gameState:
@@ -45,7 +46,7 @@ export class HeaderControlPanel extends BaseComponent {
     );
   }
 
-  private static createNoPlayerControls() {
+  private static createNoUserControls() {
     HeaderControlPanel.controlElement.innerHTML = '';
     HeaderControlPanel.createRegisterButton();
   }
@@ -94,8 +95,6 @@ export class HeaderControlPanel extends BaseComponent {
   }
 
   private static createExitGameButton(): void {
-    function exitGame(): void {}
-
     const exitGameButton = new Button(['button_exit-game'], 'exit', exitGame);
     exitGameButton.element.setAttribute('data-path', 'about-me');
     HeaderControlPanel.controlElement.appendChild(exitGameButton.element);

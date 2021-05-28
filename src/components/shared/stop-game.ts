@@ -17,4 +17,4 @@ export function stopGame(): void {
   ).then(() => {
     document.dispatchEvent(toggleControlEvent);
   });
-} // plug
+}
