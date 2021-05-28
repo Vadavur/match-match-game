@@ -1,6 +1,6 @@
 import './components/shared/styles.scss';
-import { App } from './app';
+import { runAppAppendedTo } from './run-app';
 
 window.onload = () => {
-  const app = new App(document.body);
+  runAppAppendedTo(document.body);
 };

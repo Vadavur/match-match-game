@@ -48,7 +48,10 @@ export class PopupRegisterForm extends BaseComponent {
     this.cancelButton = new Button(
       ['button_cancel'],
       'cancel'.toUpperCase(),
-      () => removePopup
+      (event) => {
+        event.preventDefault();
+        removePopup(event);
+      }
     );
 
     this.element.appendChild(this.addUserButton.element);
@@ -109,6 +112,7 @@ export class PopupRegisterForm extends BaseComponent {
   }
 
   submitUserData(event: Event): void {
+    event.preventDefault();
     if (this.isValid() && this.noOtherSameEmailUser()) {
       this.sendInputValuesToDB(event);
       this.setCurrentUser(event);
@@ -129,7 +133,6 @@ export class PopupRegisterForm extends BaseComponent {
   }
 
   sendInputValuesToDB(event: Event): void {
-    event.preventDefault();
     const user: UserInterface = {
       email: '',
       firstName: '',
