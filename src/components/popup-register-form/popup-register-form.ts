@@ -114,7 +114,7 @@ export class PopupRegisterForm extends BaseComponent {
   submitUserData(event: Event): void {
     event.preventDefault();
     if (this.isValid() && this.noOtherSameEmailUser()) {
-      this.sendInputValuesToDB(event);
+      this.sendInputValuesToDB();
       this.setCurrentUser(event);
       const toggleControlEvent = new Event(TOGGLE_CONTROL_PANEL_EVENT, {
         bubbles: true,
@@ -132,7 +132,7 @@ export class PopupRegisterForm extends BaseComponent {
     }
   }
 
-  sendInputValuesToDB(event: Event): void {
+  sendInputValuesToDB(): void {
     const user: UserInterface = {
       email: '',
       firstName: '',

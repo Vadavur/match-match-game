@@ -1,13 +1,13 @@
 import './template-field.scss';
 import { BaseComponent } from '../shared/base-component';
-import { GameField } from '../game-field/game-field';
+import { TimerField } from '../timer-field/timer-field';
 
 export class TemplateField extends BaseComponent {
-  private readonly gameField: GameField;
+  private readonly timerField: TimerField;
 
   constructor() {
     super('div', ['template-field']);
-    this.gameField = new GameField();
-    this.element.appendChild(this.gameField.element);
+    this.timerField = new TimerField();
+    this.element.appendChild(this.timerField.element);
   }
 }

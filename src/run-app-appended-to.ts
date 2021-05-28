@@ -26,3 +26,15 @@ export function runAppAppendedTo(rootElement: HTMLElement): void {
     router.changeRootField();
   });
 }
+
+// TODOs:
+// NB!!! Refactor header control panel changing completely:
+//    don't use DB for app state keeping,
+//    use custom events inner data ({ detail: data } new event param)
+//    to pass app state directly to toggleControlPanel function
+// refactor runAppAppendedTo func - devide into several more readable little funcs
+// refactor start/stop/exitGame funcs - put thim in one entity (func or class?)
+// refactor PopUpRegisterForm - take out some funcs
+// refactor HeaderControlPanel - take out some funcs
+// implement correct navigation tabs visual selections on toggle transitions
+// don't forget about final magic expelliarmus
