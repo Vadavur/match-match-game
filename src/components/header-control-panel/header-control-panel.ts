@@ -3,6 +3,7 @@ import { BaseComponent } from '../shared/base-component';
 import { CurrentUserAvatar } from '../current-user-avatar/current-user-avatar';
 import { Button } from '../button/button';
 import { startGame } from '../shared/start-game';
+import { stopGame } from '../shared/stop-game';
 import { showPopup } from '../shared/show-popup';
 import { DataBase } from '../shared/data-base';
 import { GameStateInterface, IndexedDataType } from '../shared/interfaces';
@@ -86,7 +87,7 @@ export class HeaderControlPanel extends BaseComponent {
     const stopGameButton = new Button(
       ['button_stop-game'],
       'stop game',
-      HeaderControlPanel.stopGame
+      stopGame
     );
     stopGameButton.element.setAttribute('data-path', 'best-score');
     HeaderControlPanel.controlElement.appendChild(stopGameButton.element);
@@ -103,9 +104,5 @@ export class HeaderControlPanel extends BaseComponent {
   private static createUserAvatar(): void {
     const userAvatar = new CurrentUserAvatar();
     HeaderControlPanel.controlElement.appendChild(userAvatar.element);
-  }
-
-  private static stopGame(): void {
-    const plug = 'plug'; // plug
   }
 }
