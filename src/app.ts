@@ -1,7 +1,7 @@
 import { PageField } from './components/page-field/page-field';
 import { Router } from './components/shared/router';
 import { DataBase } from './components/shared/data-base';
-import { GameTogglerInterface } from './components/shared/interfaces';
+import { GameStateInterface } from './components/shared/interfaces';
 import {
   GAME_STATES,
   DATABASES,
@@ -12,7 +12,7 @@ import {
 export class App {
   constructor(private readonly rootElement: HTMLElement) {
     DataBase.putToDB(
-      GAME_STATES.noUser as GameTogglerInterface,
+      GAME_STATES.noUser as GameStateInterface,
       DATABASES.gameState.name,
       DATABASES.gameState.keyPath
     ).then(() => {

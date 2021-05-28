@@ -4,8 +4,18 @@ import { PopupInput } from '../popup-input/popup-input';
 import { Button } from '../button/button';
 import { removePopup } from '../shared/remove-popup';
 import { DataBase } from '../shared/data-base';
-import { UserInterface, CurrentUserInterface } from '../shared/interfaces';
-import { DATABASES } from '../shared/constants';
+import {
+  UserInterface,
+  CurrentUserInterface,
+  GameStateInterface,
+} from '../shared/interfaces';
+import {
+  DATABASES,
+  REGISTER_FORM_INPUTS_ATTRIBUTES,
+  MM_GAME,
+  TOGGLE_CONTROL_PANEL_EVENT,
+  GAME_STATES,
+} from '../shared/constants';
 
 interface InputAttributesInterface {
   placeholder: string;
@@ -26,14 +36,8 @@ export class PopupRegisterForm extends BaseComponent {
     super('form', ['popup-register-form']);
 
     this.formName = name;
-    this.inputsAttributes = [
-      { placeholder: 'First Name', name: 'firstName' },
-      { placeholder: 'Last Name', name: 'lastName' },
-      { placeholder: 'E-mail', name: 'email' },
-    ];
-
+    this.inputsAttributes = REGISTER_FORM_INPUTS_ATTRIBUTES;
     this.element.setAttribute('name', name);
-
     this.setPopupInputs();
 
     this.addUserButton = new Button(
@@ -61,23 +65,24 @@ export class PopupRegisterForm extends BaseComponent {
   }
 
   isValid(): boolean {
+    const a = 'plug';
     return !!this.formName; // plug
   }
 
   noOtherSameEmailUser(): boolean {
+    const a = 'plug';
     return !!this.formName; // plug
   }
 
   showError(): boolean {
+    const a = 'plug';
     return !!this.formName; // plug
   }
 
   setCurrentUser(event: Event): void {
     event.preventDefault();
-
-    //
     const currentUser: CurrentUserInterface = {
-      gameName: 'match-match',
+      gameName: MM_GAME.name,
       email: '',
       firstName: '',
       lastName: '',
@@ -107,7 +112,18 @@ export class PopupRegisterForm extends BaseComponent {
     if (this.isValid() && this.noOtherSameEmailUser()) {
       this.sendInputValuesToDB(event);
       this.setCurrentUser(event);
-      removePopup(event);
+      const toggleControlEvent = new Event(TOGGLE_CONTROL_PANEL_EVENT, {
+        bubbles: true,
+      });
+      DataBase.putToDB(
+        GAME_STATES.onStart as GameStateInterface,
+        DATABASES.gameState.name,
+        DATABASES.gameState.keyPath
+      ).then(() => {
+        console.log('THEN');
+        this.element.dispatchEvent(toggleControlEvent);
+        removePopup(event);
+      });
     } else {
       this.showError();
     }
@@ -137,15 +153,3 @@ export class PopupRegisterForm extends BaseComponent {
     DataBase.putToDB(user, DATABASES.users.name, DATABASES.users.keyPath);
   }
 }
-
-// async function getData(): Promise<void> {
-//   const newUser = {
-//     email: 'email',
-//     firstName: 'fname',
-//     lastName: 'sname',
-//   };
-//   const DATABASE = 'users';
-//   await DataBase.putToDB(newUser, DATABASE).then(() =>
-//     DataBase.getFromDB('email', DATABASE, (a) => console.log(a, '??'))
-//   );
-// }

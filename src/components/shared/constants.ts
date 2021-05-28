@@ -32,3 +32,11 @@ export const ROUTE_PATHS = {
 };
 
 export const MM_GAME = { title: 'Match-match game', name: 'match-match' };
+
+export const REGISTER_FORM_INPUTS_ATTRIBUTES = [
+  { placeholder: 'First Name', name: 'firstName' },
+  { placeholder: 'Last Name', name: 'lastName' },
+  { placeholder: 'E-mail', name: 'email' },
+];
+
+export const TOGGLE_CONTROL_PANEL_EVENT = 'toggleControlPanel';

@@ -9,7 +9,7 @@ export interface UserInterface {
 
 export interface CurrentUserInterface {
   [index: string]: string | number;
-  gameName: 'match-match';
+  gameName: string;
   email: string;
   firstName: string;
   lastName: string;
@@ -17,8 +17,8 @@ export interface CurrentUserInterface {
   avatar: string;
 }
 
-export interface GameTogglerInterface {
-  gameName: 'match-match';
+export interface GameStateInterface {
+  gameName: string;
   gameState: 'noUser' | 'onStart' | 'onGame';
 }
 
@@ -38,4 +38,4 @@ export type IndexedDataType =
   | GameSettingsInterface
   | UserInterface
   | CurrentUserInterface
-  | GameTogglerInterface;
+  | GameStateInterface;

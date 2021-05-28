@@ -1,12 +1,12 @@
 import './header-control-panel.scss';
 import { BaseComponent } from '../shared/base-component';
-import { PopupField } from '../popup-field/popup-field';
 import { CurrentUserAvatar } from '../current-user-avatar/current-user-avatar';
 import { Button } from '../button/button';
 import { startGame } from '../shared/start-game';
+import { showPopup } from '../shared/show-popup';
 import { DataBase } from '../shared/data-base';
-import { GameTogglerInterface, IndexedDataType } from '../shared/interfaces';
-import { DATABASES } from '../shared/constants';
+import { GameStateInterface, IndexedDataType } from '../shared/interfaces';
+import { DATABASES, GAME_STATES, MM_GAME } from '../shared/constants';
 
 export class HeaderControlPanel extends BaseComponent {
   public static controlElement: HTMLElement = new BaseComponent().element;
@@ -16,17 +16,18 @@ export class HeaderControlPanel extends BaseComponent {
   }
 
   public static toggleControlPanel(): void {
+    console.log('TOGGLE!');
     function setControlPanel(gameToggler: IndexedDataType): void {
-      switch ((gameToggler as GameTogglerInterface).gameState) {
-        case 'noUser':
+      switch ((gameToggler as GameStateInterface).gameState) {
+        case GAME_STATES.noUser.gameState:
           HeaderControlPanel.createNoPlayerControls();
           break;
 
-        case 'onStart':
+        case GAME_STATES.onStart.gameState:
           HeaderControlPanel.createOnStartControls();
           break;
 
-        case 'onGame':
+        case GAME_STATES.onGame.gameState:
           HeaderControlPanel.createOnGameControls();
           break;
 
@@ -36,7 +37,7 @@ export class HeaderControlPanel extends BaseComponent {
     }
 
     DataBase.getFromDB(
-      'match-match',
+      MM_GAME.name,
       DATABASES.gameState.name,
       DATABASES.gameState.keyPath,
       setControlPanel
@@ -63,9 +64,6 @@ export class HeaderControlPanel extends BaseComponent {
   }
 
   private static createRegisterButton(): void {
-    function showPopup(): void {
-      document.body.appendChild(new PopupField().element);
-    }
     const registerButton = new Button(
       ['button_register-new-player'],
       'register new player',
@@ -104,7 +102,6 @@ export class HeaderControlPanel extends BaseComponent {
 
   private static createUserAvatar(): void {
     const userAvatar = new CurrentUserAvatar();
-
     HeaderControlPanel.controlElement.appendChild(userAvatar.element);
   }
 

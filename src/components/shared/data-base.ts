@@ -4,7 +4,7 @@ import { DATABASES } from './constants';
 export class DataBase {
   private static dbName = 'Vadavur';
 
-  private static dbVersion = 8;
+  private static dbVersion = 9;
 
   private static activateDB(
     transactionMode: IDBTransactionMode,
