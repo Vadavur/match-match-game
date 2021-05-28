@@ -4,7 +4,7 @@ import { PopupInput } from '../popup-input/popup-input';
 import { Button } from '../button/button';
 import { removePopup } from '../shared/remove-popup';
 import { DataBase } from '../shared/data-base';
-import { UserInterface } from '../shared/interfaces';
+import { UserInterface, CurrentUserInterface } from '../shared/interfaces';
 import { DATABASES } from '../shared/constants';
 
 interface InputAttributesInterface {
@@ -72,14 +72,41 @@ export class PopupRegisterForm extends BaseComponent {
     return !!this.formName; // plug
   }
 
-  static setCurrentUser(event: Event): void {
-    // plug
+  setCurrentUser(event: Event): void {
+    event.preventDefault();
+
+    //
+    const currentUser: CurrentUserInterface = {
+      gameName: 'match-match',
+      email: '',
+      firstName: '',
+      lastName: '',
+      score: 0,
+      avatar: 'src/assets/images/avatar-default.png',
+    };
+    this.inputsAttributes.forEach((inputAttributes) => {
+      if (inputAttributes.instance) {
+        const input = inputAttributes.instance.element;
+        if (input.tagName === 'INPUT') {
+          const inputElement = input as HTMLInputElement;
+          const inputName: string = inputElement.name;
+          if (inputElement && inputElement.name in currentUser) {
+            currentUser[inputName] = inputElement.value;
+          }
+        }
+      }
+    });
+    DataBase.putToDB(
+      currentUser,
+      DATABASES.currentUser.name,
+      DATABASES.currentUser.keyPath
+    );
   }
 
   submitUserData(event: Event): void {
     if (this.isValid() && this.noOtherSameEmailUser()) {
       this.sendInputValuesToDB(event);
-      PopupRegisterForm.setCurrentUser(event);
+      this.setCurrentUser(event);
       removePopup(event);
     } else {
       this.showError();

@@ -7,7 +7,8 @@ export interface UserInterface {
   avatar: string;
 }
 
-export interface CurrentPlayerInterface {
+export interface CurrentUserInterface {
+  [index: string]: string | number | undefined;
   gameName: 'match-match';
   email: string;
   firstName: string;

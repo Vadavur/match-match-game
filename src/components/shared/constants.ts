@@ -13,6 +13,7 @@ export const GAME_SETTINGS = [
 
 export const DATABASES = {
   users: { name: 'users', keyPath: 'email' },
+  currentUser: { name: 'currentUser', keyPath: 'gameName' },
   gameSettings: { name: 'gameSettings', keyPath: 'settingName' },
   gameState: { name: 'gameState', keyPath: 'gameName' },
 };
