@@ -120,8 +120,7 @@ export class PopupRegisterForm extends BaseComponent {
         DATABASES.gameState.name,
         DATABASES.gameState.keyPath
       ).then(() => {
-        console.log('THEN');
-        this.element.dispatchEvent(toggleControlEvent);
+        document.dispatchEvent(toggleControlEvent);
         removePopup(event);
       });
     } else {

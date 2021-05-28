@@ -16,7 +16,7 @@ export class HeaderControlPanel extends BaseComponent {
   }
 
   public static toggleControlPanel(): void {
-    console.log('TOGGLE!');
+    HeaderControlPanel.controlElement.className = 'header-control-panel';
     function setControlPanel(gameToggler: IndexedDataType): void {
       switch ((gameToggler as GameStateInterface).gameState) {
         case GAME_STATES.noUser.gameState:
