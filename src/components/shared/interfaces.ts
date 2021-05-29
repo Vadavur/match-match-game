@@ -1,5 +1,5 @@
 export interface UserInterface {
-  [index: string]: string | number | undefined;
+  [index: string]: string | number;
   email: string;
   firstName: string;
   lastName: string;
@@ -30,7 +30,7 @@ export interface ScoreItemInterface {
 }
 
 export interface GameSettingsInterface {
-  settingName: string;
+  name: string;
   option: string;
 }
 

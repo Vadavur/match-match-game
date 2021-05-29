@@ -32,6 +32,7 @@ export function runAppAppendedTo(rootElement: HTMLElement): void {
 //    don't use DB for app state keeping,
 //    use custom events inner data ({ detail: data } new event param)
 //    to pass app state directly to toggleControlPanel function
+// NB!!! Refactor CardField class completely. Total mess...
 // refactor runAppAppendedTo func - devide into several more readable little funcs
 // refactor start/stop/exitGame funcs - put thim in one entity (func or class?)
 // refactor PopUpRegisterForm - take out some funcs

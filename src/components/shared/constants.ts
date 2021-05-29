@@ -1,20 +1,20 @@
 import {} from './interfaces';
 
-export const GAME_SETTINGS = [
-  {
-    settingName: 'gameDifficulty',
+export const GAME_SETTINGS = {
+  gameDifficulty: {
+    name: 'gameDifficulty',
     options: ['4x4', '6x6', '8x8'],
   },
-  {
-    settingName: 'cardsType',
+  cardsType: {
+    name: 'cardsType',
     options: ['cars', 'animals', 'programming'],
   },
-];
+};
 
 export const DATABASES = {
   users: { name: 'users', keyPath: 'email' },
   currentUser: { name: 'currentUser', keyPath: 'gameName' },
-  gameSettings: { name: 'gameSettings', keyPath: 'settingName' },
+  gameSettings: { name: 'gameSettings', keyPath: 'name' },
   gameState: { name: 'gameState', keyPath: 'gameName' },
 };
 
@@ -40,3 +40,5 @@ export const REGISTER_FORM_INPUTS_ATTRIBUTES = [
 ];
 
 export const TOGGLE_CONTROL_PANEL_EVENT = 'toggleControlPanel';
+
+export const cardsFieldGap = 5; // px

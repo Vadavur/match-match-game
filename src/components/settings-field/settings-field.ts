@@ -9,11 +9,11 @@ export class SettingsField extends BaseComponent {
 
   constructor() {
     super('div', ['settings-field']);
-    GAME_SETTINGS.forEach((setting, index) => {
+    Object.entries(GAME_SETTINGS).forEach((setting, index) => {
       this.gameDifficultySelectInputs.push(
         new SelectInput(
-          setting.settingName,
-          setting.options,
+          setting[1].name,
+          setting[1].options,
           SettingsField.setGameSetting
         )
       );
@@ -24,7 +24,7 @@ export class SettingsField extends BaseComponent {
   private static setGameSetting(event: Event) {
     const eventElement = event.target as HTMLSelectElement;
     DataBase.putToDB(
-      { settingName: eventElement.name, option: eventElement.value },
+      { name: eventElement.name, option: eventElement.value },
       DATABASES.gameSettings.name,
       DATABASES.gameSettings.keyPath
     );

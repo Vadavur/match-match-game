@@ -1,13 +1,10 @@
 import './card-panel.scss';
 import { BaseComponent } from '../shared/base-component';
-import { TimerField } from '../timer-field/timer-field';
 
-export class TemplateField extends BaseComponent {
-  private readonly timerField: TimerField;
-
-  constructor() {
+export class CardPanel extends BaseComponent {
+  constructor(size?: number) {
     super('div', ['card-panel']);
-    this.timerField = new TimerField();
-    this.element.appendChild(this.timerField.element);
+    this.element.style.width = `${size}px`;
+    this.element.style.height = `${size}px`;
   }
 }

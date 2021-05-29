@@ -1,9 +1,10 @@
 .cards-field {
   width: 744px;
   height: 532px;
+  margin: auto;
   display: flex;
-  flex-direction: column;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: center;
   align-items: auto;
+  gap: 5px;
 }
