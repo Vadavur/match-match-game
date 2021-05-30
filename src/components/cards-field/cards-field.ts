@@ -37,7 +37,11 @@ export class CardsField extends BaseComponent {
         this.setNewCardPanelAndCardsFieldSizes();
         if (this.cardPanelSize) {
           for (let i = 0; i < this.cardsQuantity; i++) {
-            const cardPanel = new CardPanel(this.cardPanelSize);
+            const cardPanel = new CardPanel(
+              this.cardPanelSize,
+              'animals',
+              '(2)'
+            );
             this.element.appendChild(cardPanel.element);
           }
         }

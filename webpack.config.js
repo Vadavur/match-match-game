@@ -75,7 +75,7 @@ export default ({ develop }) => {
         favicon: './src/assets/images/favicon.ico',
       }),
       new MiniCssExtractPlugin({ filename: '[name].[contenthash].css' }),
-      new CopyPlugin({ patterns: [{ from: './public' }] }),
+      new CopyPlugin({ patterns: [{ from: './public/**/*' }] }),
       new CleanWebpackPlugin.CleanWebpackPlugin({
         cleanStaleWebpackAssets: false,
       }),

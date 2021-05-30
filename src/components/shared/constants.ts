@@ -1,4 +1,4 @@
-import {} from './interfaces';
+export const MM_GAME = { title: 'Match-match game', name: 'match-match' };
 
 export const GAME_SETTINGS = {
   gameDifficulty: {
@@ -7,8 +7,14 @@ export const GAME_SETTINGS = {
   },
   cardsType: {
     name: 'cardsType',
-    options: ['cars', 'animals', 'programming'],
+    options: ['animals', 'cars', 'programming'],
   },
+};
+
+export const CARDS_TYPE_QUANTITIES = {
+  [GAME_SETTINGS.cardsType.options[0]]: 100,
+  [GAME_SETTINGS.cardsType.options[1]]: 99,
+  [GAME_SETTINGS.cardsType.options[2]]: 75,
 };
 
 export const DATABASES = {
@@ -30,8 +36,6 @@ export const ROUTE_PATHS = {
   bestScore: 'best-score',
   playground: 'playground',
 };
-
-export const MM_GAME = { title: 'Match-match game', name: 'match-match' };
 
 export const REGISTER_FORM_INPUTS_ATTRIBUTES = [
   { placeholder: 'First Name', name: 'firstName' },
