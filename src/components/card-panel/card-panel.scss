@@ -16,11 +16,6 @@
   box-shadow: 0 5px 10px #7c410a50;
 }
 
-.flipped {
-  transform: rotateY(180deg) translateX(-100%);
-  transform-origin: left;
-}
-
 .card-panel__back,
 .card-panel__front {
   width: 100%;
@@ -37,20 +32,22 @@
   transform: rotateY(180deg);
 }
 
-.card-container {
-  margin: 1%;
-  flex: 1 0 20%;
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  perspective: 25%;
+.flipped {
+  transform: rotateY(180deg) translateX(-100%);
+  transform-origin: left;
 }
 
-.card {
-  position: relative;
-  width: 100px;
-  height: 120px;
-  transform-style: preserve-3d;
-  transform-origin: right;
-  transition: all 0.3s;
+.matched::before,
+.wrongly-matched::before {
+  content: "";
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: #0fb84735;
+}
+
+.wrongly-matched::before {
+  background-color: #ff080035;
 }

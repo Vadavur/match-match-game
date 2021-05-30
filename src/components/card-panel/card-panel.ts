@@ -17,7 +17,7 @@ export class CardPanel extends BaseComponent {
         style="background-image: url('${img}')">
         </div>
         `;
-    this.element.addEventListener('click', () => this.toggleFlipState());
+    // this.element.addEventListener('click', () => this.toggleFlipState());
   }
 
   private toggleFlipState() {

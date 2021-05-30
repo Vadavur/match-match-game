@@ -46,5 +46,14 @@ export const REGISTER_FORM_INPUTS_ATTRIBUTES = [
 ];
 
 export const TOGGLE_CONTROL_PANEL_EVENT = 'toggleControlPanel';
+export const CARD_PANELS_APPENDED_EVENT = 'cardPanelsAppended';
 
 export const CARDS_FIELD_GAP = 5; // px
+
+export const FLIPPED_STATE_TIMEOUT = 500;
+
+export const CLASS_NAMES = {
+  flipped: 'flipped',
+  matched: 'matched',
+  wronglyMatched: 'wrongly-matched',
+};

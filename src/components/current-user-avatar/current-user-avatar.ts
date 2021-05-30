@@ -24,6 +24,7 @@ export class CurrentUserAvatar extends BaseComponent {
         const imageElement = this.element as HTMLImageElement;
         imageElement.src = currentUser.avatar;
         imageElement.alt = `${currentUser.firstName} ${currentUser.lastName} avatar`;
+        imageElement.title = `Hello, ${currentUser.firstName} ${currentUser.lastName}!`;
       }
     );
     return src;

@@ -8,6 +8,8 @@ import {
   GAME_SETTINGS,
   GAME_DIFFICULTY_DEVIDER,
   CARDS_TYPE_QUANTITIES,
+  CLASS_NAMES,
+  CARD_PANELS_APPENDED_EVENT,
 } from '../shared/constants';
 import { GameSettingsInterface, IndexedDataType } from '../shared/interfaces';
 
@@ -17,11 +19,7 @@ interface MatrixSizeInterface {
 }
 
 export class CardsField extends BaseComponent {
-  private cardsFieldMatrixSize?: MatrixSizeInterface;
-
-  private cardPanelSize?: number;
-
-  private cardsInGame?: number;
+  cardsPanels: CardPanel[] = [];
 
   constructor() {
     super('div', ['cards-field']);
@@ -39,24 +37,31 @@ export class CardsField extends BaseComponent {
   }
 
   putCardsOnField(gameDifficulty: GameSettingsInterface): void {
-    this.cardsFieldMatrixSize =
+    const cardsFieldMatrixSize =
       CardsField.getCardsFieldMatrixSize(gameDifficulty);
     const cardsInGame = CardsField.getCardsQuantity(gameDifficulty);
-    const cardPanelSize = this.getCardPanelSize(this.cardsFieldMatrixSize);
-    this.setNewCardsFieldSize(this.cardsFieldMatrixSize, cardPanelSize);
+    const cardPanelSize = this.getCardPanelSize(cardsFieldMatrixSize);
+    this.setNewCardsFieldSize(cardsFieldMatrixSize, cardPanelSize);
     CardsField.setCards((cardsType) => {
       const imagesNames: string[] = CardsField.getImagesNames(
         cardsType,
         cardsInGame
       );
       imagesNames.forEach((imageName) => {
-        const cardPanel = new CardPanel(
+        const currentCardPanel = new CardPanel(
           cardPanelSize,
           cardsType.option,
           imageName
         );
-        this.element.appendChild(cardPanel.element);
+        currentCardPanel.element.classList.add(CLASS_NAMES.flipped);
+        this.cardsPanels.push(currentCardPanel);
+        this.element.appendChild(currentCardPanel.element);
       });
+      this.element.dispatchEvent(
+        new Event(CARD_PANELS_APPENDED_EVENT, {
+          bubbles: true,
+        })
+      );
     });
   }
 

@@ -68,7 +68,8 @@ export function runAppAppendedTo(rootElement: HTMLElement): void {
 // refactor start/stop/exitGame funcs - put thim in one entity (func or class?)
 // refactor PopUpRegisterForm - take out some funcs
 // refactor HeaderControlPanel - take out some funcs
-// implement correct navigation tabs visual selections on toggle transitions
+// implement correct navigation tabs selections on page transitions
 // don't forget about final magic expelliarmus
 // refactor game settings
 //    put cardType and gameDifficulty in DB as one object
+// implement router ability to reload page correctly
