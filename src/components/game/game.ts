@@ -37,15 +37,12 @@ export class Game {
     });
   }
 
-  private startGame(): void {
-    this.showCards();
-  }
-
-  private showCards(): void {
+  private async startGame(): Promise<void> {
     this.flipAllCardsImagesUp();
     this.timerField.countDown(() => {
       this.flipAllCardsImagesDown();
       this.setCardsFlipping();
+      this.timerField.countUp(() => {});
     });
   }
 

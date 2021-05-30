@@ -19,4 +19,17 @@ export class TimerField extends BaseComponent {
       timeLeft--;
     }, 1000);
   }
+
+  public async countUp(proceedOnTimesUp: () => void): Promise<void> {
+    let secondsPassed = 0;
+    const myfunc = setInterval(() => {
+      this.element.innerHTML = `${secondsPassed} seconds passed!`;
+      secondsPassed++;
+      if (secondsPassed <= 0) {
+        clearInterval(myfunc);
+        this.element.innerHTML = 'GO!!!';
+        proceedOnTimesUp();
+      }
+    }, 1000);
+  }
 }
