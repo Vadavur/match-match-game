@@ -22,20 +22,20 @@ export interface GameStateInterface {
   gameState: 'noUser' | 'onStart' | 'onGame';
 }
 
-export interface ScoreItemInterface {
-  name: string;
-  email: string;
-  score: number;
-  avatar: string;
-}
-
 export interface GameSettingsInterface {
   name: string;
   option: string;
 }
 
 export type IndexedDataType =
-  | GameSettingsInterface
   | UserInterface
   | CurrentUserInterface
-  | GameStateInterface;
+  | GameStateInterface
+  | GameSettingsInterface;
+
+export interface ScoreItemInterface {
+  name: string;
+  email: string;
+  score: number;
+  avatar: string;
+}

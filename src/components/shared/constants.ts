@@ -1,5 +1,7 @@
 export const MM_GAME = { title: 'Match-match game', name: 'match-match' };
 
+export const GAME_DIFFICULTY_DEVIDER = 'x';
+
 export const GAME_SETTINGS = {
   gameDifficulty: {
     name: 'gameDifficulty',
@@ -45,4 +47,4 @@ export const REGISTER_FORM_INPUTS_ATTRIBUTES = [
 
 export const TOGGLE_CONTROL_PANEL_EVENT = 'toggleControlPanel';
 
-export const cardsFieldGap = 5; // px
+export const CARDS_FIELD_GAP = 5; // px
