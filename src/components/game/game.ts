@@ -15,13 +15,4 @@ export class Game {
       (result) => {}
     );
   }
-
-  public static getCardImagesNames(): [] {
-    DataBase.getFromDB(
-      GAME_SETTINGS.gameDifficulty.name,
-      DATABASES.gameSettings.name,
-      DATABASES.gameSettings.keyPath,
-      (result) => {}
-    );
-  }
 }

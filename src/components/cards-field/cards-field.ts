@@ -7,6 +7,7 @@ import {
   DATABASES,
   GAME_SETTINGS,
   GAME_DIFFICULTY_DEVIDER,
+  CARDS_TYPE_QUANTITIES,
 } from '../shared/constants';
 import { GameSettingsInterface, IndexedDataType } from '../shared/interfaces';
 
@@ -20,14 +21,14 @@ export class CardsField extends BaseComponent {
 
   private cardPanelSize?: number;
 
-  private cardsQuantity?: number;
+  private cardsInGame?: number;
 
   constructor() {
     super('div', ['cards-field']);
-    this.prepareGameField();
+    this.setGameField();
   }
 
-  prepareGameField(): void {
+  setGameField(): void {
     DataBase.getFromDB(
       GAME_SETTINGS.gameDifficulty.name,
       DATABASES.gameSettings.name,
@@ -35,6 +36,28 @@ export class CardsField extends BaseComponent {
       (gameDifficulty: IndexedDataType) =>
         this.putCardsOnField(gameDifficulty as GameSettingsInterface)
     );
+  }
+
+  putCardsOnField(gameDifficulty: GameSettingsInterface): void {
+    this.cardsFieldMatrixSize =
+      CardsField.getCardsFieldMatrixSize(gameDifficulty);
+    const cardsInGame = CardsField.getCardsQuantity(gameDifficulty);
+    const cardPanelSize = this.getCardPanelSize(this.cardsFieldMatrixSize);
+    this.setNewCardsFieldSize(this.cardsFieldMatrixSize, cardPanelSize);
+    CardsField.setCards((cardsType) => {
+      const imagesNames: string[] = CardsField.getImagesNames(
+        cardsType,
+        cardsInGame
+      );
+      imagesNames.forEach((imageName) => {
+        const cardPanel = new CardPanel(
+          cardPanelSize,
+          cardsType.option,
+          imageName
+        );
+        this.element.appendChild(cardPanel.element);
+      });
+    });
   }
 
   static getCardsFieldMatrixSize(
@@ -80,15 +103,33 @@ export class CardsField extends BaseComponent {
     this.element.style.height = `${cardsFieldNewHeight + 10}px`;
   }
 
-  putCardsOnField(gameDifficulty: GameSettingsInterface): void {
-    this.cardsFieldMatrixSize =
-      CardsField.getCardsFieldMatrixSize(gameDifficulty);
-    this.cardsQuantity = CardsField.getCardsQuantity(gameDifficulty);
-    this.cardPanelSize = this.getCardPanelSize(this.cardsFieldMatrixSize);
-    this.setNewCardsFieldSize(this.cardsFieldMatrixSize, this.cardPanelSize);
-    for (let i = 0; i < this.cardsQuantity; i++) {
-      const cardPanel = new CardPanel(this.cardPanelSize, 'animals', '(2)');
-      this.element.appendChild(cardPanel.element);
+  static setCards(callback: (cardsType: GameSettingsInterface) => void): void {
+    DataBase.getFromDB(
+      GAME_SETTINGS.cardsType.name,
+      DATABASES.gameSettings.name,
+      DATABASES.gameSettings.keyPath,
+      (cardsType: IndexedDataType) =>
+        callback(cardsType as GameSettingsInterface)
+    );
+  }
+
+  static getImagesNames(
+    cardsType: GameSettingsInterface,
+    cardsInGame: number
+  ): string[] {
+    const currentTypeCardsAwailable = CARDS_TYPE_QUANTITIES[cardsType.option];
+    const awailableImagesNames: string[] = [''];
+    for (let i = 0; i < currentTypeCardsAwailable; i++) {
+      awailableImagesNames[i] = `(${i + 1})`;
     }
+    awailableImagesNames.sort(() => Math.random() - 0.5);
+    const inGameImagesNames: string[] = [];
+    for (let i = 0; i < cardsInGame / 2; i++) {
+      inGameImagesNames.push(awailableImagesNames.pop() as string);
+    }
+
+    return inGameImagesNames
+      .concat(inGameImagesNames)
+      .sort(() => Math.random() - 0.5);
   }
 }
