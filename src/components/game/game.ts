@@ -4,6 +4,7 @@ import {
   CARD_PANELS_APPENDED_EVENT,
   CLASS_NAMES,
   FLIPPED_STATE_TIMEOUT,
+  TIMER_MESSAGES,
 } from '../shared/constants';
 import { TimerField } from '../timer-field/timer-field';
 import { CardsField } from '../cards-field/cards-field';
@@ -19,7 +20,7 @@ export class Game {
 
   private secondFlippedCard: CardsField['cardsPanels'][0]['element'] | null;
 
-  private readonly onDomLoadingTitle = 'LOADING...';
+  private readonly onLoadingTitle = TIMER_MESSAGES.loading;
 
   constructor(gameFieldElement: HTMLElement) {
     this.gameFieldElement = gameFieldElement;
@@ -27,25 +28,45 @@ export class Game {
     this.secondFlippedCard = null;
     this.timerField = new TimerField();
     this.cardsField = new CardsField();
-    this.timerField.element.innerHTML = this.onDomLoadingTitle;
+    this.timerField.element.innerHTML = this.onLoadingTitle;
     this.gameFieldElement.appendChild(this.timerField.element);
     this.gameFieldElement.appendChild(this.cardsField.element);
-    this.timerField.element.innerHTML = 'GO!!!';
-    this.setCardsFlipping();
-    this.cardsField.element.onload = () => this.startGame();
-  }
 
-  setCardsFlipping(): void {
     this.gameFieldElement.addEventListener(CARD_PANELS_APPENDED_EVENT, () => {
-      this.cardsField.cardsPanels.forEach((cardPanel) => {
-        const flipToggle = () => this.toggleFlipState(cardPanel.element);
-        cardPanel.element.addEventListener('click', flipToggle);
-      });
+      this.startGame();
     });
   }
 
-  private startGame() {
-    console.log(this.timerField.element.innerHTML);
+  private startGame(): void {
+    this.showCards();
+  }
+
+  private showCards(): void {
+    this.flipAllCardsImagesUp();
+    this.timerField.countDown(() => {
+      this.flipAllCardsImagesDown();
+      this.setCardsFlipping();
+    });
+  }
+
+  private flipAllCardsImagesUp(): void {
+    this.cardsField.cardsPanels.forEach((cardPanel) => {
+      cardPanel.element.classList.remove(CLASS_NAMES.flipped);
+    });
+  }
+
+  private flipAllCardsImagesDown(): void {
+    this.cardsField.cardsPanels.forEach((cardPanel) => {
+      cardPanel.element.classList.add(CLASS_NAMES.flipped);
+    });
+  }
+
+  setCardsFlipping(): void {
+    this.cardsField.cardsPanels.forEach((cardPanel) => {
+      cardPanel.element.addEventListener('click', () =>
+        this.toggleFlipState(cardPanel.element)
+      );
+    });
   }
 
   private toggleFlipState(cardPanel: HTMLElement) {
@@ -62,15 +83,12 @@ export class Game {
       cardPanel.classList.remove(CLASS_NAMES.flipped);
       this.secondFlippedCard = cardPanel;
       if (this.gotMatch()) {
-        this.firstFlippedCard?.classList.add(CLASS_NAMES.matched);
-        this.secondFlippedCard?.classList.add(CLASS_NAMES.matched);
+        this.flippedCardsClassToggle(CLASS_NAMES.matched);
         this.resetFlippedCards();
       } else {
-        this.firstFlippedCard?.classList.add(CLASS_NAMES.wronglyMatched);
-        this.secondFlippedCard?.classList.add(CLASS_NAMES.wronglyMatched);
+        this.flippedCardsClassToggle(CLASS_NAMES.wronglyMatched);
         setTimeout(() => {
-          this.firstFlippedCard?.classList.remove(CLASS_NAMES.wronglyMatched);
-          this.secondFlippedCard?.classList.remove(CLASS_NAMES.wronglyMatched);
+          this.flippedCardsClassToggle(CLASS_NAMES.wronglyMatched);
           this.flipCardsBack();
         }, FLIPPED_STATE_TIMEOUT);
       }
@@ -78,9 +96,13 @@ export class Game {
   }
 
   private flipCardsBack() {
-    this.firstFlippedCard?.classList.add(CLASS_NAMES.flipped);
-    this.secondFlippedCard?.classList.add(CLASS_NAMES.flipped);
+    this.flippedCardsClassToggle(CLASS_NAMES.flipped);
     this.resetFlippedCards();
+  }
+
+  private flippedCardsClassToggle(className: string) {
+    this.firstFlippedCard?.classList.toggle(className);
+    this.secondFlippedCard?.classList.toggle(className);
   }
 
   private resetFlippedCards(): void {

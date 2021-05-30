@@ -52,6 +52,13 @@ export const CARDS_FIELD_GAP = 5; // px
 
 export const FLIPPED_STATE_TIMEOUT = 500;
 
+export const SHOW_CARDS_SECONDS_PERIOD = 15;
+
+export const TIMER_MESSAGES = {
+  loading: 'LOADING...',
+  go: 'GO!!!',
+};
+
 export const CLASS_NAMES = {
   flipped: 'flipped',
   matched: 'matched',
