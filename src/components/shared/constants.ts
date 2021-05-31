@@ -56,6 +56,8 @@ export const FLIPPED_STATE_TIMEOUT = 500; // ms
 
 export const SHOW_CARDS_SECONDS_PERIOD = 3; // sec
 
+export const SCORE_TABLE_LIMIT = 10; // sec
+
 export const TIMER_MESSAGES = {
   loading: 'LOADING...',
   go: 'GO!!!',

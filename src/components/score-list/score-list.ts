@@ -7,7 +7,7 @@ import {
   ScoreItemInterface,
   IndexedDataType,
 } from '../shared/interfaces';
-import { DATABASES } from '../shared/constants';
+import { DATABASES, SCORE_TABLE_LIMIT } from '../shared/constants';
 
 export class ScoreList extends BaseComponent {
   constructor() {
@@ -36,15 +36,16 @@ export class ScoreList extends BaseComponent {
       users.forEach((user) => {
         allItemSources.push(getItemSourceFromUserData(user as UserInterface));
       });
-      allItemSources.forEach((itemSource) => {
-        const item = new ScoreItem(itemSource);
+      allItemSources.sort((a, b) => b.score - a.score);
+      for (let i = 0; i < SCORE_TABLE_LIMIT; i++) {
+        const item = new ScoreItem(allItemSources[i]);
         list.appendChild(item.element);
-        const horizontalLine = new ScoreItem(itemSource);
+        const horizontalLine = new ScoreItem(allItemSources[i]);
         horizontalLine.element.innerHTML =
           '<hr class="score-item__break-line">';
         horizontalLine.element.className = 'score-item_break';
         list.appendChild(horizontalLine.element);
-      });
+      }
     }
     DataBase.getAllFromDB(
       DATABASES.users.name,
