@@ -40,9 +40,7 @@ export class DataBase {
         db.close();
       };
     };
-    openRequest.onerror = () => {
-      console.log('Error', openRequest.error);
-    };
+    openRequest.onerror = () => {};
   }
 
   public static async putToDB(
@@ -53,13 +51,9 @@ export class DataBase {
     function putItemToDB(store: IDBObjectStore): void {
       const request = store.put(item);
 
-      request.onsuccess = () => {
-        console.log('!!!!!!!!!!!!', request);
-      };
+      request.onsuccess = () => {};
 
-      request.onerror = () => {
-        console.log('Error', request.error);
-      };
+      request.onerror = () => {};
     }
 
     DataBase.activateDB('readwrite', storeName, keyPathName, putItemToDB);
@@ -82,7 +76,6 @@ export class DataBase {
           throw new Error();
         } catch {
           callback(null);
-          console.log('Error', request.error);
         }
       };
     }
@@ -100,37 +93,8 @@ export class DataBase {
       request.onsuccess = () => {
         callback(request.result);
       };
-      request.onerror = () => {
-        console.log('Error', request.error);
-      };
+      request.onerror = () => {};
     }
     DataBase.activateDB('readwrite', storeName, keyPathName, getAllItemsFromDB);
-  }
-
-  public static async forEachItemInDB(
-    storeName: string,
-    keyPathName: string,
-    callback: (request: IndexedDataType) => void
-  ): Promise<void> {
-    function setCallbackToCursor(store: IDBObjectStore) {
-      const request: IDBRequest = store.openCursor();
-
-      request.onsuccess = () => {
-        const cursor = request.result;
-        if (cursor) {
-          callback(cursor.value);
-          cursor.continue();
-        }
-      };
-      request.onerror = () => {
-        console.log('Error', request.error);
-      };
-    }
-    DataBase.activateDB(
-      'readwrite',
-      storeName,
-      keyPathName,
-      setCallbackToCursor
-    );
   }
 }

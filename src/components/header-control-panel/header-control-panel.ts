@@ -2,9 +2,7 @@ import './header-control-panel.scss';
 import { BaseComponent } from '../shared/base-component';
 import { CurrentUserAvatar } from '../current-user-avatar/current-user-avatar';
 import { Button } from '../button/button';
-import { startGame } from '../shared/start-game';
-import { stopGame } from '../shared/stop-game';
-import { exitGame } from '../shared/exit-game';
+import { startGame, stopGame, exitGame } from '../shared/game-controls';
 import { showPopup } from '../shared/show-popup';
 import { GAME_STATES, CUSTOM_EVENTS } from '../shared/constants';
 

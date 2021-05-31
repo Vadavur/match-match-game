@@ -52,6 +52,7 @@ export class UserDataHandler {
   public handleNewScore(score: number): void {
     if (this.currentUser.score < score) {
       this.currentUser.score = score;
+
       UserDataHandler.putUserToDB(this.currentUser);
     }
   }
