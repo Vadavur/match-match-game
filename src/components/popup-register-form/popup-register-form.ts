@@ -9,7 +9,7 @@ import {
   DATABASES,
   REGISTER_FORM_INPUTS_ATTRIBUTES,
   MM_GAME,
-  TOGGLE_CONTROL_PANEL_EVENT,
+  CUSTOM_EVENTS,
   GAME_STATES,
 } from '../shared/constants';
 
@@ -113,7 +113,7 @@ export class PopupRegisterForm extends BaseComponent {
       this.sendInputValuesToDB();
       this.setCurrentUser(event);
       document.dispatchEvent(
-        new CustomEvent(TOGGLE_CONTROL_PANEL_EVENT, {
+        new CustomEvent(CUSTOM_EVENTS.gameStateChanged, {
           detail: GAME_STATES.onStart,
         })
       );

@@ -6,14 +6,14 @@ import { startGame } from '../shared/start-game';
 import { stopGame } from '../shared/stop-game';
 import { exitGame } from '../shared/exit-game';
 import { showPopup } from '../shared/show-popup';
-import { GAME_STATES, TOGGLE_CONTROL_PANEL_EVENT } from '../shared/constants';
+import { GAME_STATES, CUSTOM_EVENTS } from '../shared/constants';
 
 export class HeaderControlPanel extends BaseComponent {
   constructor() {
     super('div', ['header-control-panel']);
     this.toggleControlPanel(GAME_STATES.noUser);
 
-    document.addEventListener(TOGGLE_CONTROL_PANEL_EVENT, (event) => {
+    document.addEventListener(CUSTOM_EVENTS.gameStateChanged, (event) => {
       this.toggleControlPanel((event as CustomEvent).detail);
     });
   }

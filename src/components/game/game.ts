@@ -1,5 +1,5 @@
 import {
-  CARD_PANELS_APPENDED_EVENT,
+  CUSTOM_EVENTS,
   CARDS_CLASS_NAMES,
   FLIPPED_STATE_TIMEOUT,
   TIMER_MESSAGES,
@@ -36,10 +36,13 @@ export class Game {
     this.timerField.element.innerHTML = TIMER_MESSAGES.loading;
     this.gameFieldElement.appendChild(this.timerField.element);
     this.gameFieldElement.appendChild(this.cardsField.element);
-    this.gameFieldElement.addEventListener(CARD_PANELS_APPENDED_EVENT, () => {
-      this.cardsInGame = this.cardsField.cardsInGame as number;
-      this.startGame();
-    });
+    this.gameFieldElement.addEventListener(
+      CUSTOM_EVENTS.cardPanelsAppended,
+      () => {
+        this.cardsInGame = this.cardsField.cardsInGame as number;
+        this.startGame();
+      }
+    );
   }
 
   private async startGame(): Promise<void> {

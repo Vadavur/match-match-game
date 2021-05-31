@@ -4,7 +4,7 @@ import { DATABASES } from './constants';
 export class DataBase {
   private static dbName = 'Vadavur';
 
-  private static dbVersion = 9;
+  private static dbVersion = 1;
 
   private static activateDB(
     transactionMode: IDBTransactionMode,
@@ -82,6 +82,24 @@ export class DataBase {
     DataBase.activateDB('readwrite', storeName, keyPathName, getItemFromDB);
   }
 
+  public static getAllFromDB(
+    storeName: string,
+    keyPathName: string,
+    callback: (user: IndexedDataType[]) => void
+  ): void {
+    function getAllItemsFromDB(store: IDBObjectStore) {
+      const request: IDBRequest = store.getAll();
+
+      request.onsuccess = () => {
+        callback(request.result);
+      };
+      request.onerror = () => {
+        console.log('Error', request.error);
+      };
+    }
+    DataBase.activateDB('readwrite', storeName, keyPathName, getAllItemsFromDB);
+  }
+
   public static async forEachItemInDB(
     storeName: string,
     keyPathName: string,
@@ -107,23 +125,5 @@ export class DataBase {
       keyPathName,
       setCallbackToCursor
     );
-  }
-
-  public static getAllFromDB(
-    storeName: string,
-    keyPathName: string,
-    callback: (user: IndexedDataType[]) => void
-  ): void {
-    function getAllItemsFromDB(store: IDBObjectStore) {
-      const request: IDBRequest = store.getAll();
-
-      request.onsuccess = () => {
-        callback(request.result);
-      };
-      request.onerror = () => {
-        console.log('Error', request.error);
-      };
-    }
-    DataBase.activateDB('readwrite', storeName, keyPathName, getAllItemsFromDB);
   }
 }

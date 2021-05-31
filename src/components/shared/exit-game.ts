@@ -1,10 +1,5 @@
 import { CurrentUserInterface } from './interfaces';
-import {
-  DATABASES,
-  TOGGLE_CONTROL_PANEL_EVENT,
-  GAME_STATES,
-  MM_GAME,
-} from './constants';
+import { DATABASES, CUSTOM_EVENTS, GAME_STATES, MM_GAME } from './constants';
 import { DataBase } from './data-base';
 
 function resetCurrentUser(): void {
@@ -26,7 +21,7 @@ function resetCurrentUser(): void {
 export function exitGame(): void {
   resetCurrentUser();
   document.dispatchEvent(
-    new CustomEvent(TOGGLE_CONTROL_PANEL_EVENT, {
+    new CustomEvent(CUSTOM_EVENTS.gameStateChanged, {
       detail: GAME_STATES.noUser,
     })
   );

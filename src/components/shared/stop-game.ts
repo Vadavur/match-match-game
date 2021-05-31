@@ -1,8 +1,8 @@
-import { TOGGLE_CONTROL_PANEL_EVENT, GAME_STATES } from './constants';
+import { CUSTOM_EVENTS, GAME_STATES } from './constants';
 
 export function stopGame(): void {
   document.dispatchEvent(
-    new CustomEvent(TOGGLE_CONTROL_PANEL_EVENT, {
+    new CustomEvent(CUSTOM_EVENTS.gameStateChanged, {
       detail: GAME_STATES.onStart,
     })
   );

@@ -9,7 +9,7 @@ import {
   GAME_DIFFICULTY_DEVIDER,
   CARDS_TYPE_QUANTITIES,
   CARDS_CLASS_NAMES,
-  CARD_PANELS_APPENDED_EVENT,
+  CUSTOM_EVENTS,
 } from '../shared/constants';
 import { GameSettingsInterface, IndexedDataType } from '../shared/interfaces';
 
@@ -61,7 +61,7 @@ export class CardsField extends BaseComponent {
         this.element.appendChild(currentCardPanel.element);
       });
       this.element.dispatchEvent(
-        new Event(CARD_PANELS_APPENDED_EVENT, {
+        new Event(CUSTOM_EVENTS.cardPanelsAppended, {
           bubbles: true,
         })
       );

@@ -44,8 +44,13 @@ export const REGISTER_FORM_INPUTS_ATTRIBUTES = [
   { placeholder: 'E-mail', name: 'email' },
 ];
 
-export const TOGGLE_CONTROL_PANEL_EVENT = 'toggleControlPanel';
-export const CARD_PANELS_APPENDED_EVENT = 'cardPanelsAppended';
+export const CUSTOM_EVENTS = {
+  gameStateChanged: 'gameStateChanged',
+  cardPanelsAppended: 'cardPanelsAppended',
+};
+
+// export const CUSTOM_EVENTS.gameStateChanged = 'gameStateChanged';
+// export const CUSTOM_EVENTS.cardPanelsAppended = 'cardPanelsAppended';
 
 export const CARDS_FIELD_GAP = 5; // px
 
