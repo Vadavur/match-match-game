@@ -1,4 +1,4 @@
-import { CUSTOM_EVENTS, DATABASES, MM_GAME } from './constants';
+import { CUSTOM_EVENTS, DATABASES } from './constants';
 import { IndexedDataType, UserInterface } from './interfaces';
 import { DataBase } from './data-base';
 import defaultAvaatarUrl from '../../assets/images/avatar-default.png';
@@ -6,9 +6,8 @@ import defaultAvaatarUrl from '../../assets/images/avatar-default.png';
 export class UserDataHandler {
   currentUser: UserInterface;
 
-  constructor() {
+  constructor(user: UserInterface) {
     this.currentUser = {
-      gameName: MM_GAME.name,
       email: '',
       firstName: '',
       lastName: '',
@@ -18,14 +17,44 @@ export class UserDataHandler {
     document.addEventListener(CUSTOM_EVENTS.gameStateChange, (event) => {
       this.setCurrentUser((event as CustomEvent).detail);
     });
+    this.addUserDataToDB(user);
+  }
+
+  private addUserDataToDB(user: UserInterface) {
+    const checkedUser = user;
+    DataBase.getFromDB(
+      checkedUser.email,
+      DATABASES.users.name,
+      DATABASES.users.keyPath,
+      (result: IndexedDataType | null) => {
+        if (result !== null) {
+          const userInDB = result as UserInterface;
+          if (
+            userInDB.firstName === checkedUser.firstName &&
+            userInDB.lastName === checkedUser.lastName
+          ) {
+            checkedUser.score = userInDB.score;
+
+            if (checkedUser.avatar === '') {
+              checkedUser.avatar =
+                userInDB.avatar !== defaultAvaatarUrl
+                  ? userInDB.avatar
+                  : defaultAvaatarUrl;
+            }
+          }
+          UserDataHandler.putUserToDB(checkedUser);
+          this.setCurrentUser(checkedUser);
+        }
+      }
+    );
   }
 
   public sendScoreToTable(score: number): void {
     this.currentUser.score = score;
   }
 
-  private setCurrentUser(event: CustomEvent) {
-    this.currentUser = event.detail;
+  private setCurrentUser(user: CustomEvent['detail']) {
+    this.currentUser = user;
 
     DataBase.putToDB(
       this.currentUser as IndexedDataType,
@@ -34,8 +63,7 @@ export class UserDataHandler {
     );
   }
 
-  private static createNewUser(event: CustomEvent) {
-    const user: UserInterface = event.detail;
+  private static putUserToDB(user: CustomEvent['detail']) {
     DataBase.putToDB(user, DATABASES.users.name, DATABASES.users.keyPath);
   }
 }

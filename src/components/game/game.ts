@@ -120,7 +120,7 @@ export class Game {
 
   private stopGame() {
     this.calculateFinalScore();
-    new UserDataHandler().sendScoreToTable(this.finalScore);
+    console.log('push score');
   }
 
   private calculateFinalScore() {

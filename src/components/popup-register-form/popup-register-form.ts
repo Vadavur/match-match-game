@@ -3,14 +3,13 @@ import { BaseComponent } from '../shared/base-component';
 import { PopupInput } from '../popup-input/popup-input';
 import { Button } from '../button/button';
 import { removePopup } from '../shared/remove-popup';
-import { DataBase } from '../shared/data-base';
 import { UserInterface } from '../shared/interfaces';
 import {
-  DATABASES,
   REGISTER_FORM_INPUTS_ATTRIBUTES,
   CUSTOM_EVENTS,
   GAME_STATES,
 } from '../shared/constants';
+import { UserDataHandler } from '../shared/user-data-handler';
 
 interface InputAttributesInterface {
   placeholder: string;
@@ -26,6 +25,8 @@ export class PopupRegisterForm extends BaseComponent {
   private readonly cancelButton: Button;
 
   private readonly formName: string;
+
+  private userDataHandler?: UserDataHandler;
 
   constructor(name: string) {
     super('form', ['popup-register-form']);
@@ -67,49 +68,15 @@ export class PopupRegisterForm extends BaseComponent {
     return !!this.formName; // plug
   }
 
-  noOtherSameEmailUser(): boolean {
+  showNotValidError(): boolean {
     const a = 'plug';
     return !!this.formName; // plug
-  }
-
-  showError(): boolean {
-    const a = 'plug';
-    return !!this.formName; // plug
-  }
-
-  setCurrentUser(event: Event): void {
-    event.preventDefault();
-    const currentUser: UserInterface = {
-      email: '',
-      firstName: '',
-      lastName: '',
-      score: 0,
-      avatar: 'src/assets/images/avatar-default.png',
-    };
-    this.inputsAttributes.forEach((inputAttributes) => {
-      if (inputAttributes.instance) {
-        const input = inputAttributes.instance.element;
-        if (input.tagName === 'INPUT') {
-          const inputElement = input as HTMLInputElement;
-          const inputName: string = inputElement.name;
-          if (inputElement && inputElement.name in currentUser) {
-            currentUser[inputName] = inputElement.value;
-          }
-        }
-      }
-    });
-    DataBase.putToDB(
-      currentUser,
-      DATABASES.currentUser.name,
-      DATABASES.currentUser.keyPath
-    );
   }
 
   submitUserData(event: Event): void {
     event.preventDefault();
-    if (this.isValid() && this.noOtherSameEmailUser()) {
+    if (this.isValid()) {
       this.sendInputValuesToDB();
-      this.setCurrentUser(event);
       document.dispatchEvent(
         new CustomEvent(CUSTOM_EVENTS.gameStateChange, {
           detail: GAME_STATES.onStart,
@@ -117,7 +84,7 @@ export class PopupRegisterForm extends BaseComponent {
       );
       removePopup(event);
     } else {
-      this.showError();
+      this.showNotValidError();
     }
   }
 
@@ -141,6 +108,6 @@ export class PopupRegisterForm extends BaseComponent {
         }
       }
     });
-    DataBase.putToDB(user, DATABASES.users.name, DATABASES.users.keyPath);
+    this.userDataHandler = new UserDataHandler(user);
   }
 }

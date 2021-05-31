@@ -33,7 +33,7 @@ export class CardsField extends BaseComponent {
       GAME_SETTINGS.gameDifficulty.name,
       DATABASES.gameSettings.name,
       DATABASES.gameSettings.keyPath,
-      (gameDifficulty: IndexedDataType) =>
+      (gameDifficulty: IndexedDataType | null) =>
         this.putCardsOnField(gameDifficulty as GameSettingsInterface)
     );
   }
@@ -116,7 +116,7 @@ export class CardsField extends BaseComponent {
       GAME_SETTINGS.cardsType.name,
       DATABASES.gameSettings.name,
       DATABASES.gameSettings.keyPath,
-      (cardsType: IndexedDataType) =>
+      (cardsType: IndexedDataType | null) =>
         callback(cardsType as GameSettingsInterface)
     );
   }

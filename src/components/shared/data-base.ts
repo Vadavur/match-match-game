@@ -67,7 +67,7 @@ export class DataBase {
     keyValue: string,
     storeName: string,
     keyPathName: string,
-    callback: (request: IndexedDataType) => void
+    callback: (request: IndexedDataType | null) => void
   ): void {
     function getItemFromDB(store: IDBObjectStore) {
       const request: IDBRequest = store.get(keyValue);
@@ -76,7 +76,7 @@ export class DataBase {
         callback(request.result);
       };
       request.onerror = () => {
-        console.log('Error', request.error);
+        callback(null);
       };
     }
     DataBase.activateDB('readwrite', storeName, keyPathName, getItemFromDB);
