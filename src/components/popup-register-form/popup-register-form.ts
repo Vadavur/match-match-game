@@ -1,4 +1,5 @@
 import './popup-register-form.scss';
+import defaultAvatarUrl from '../../assets/images/avatar-default.png';
 import { BaseComponent } from '../shared/base-component';
 import { PopupInput } from '../popup-input/popup-input';
 import { Button } from '../button/button';
@@ -94,7 +95,7 @@ export class PopupRegisterForm extends BaseComponent {
       firstName: '',
       lastName: '',
       score: 0,
-      avatar: 'src/assets/images/avatar-default.png',
+      avatar: defaultAvatarUrl,
     };
     this.inputsAttributes.forEach((inputAttributes) => {
       if (inputAttributes.instance) {
@@ -102,7 +103,7 @@ export class PopupRegisterForm extends BaseComponent {
         if (input.tagName === 'INPUT') {
           const inputElement = input as HTMLInputElement;
           const inputName: string = inputElement.name;
-          if (inputElement && inputElement.name in user) {
+          if (inputElement && inputName in user) {
             user[inputName] = inputElement.value;
           }
         }

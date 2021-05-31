@@ -6,7 +6,6 @@ import {
 } from '../shared/constants';
 import { TimerField } from '../timer-field/timer-field';
 import { CardsField } from '../cards-field/cards-field';
-import { UserDataHandler } from '../shared/user-data-handler';
 
 export class Game {
   private readonly gameFieldElement: HTMLElement;
@@ -120,7 +119,11 @@ export class Game {
 
   private stopGame() {
     this.calculateFinalScore();
-    console.log('push score');
+    document.dispatchEvent(
+      new CustomEvent(CUSTOM_EVENTS.newScoreAcquire, {
+        detail: this.finalScore,
+      })
+    );
   }
 
   private calculateFinalScore() {

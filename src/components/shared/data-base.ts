@@ -53,7 +53,9 @@ export class DataBase {
     function putItemToDB(store: IDBObjectStore): void {
       const request = store.put(item);
 
-      request.onsuccess = () => {};
+      request.onsuccess = () => {
+        console.log('!!!!!!!!!!!!', request);
+      };
 
       request.onerror = () => {
         console.log('Error', request.error);
@@ -76,7 +78,12 @@ export class DataBase {
         callback(request.result);
       };
       request.onerror = () => {
-        callback(null);
+        try {
+          throw new Error();
+        } catch {
+          callback(null);
+          console.log('Error', request.error);
+        }
       };
     }
     DataBase.activateDB('readwrite', storeName, keyPathName, getItemFromDB);

@@ -47,8 +47,7 @@ export const REGISTER_FORM_INPUTS_ATTRIBUTES = [
 export const CUSTOM_EVENTS = {
   gameStateChange: 'gameStateChange',
   cardPanelsAppend: 'cardPanelsAppend',
-  currentUserChange: 'currentUserChange',
-  newUserAdd: 'newUserAdd',
+  newScoreAcquire: 'newScoreAcquire',
 };
 
 export const CARDS_FIELD_GAP = 5; // px

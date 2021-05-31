@@ -1,7 +1,7 @@
 import { CUSTOM_EVENTS, DATABASES } from './constants';
 import { IndexedDataType, UserInterface } from './interfaces';
 import { DataBase } from './data-base';
-import defaultAvaatarUrl from '../../assets/images/avatar-default.png';
+import defaultAvatarUrl from '../../assets/images/avatar-default.png';
 
 export class UserDataHandler {
   currentUser: UserInterface;
@@ -12,10 +12,10 @@ export class UserDataHandler {
       firstName: '',
       lastName: '',
       score: 0,
-      avatar: defaultAvaatarUrl,
+      avatar: defaultAvatarUrl,
     };
-    document.addEventListener(CUSTOM_EVENTS.gameStateChange, (event) => {
-      this.setCurrentUser((event as CustomEvent).detail);
+    document.addEventListener(CUSTOM_EVENTS.newScoreAcquire, (event) => {
+      this.handleNewScore((event as CustomEvent).detail);
     });
     this.addUserDataToDB(user);
   }
@@ -27,7 +27,7 @@ export class UserDataHandler {
       DATABASES.users.name,
       DATABASES.users.keyPath,
       (result: IndexedDataType | null) => {
-        if (result !== null) {
+        if (result !== null && result !== undefined) {
           const userInDB = result as UserInterface;
           if (
             userInDB.firstName === checkedUser.firstName &&
@@ -37,23 +37,26 @@ export class UserDataHandler {
 
             if (checkedUser.avatar === '') {
               checkedUser.avatar =
-                userInDB.avatar !== defaultAvaatarUrl
+                userInDB.avatar !== defaultAvatarUrl
                   ? userInDB.avatar
-                  : defaultAvaatarUrl;
+                  : defaultAvatarUrl;
             }
           }
-          UserDataHandler.putUserToDB(checkedUser);
-          this.setCurrentUser(checkedUser);
         }
+        UserDataHandler.putUserToDB(checkedUser);
+        this.setCurrentUser(checkedUser);
       }
     );
   }
 
-  public sendScoreToTable(score: number): void {
-    this.currentUser.score = score;
+  public handleNewScore(score: number): void {
+    if (this.currentUser.score < score) {
+      this.currentUser.score = score;
+      UserDataHandler.putUserToDB(this.currentUser);
+    }
   }
 
-  private setCurrentUser(user: CustomEvent['detail']) {
+  private setCurrentUser(user: UserInterface) {
     this.currentUser = user;
 
     DataBase.putToDB(
@@ -63,21 +66,7 @@ export class UserDataHandler {
     );
   }
 
-  private static putUserToDB(user: CustomEvent['detail']) {
+  private static putUserToDB(user: UserInterface) {
     DataBase.putToDB(user, DATABASES.users.name, DATABASES.users.keyPath);
   }
 }
-
-// DataBase.getFromDB(
-//   GAME_SETTINGS.cardsType.name,
-//   DATABASES.gameSettings.name,
-//   DATABASES.gameSettings.keyPath,
-//   (cardsType: IndexedDataType) =>
-//     callback(cardsType as GameSettingsInterface)
-// );
-// gameName: string;
-// email: string;
-// firstName: string;
-// lastName: string;
-// score: number;
-// avatar: string;
