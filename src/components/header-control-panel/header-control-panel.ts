@@ -8,13 +8,20 @@ import { exitGame } from '../shared/exit-game';
 import { showPopup } from '../shared/show-popup';
 import { DataBase } from '../shared/data-base';
 import { GameStateInterface, IndexedDataType } from '../shared/interfaces';
-import { DATABASES, GAME_STATES, MM_GAME } from '../shared/constants';
+import {
+  DATABASES,
+  GAME_STATES,
+  MM_GAME,
+  TOGGLE_CONTROL_PANEL_EVENT,
+} from '../shared/constants';
 
 export class HeaderControlPanel extends BaseComponent {
-  // public static controlElement: HTMLElement = new BaseComponent().element;
-
   constructor() {
     super('div', ['header-control-panel']);
+
+    document.addEventListener(TOGGLE_CONTROL_PANEL_EVENT, () => {
+      this.toggleControlPanel();
+    });
   }
 
   public toggleControlPanel(): void {

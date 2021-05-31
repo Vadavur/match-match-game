@@ -60,7 +60,7 @@ export function runAppAppendedTo(rootElement: HTMLElement): void {
 }
 
 // TODOs:
-// NB!!! Refactor header control panel changing completely:
+// NB!!! Refactor app state handling:
 //    don't use DB for app state keeping,
 //    use custom events inner data ({ detail: data } new event param)
 //    to pass app state directly to toggleControlPanel function
