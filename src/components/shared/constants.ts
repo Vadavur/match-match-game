@@ -50,16 +50,16 @@ export const CARD_PANELS_APPENDED_EVENT = 'cardPanelsAppended';
 
 export const CARDS_FIELD_GAP = 5; // px
 
-export const FLIPPED_STATE_TIMEOUT = 500;
+export const FLIPPED_STATE_TIMEOUT = 500; // ms
 
-export const SHOW_CARDS_SECONDS_PERIOD = 15;
+export const SHOW_CARDS_SECONDS_PERIOD = 3; // sec
 
 export const TIMER_MESSAGES = {
   loading: 'LOADING...',
   go: 'GO!!!',
 };
 
-export const CLASS_NAMES = {
+export const CARDS_CLASS_NAMES = {
   flipped: 'flipped',
   matched: 'matched',
   wronglyMatched: 'wrongly-matched',

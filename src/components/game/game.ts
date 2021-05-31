@@ -2,7 +2,7 @@ import { DataBase } from '../shared/data-base';
 import {
   DATABASES,
   CARD_PANELS_APPENDED_EVENT,
-  CLASS_NAMES,
+  CARDS_CLASS_NAMES,
   FLIPPED_STATE_TIMEOUT,
   TIMER_MESSAGES,
 } from '../shared/constants';
@@ -20,7 +20,13 @@ export class Game {
 
   private secondFlippedCard: CardsField['cardsPanels'][0]['element'] | null;
 
-  private readonly onLoadingTitle = TIMER_MESSAGES.loading;
+  private finalScore = 0;
+
+  private attempts = 0;
+
+  private mismatches = 0;
+
+  private cardsInGame?: number;
 
   constructor(gameFieldElement: HTMLElement) {
     this.gameFieldElement = gameFieldElement;
@@ -28,11 +34,11 @@ export class Game {
     this.secondFlippedCard = null;
     this.timerField = new TimerField();
     this.cardsField = new CardsField();
-    this.timerField.element.innerHTML = this.onLoadingTitle;
+    this.timerField.element.innerHTML = TIMER_MESSAGES.loading;
     this.gameFieldElement.appendChild(this.timerField.element);
     this.gameFieldElement.appendChild(this.cardsField.element);
-
     this.gameFieldElement.addEventListener(CARD_PANELS_APPENDED_EVENT, () => {
+      this.cardsInGame = this.cardsField.cardsInGame as number;
       this.startGame();
     });
   }
@@ -41,59 +47,96 @@ export class Game {
     this.flipAllCardsImagesUp();
     this.timerField.countDown(() => {
       this.flipAllCardsImagesDown();
-      this.setCardsFlipping();
-      this.timerField.countUp(() => {});
+      this.timerField.countUp();
+      this.activateCardsField();
     });
   }
 
   private flipAllCardsImagesUp(): void {
     this.cardsField.cardsPanels.forEach((cardPanel) => {
-      cardPanel.element.classList.remove(CLASS_NAMES.flipped);
+      cardPanel.element.classList.remove(CARDS_CLASS_NAMES.flipped);
     });
   }
 
   private flipAllCardsImagesDown(): void {
     this.cardsField.cardsPanels.forEach((cardPanel) => {
-      cardPanel.element.classList.add(CLASS_NAMES.flipped);
+      cardPanel.element.classList.add(CARDS_CLASS_NAMES.flipped);
     });
   }
 
-  setCardsFlipping(): void {
+  activateCardsField(): void {
     this.cardsField.cardsPanels.forEach((cardPanel) => {
       cardPanel.element.addEventListener('click', () =>
-        this.toggleFlipState(cardPanel.element)
+        this.handleCardClickAction(cardPanel.element)
       );
     });
   }
 
-  private toggleFlipState(cardPanel: HTMLElement) {
-    if (cardPanel.classList.contains(CLASS_NAMES.matched)) {
+  private handleCardClickAction(card: HTMLElement) {
+    if (card.classList.contains(CARDS_CLASS_NAMES.matched)) {
       return;
     }
     if (this.firstFlippedCard === null) {
-      cardPanel.classList.remove(CLASS_NAMES.flipped);
-      this.firstFlippedCard = cardPanel;
+      card.classList.remove(CARDS_CLASS_NAMES.flipped);
+      this.firstFlippedCard = card;
     } else if (
       this.secondFlippedCard === null &&
-      this.firstFlippedCard !== cardPanel
+      this.firstFlippedCard !== card
     ) {
-      cardPanel.classList.remove(CLASS_NAMES.flipped);
-      this.secondFlippedCard = cardPanel;
-      if (this.gotMatch()) {
-        this.flippedCardsClassToggle(CLASS_NAMES.matched);
-        this.resetFlippedCards();
-      } else {
-        this.flippedCardsClassToggle(CLASS_NAMES.wronglyMatched);
-        setTimeout(() => {
-          this.flippedCardsClassToggle(CLASS_NAMES.wronglyMatched);
-          this.flipCardsBack();
-        }, FLIPPED_STATE_TIMEOUT);
-      }
+      this.attempts++;
+      this.compareFlippedCards(card);
     }
   }
 
+  private compareFlippedCards(card: HTMLElement) {
+    card.classList.remove(CARDS_CLASS_NAMES.flipped);
+    this.secondFlippedCard = card;
+    if (this.gotMatch()) {
+      this.handleGameOnMatch();
+    } else {
+      this.handleGameOnMismatch();
+    }
+  }
+
+  private handleGameOnMismatch() {
+    this.mismatches++;
+    this.flippedCardsClassToggle(CARDS_CLASS_NAMES.wronglyMatched);
+    setTimeout(() => {
+      this.flippedCardsClassToggle(CARDS_CLASS_NAMES.wronglyMatched);
+      this.flipCardsBack();
+    }, FLIPPED_STATE_TIMEOUT);
+  }
+
+  private handleGameOnMatch() {
+    this.flippedCardsClassToggle(CARDS_CLASS_NAMES.matched);
+    this.resetFlippedCards();
+    (this.cardsInGame as number) -= 2;
+    if (this.cardsInGame === 0) {
+      this.stopGame();
+    }
+  }
+
+  private stopGame() {
+    this.calculateFinalScore();
+    this.sendScoreToTable();
+  }
+
+  private calculateFinalScore() {
+    const passedTime = Number(this.timerField.element.innerHTML);
+    this.timerField.element.innerHTML = `You finished<br>in ${passedTime} seconds`;
+    const calculatedScore =
+      (this.attempts - this.mismatches) * 100 - passedTime * 10;
+    this.finalScore = calculatedScore < 0 ? 0 : calculatedScore;
+  }
+
+  private sendScoreToTable() {
+    console.log(this.finalScore);
+    console.log(this.attempts);
+    console.log(this.mismatches);
+  }
+
   private flipCardsBack() {
-    this.flippedCardsClassToggle(CLASS_NAMES.flipped);
+    this.flippedCardsClassToggle(CARDS_CLASS_NAMES.flipped);
     this.resetFlippedCards();
   }
 

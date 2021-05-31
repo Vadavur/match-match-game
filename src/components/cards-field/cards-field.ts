@@ -8,7 +8,7 @@ import {
   GAME_SETTINGS,
   GAME_DIFFICULTY_DEVIDER,
   CARDS_TYPE_QUANTITIES,
-  CLASS_NAMES,
+  CARDS_CLASS_NAMES,
   CARD_PANELS_APPENDED_EVENT,
 } from '../shared/constants';
 import { GameSettingsInterface, IndexedDataType } from '../shared/interfaces';
@@ -19,7 +19,9 @@ interface MatrixSizeInterface {
 }
 
 export class CardsField extends BaseComponent {
-  cardsPanels: CardPanel[] = [];
+  public cardsPanels: CardPanel[] = [];
+
+  public cardsInGame?: number;
 
   constructor() {
     super('div', ['cards-field']);
@@ -39,7 +41,8 @@ export class CardsField extends BaseComponent {
   putCardsOnField(gameDifficulty: GameSettingsInterface): void {
     const cardsFieldMatrixSize =
       CardsField.getCardsFieldMatrixSize(gameDifficulty);
-    const cardsInGame = CardsField.getCardsQuantity(gameDifficulty);
+    this.cardsInGame = CardsField.getCardsQuantity(gameDifficulty);
+    const { cardsInGame } = this;
     const cardPanelSize = this.getCardPanelSize(cardsFieldMatrixSize);
     this.setNewCardsFieldSize(cardsFieldMatrixSize, cardPanelSize);
     CardsField.setCards((cardsType) => {
@@ -53,7 +56,7 @@ export class CardsField extends BaseComponent {
           cardsType.option,
           imageName
         );
-        currentCardPanel.element.classList.add(CLASS_NAMES.flipped);
+        currentCardPanel.element.classList.add(CARDS_CLASS_NAMES.flipped);
         this.cardsPanels.push(currentCardPanel);
         this.element.appendChild(currentCardPanel.element);
       });
