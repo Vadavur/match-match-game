@@ -11,97 +11,96 @@ import { GameStateInterface, IndexedDataType } from '../shared/interfaces';
 import { DATABASES, GAME_STATES, MM_GAME } from '../shared/constants';
 
 export class HeaderControlPanel extends BaseComponent {
-  public static controlElement: HTMLElement = new BaseComponent().element;
+  // public static controlElement: HTMLElement = new BaseComponent().element;
 
   constructor() {
     super('div', ['header-control-panel']);
   }
 
-  public static toggleControlPanel(): void {
-    HeaderControlPanel.controlElement.className = 'header-control-panel';
-    function setControlPanel(gameToggler: IndexedDataType): void {
-      switch ((gameToggler as GameStateInterface).gameState) {
-        case GAME_STATES.noUser.gameState:
-          HeaderControlPanel.createNoUserControls();
-          break;
-
-        case GAME_STATES.onStart.gameState:
-          HeaderControlPanel.createOnStartControls();
-          break;
-
-        case GAME_STATES.onGame.gameState:
-          HeaderControlPanel.createOnGameControls();
-          break;
-
-        default:
-          break;
-      }
-    }
+  public toggleControlPanel(): void {
+    this.element.className = 'header-control-panel';
 
     DataBase.getFromDB(
       MM_GAME.name,
       DATABASES.gameState.name,
       DATABASES.gameState.keyPath,
-      setControlPanel
+      (gameToggler: IndexedDataType) => {
+        switch ((gameToggler as GameStateInterface).gameState) {
+          case GAME_STATES.noUser.gameState:
+            this.createNoUserControls();
+            break;
+
+          case GAME_STATES.onStart.gameState:
+            this.createOnStartControls();
+            break;
+
+          case GAME_STATES.onGame.gameState:
+            this.createOnGameControls();
+            break;
+
+          default:
+            break;
+        }
+      }
     );
   }
 
-  private static createNoUserControls() {
-    HeaderControlPanel.controlElement.innerHTML = '';
-    HeaderControlPanel.createRegisterButton();
+  private createNoUserControls() {
+    this.element.innerHTML = '';
+    this.createRegisterButton();
   }
 
-  private static createOnStartControls(): void {
-    HeaderControlPanel.controlElement.innerHTML = '';
-    HeaderControlPanel.createStartGameButton();
-    HeaderControlPanel.createExitGameButton();
-    HeaderControlPanel.createUserAvatar();
+  private createOnStartControls(): void {
+    this.element.innerHTML = '';
+    this.createStartGameButton();
+    this.createExitGameButton();
+    this.createUserAvatar();
   }
 
-  private static createOnGameControls(): void {
-    HeaderControlPanel.controlElement.innerHTML = '';
-    HeaderControlPanel.createStopGameButton();
-    HeaderControlPanel.createExitGameButton();
-    HeaderControlPanel.createUserAvatar();
+  private createOnGameControls(): void {
+    this.element.innerHTML = '';
+    this.createStopGameButton();
+    this.createExitGameButton();
+    this.createUserAvatar();
   }
 
-  private static createRegisterButton(): void {
+  private createRegisterButton(): void {
     const registerButton = new Button(
       ['button_register-new-player'],
       'register new player',
       showPopup
     );
-    HeaderControlPanel.controlElement.appendChild(registerButton.element);
+    this.element.appendChild(registerButton.element);
   }
 
-  private static createStartGameButton(): void {
+  private createStartGameButton(): void {
     const startGameButton = new Button(
       ['button_start-game'],
       'start game',
       startGame
     );
     startGameButton.element.setAttribute('data-path', 'playground');
-    HeaderControlPanel.controlElement.appendChild(startGameButton.element);
+    this.element.appendChild(startGameButton.element);
   }
 
-  private static createStopGameButton(): void {
+  private createStopGameButton(): void {
     const stopGameButton = new Button(
       ['button_stop-game'],
       'stop game',
       stopGame
     );
     stopGameButton.element.setAttribute('data-path', 'best-score');
-    HeaderControlPanel.controlElement.appendChild(stopGameButton.element);
+    this.element.appendChild(stopGameButton.element);
   }
 
-  private static createExitGameButton(): void {
+  private createExitGameButton(): void {
     const exitGameButton = new Button(['button_exit-game'], 'exit', exitGame);
     exitGameButton.element.setAttribute('data-path', 'about-me');
-    HeaderControlPanel.controlElement.appendChild(exitGameButton.element);
+    this.element.appendChild(exitGameButton.element);
   }
 
-  private static createUserAvatar(): void {
+  private createUserAvatar(): void {
     const userAvatar = new CurrentUserAvatar();
-    HeaderControlPanel.controlElement.appendChild(userAvatar.element);
+    this.element.appendChild(userAvatar.element);
   }
 }

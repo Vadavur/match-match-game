@@ -1,6 +1,4 @@
-import { DataBase } from '../shared/data-base';
 import {
-  DATABASES,
   CARD_PANELS_APPENDED_EVENT,
   CARDS_CLASS_NAMES,
   FLIPPED_STATE_TIMEOUT,
@@ -8,6 +6,7 @@ import {
 } from '../shared/constants';
 import { TimerField } from '../timer-field/timer-field';
 import { CardsField } from '../cards-field/cards-field';
+import { UserDataHandler } from '../shared/user-data-handler';
 
 export class Game {
   private readonly gameFieldElement: HTMLElement;
@@ -118,7 +117,7 @@ export class Game {
 
   private stopGame() {
     this.calculateFinalScore();
-    this.sendScoreToTable();
+    new UserDataHandler().sendScoreToTable(this.finalScore);
   }
 
   private calculateFinalScore() {
@@ -127,12 +126,6 @@ export class Game {
     const calculatedScore =
       (this.attempts - this.mismatches) * 100 - passedTime * 10;
     this.finalScore = calculatedScore < 0 ? 0 : calculatedScore;
-  }
-
-  private sendScoreToTable() {
-    console.log(this.finalScore);
-    console.log(this.attempts);
-    console.log(this.mismatches);
   }
 
   private flipCardsBack() {
