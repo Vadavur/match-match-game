@@ -3,7 +3,7 @@ import { BaseComponent } from '../shared/base-component';
 import { NavItem } from '../nav-item/nav-item';
 
 export class NavField extends BaseComponent {
-  private readonly navItems: {
+  readonly navItems: {
     imgUrl: string;
     label: string;
     dataPath: string;

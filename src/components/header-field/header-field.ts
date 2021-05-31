@@ -5,7 +5,7 @@ import { NavField } from '../nav-field/nav-field';
 import { HeaderControlPanel } from '../header-control-panel/header-control-panel';
 
 export class HeaderField extends BaseComponent {
-  private readonly navField: NavField;
+  readonly navField: NavField;
 
   private readonly headerControlPanel: HeaderControlPanel;
 

@@ -1,4 +1,4 @@
-import { CUSTOM_EVENTS, GAME_STATES } from './constants';
+import { CUSTOM_EVENTS, GAME_STATES, MM_GAME, ROUTE_PATHS } from './constants';
 
 export function startGame(): void {
   document.dispatchEvent(
@@ -14,6 +14,11 @@ export function stopGame(): void {
       detail: GAME_STATES.onStart,
     })
   );
+  // window.history.pushState(
+  //   ROUTE_PATHS.bestScore,
+  //   MM_GAME.title,
+  //   ROUTE_PATHS.bestScore
+  // );
 }
 
 export function exitGame(): void {

@@ -1,13 +1,7 @@
 import { PageField } from './components/page-field/page-field';
-import { Router } from './components/shared/router';
 import { DataBase } from './components/shared/data-base';
 import { GameSettingsInterface } from './components/shared/interfaces';
-import {
-  DATABASES,
-  MM_GAME,
-  ROUTE_PATHS,
-  GAME_SETTINGS,
-} from './components/shared/constants';
+import { DATABASES, GAME_SETTINGS } from './components/shared/constants';
 
 async function setDefaultGameState(): Promise<void> {
   const defaultCardTypeSetting = {
@@ -37,13 +31,6 @@ export function runAppAppendedTo(rootElement: HTMLElement): void {
   setDefaultGameState().then(() => {
     const pageField = new PageField();
     rootElement.appendChild(pageField.element);
-    window.history.pushState(
-      ROUTE_PATHS.aboutMe,
-      MM_GAME.title,
-      ROUTE_PATHS.aboutMe
-    );
-    const router = new Router();
-    router.changeRootField();
   });
 }
 

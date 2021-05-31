@@ -4,6 +4,7 @@ import {
   FLIPPED_STATE_TIMEOUT,
   TIMER_MESSAGES,
 } from '../shared/constants';
+import { stopGame } from '../shared/game-controls';
 import { TimerField } from '../timer-field/timer-field';
 import { CardsField } from '../cards-field/cards-field';
 
@@ -113,17 +114,18 @@ export class Game {
     this.resetFlippedCards();
     (this.cardsInGame as number) -= 2;
     if (this.cardsInGame === 0) {
-      this.stopGame();
+      this.finishGame();
     }
   }
 
-  private stopGame() {
+  private finishGame() {
     this.calculateFinalScore();
     document.dispatchEvent(
       new CustomEvent(CUSTOM_EVENTS.newScoreAcquire, {
         detail: this.finalScore,
       })
     );
+    // stopGame();
   }
 
   private calculateFinalScore() {

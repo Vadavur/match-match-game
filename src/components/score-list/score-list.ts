@@ -37,7 +37,11 @@ export class ScoreList extends BaseComponent {
         allItemSources.push(getItemSourceFromUserData(user as UserInterface));
       });
       allItemSources.sort((a, b) => b.score - a.score);
-      for (let i = 0; i < SCORE_TABLE_LIMIT; i++) {
+      const winnersQuantity = Math.min(
+        SCORE_TABLE_LIMIT,
+        allItemSources.length
+      );
+      for (let i = 0; i < winnersQuantity; i++) {
         const item = new ScoreItem(allItemSources[i]);
         list.appendChild(item.element);
         const horizontalLine = new ScoreItem(allItemSources[i]);
