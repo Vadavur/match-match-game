@@ -13,7 +13,7 @@ export class HeaderControlPanel extends BaseComponent {
     super('div', ['header-control-panel']);
     this.toggleControlPanel(GAME_STATES.noUser);
 
-    document.addEventListener(CUSTOM_EVENTS.gameStateChanged, (event) => {
+    document.addEventListener(CUSTOM_EVENTS.gameStateChange, (event) => {
       this.toggleControlPanel((event as CustomEvent).detail);
     });
   }

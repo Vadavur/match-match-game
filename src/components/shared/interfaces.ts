@@ -7,25 +7,12 @@ export interface UserInterface {
   avatar: string;
 }
 
-export interface CurrentUserInterface {
-  [index: string]: string | number;
-  gameName: string;
-  email: string;
-  firstName: string;
-  lastName: string;
-  score: number;
-  avatar: string;
-}
-
 export interface GameSettingsInterface {
   name: string;
   option: string;
 }
 
-export type IndexedDataType =
-  | UserInterface
-  | CurrentUserInterface
-  | GameSettingsInterface;
+export type IndexedDataType = UserInterface | GameSettingsInterface;
 
 export interface ScoreItemInterface {
   name: string;

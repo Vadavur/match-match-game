@@ -37,7 +37,7 @@ export class Game {
     this.gameFieldElement.appendChild(this.timerField.element);
     this.gameFieldElement.appendChild(this.cardsField.element);
     this.gameFieldElement.addEventListener(
-      CUSTOM_EVENTS.cardPanelsAppended,
+      CUSTOM_EVENTS.cardPanelsAppend,
       () => {
         this.cardsInGame = this.cardsField.cardsInGame as number;
         this.startGame();

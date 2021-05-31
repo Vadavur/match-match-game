@@ -4,11 +4,10 @@ import { PopupInput } from '../popup-input/popup-input';
 import { Button } from '../button/button';
 import { removePopup } from '../shared/remove-popup';
 import { DataBase } from '../shared/data-base';
-import { UserInterface, CurrentUserInterface } from '../shared/interfaces';
+import { UserInterface } from '../shared/interfaces';
 import {
   DATABASES,
   REGISTER_FORM_INPUTS_ATTRIBUTES,
-  MM_GAME,
   CUSTOM_EVENTS,
   GAME_STATES,
 } from '../shared/constants';
@@ -80,8 +79,7 @@ export class PopupRegisterForm extends BaseComponent {
 
   setCurrentUser(event: Event): void {
     event.preventDefault();
-    const currentUser: CurrentUserInterface = {
-      gameName: MM_GAME.name,
+    const currentUser: UserInterface = {
       email: '',
       firstName: '',
       lastName: '',
@@ -113,7 +111,7 @@ export class PopupRegisterForm extends BaseComponent {
       this.sendInputValuesToDB();
       this.setCurrentUser(event);
       document.dispatchEvent(
-        new CustomEvent(CUSTOM_EVENTS.gameStateChanged, {
+        new CustomEvent(CUSTOM_EVENTS.gameStateChange, {
           detail: GAME_STATES.onStart,
         })
       );

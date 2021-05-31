@@ -1,8 +1,8 @@
 import './current-user-avatar.scss';
 import { BaseComponent } from '../shared/base-component';
 import { DataBase } from '../shared/data-base';
-import { DATABASES, MM_GAME } from '../shared/constants';
-import { IndexedDataType, CurrentUserInterface } from '../shared/interfaces';
+import { DATABASES } from '../shared/constants';
+import { IndexedDataType, UserInterface } from '../shared/interfaces';
 
 export class CurrentUserAvatar extends BaseComponent {
   constructor() {
@@ -15,12 +15,11 @@ export class CurrentUserAvatar extends BaseComponent {
     let src: string;
     src = 'd';
     src = 'd';
-    DataBase.getFromDB(
-      MM_GAME.name,
+    DataBase.getAllFromDB(
       DATABASES.currentUser.name,
       DATABASES.currentUser.keyPath,
-      (request: IndexedDataType) => {
-        const currentUser = request as CurrentUserInterface;
+      (request: IndexedDataType[]) => {
+        const currentUser = request[0] as UserInterface;
         const imageElement = this.element as HTMLImageElement;
         imageElement.src = currentUser.avatar;
         imageElement.alt = `${currentUser.firstName} ${currentUser.lastName} avatar`;

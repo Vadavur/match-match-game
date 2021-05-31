@@ -61,7 +61,7 @@ export class CardsField extends BaseComponent {
         this.element.appendChild(currentCardPanel.element);
       });
       this.element.dispatchEvent(
-        new Event(CUSTOM_EVENTS.cardPanelsAppended, {
+        new Event(CUSTOM_EVENTS.cardPanelsAppend, {
           bubbles: true,
         })
       );

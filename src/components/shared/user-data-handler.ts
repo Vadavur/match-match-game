@@ -1,14 +1,10 @@
-import { DATABASES, MM_GAME } from './constants';
-import {
-  CurrentUserInterface,
-  IndexedDataType,
-  UserInterface,
-} from './interfaces';
+import { CUSTOM_EVENTS, DATABASES, MM_GAME } from './constants';
+import { IndexedDataType, UserInterface } from './interfaces';
 import { DataBase } from './data-base';
 import defaultAvaatarUrl from '../../assets/images/avatar-default.png';
 
 export class UserDataHandler {
-  currentUser: CurrentUserInterface;
+  currentUser: UserInterface;
 
   constructor() {
     this.currentUser = {
@@ -19,14 +15,16 @@ export class UserDataHandler {
       score: 0,
       avatar: defaultAvaatarUrl,
     };
-    // document.addEventListener();
+    document.addEventListener(CUSTOM_EVENTS.gameStateChange, (event) => {
+      this.setCurrentUser((event as CustomEvent).detail);
+    });
   }
 
   public sendScoreToTable(score: number): void {
     this.currentUser.score = score;
   }
 
-  setCurrentUser(event: CustomEvent): void {
+  private setCurrentUser(event: CustomEvent) {
     this.currentUser = event.detail;
 
     DataBase.putToDB(
@@ -35,28 +33,12 @@ export class UserDataHandler {
       DATABASES.currentUser.keyPath
     );
   }
-}
 
-// const user: UserInterface = {
-//   email: '',
-//   firstName: '',
-//   lastName: '',
-//   score: 0,
-//   avatar: 'src/assets/images/avatar-default.png',
-// };
-// this.inputsAttributes.forEach((inputAttributes) => {
-//   if (inputAttributes.instance) {
-//     const input = inputAttributes.instance.element;
-//     if (input.tagName === 'INPUT') {
-//       const inputElement = input as HTMLInputElement;
-//       const inputName: string = inputElement.name;
-//       if (inputElement && inputElement.name in user) {
-//         user[inputName] = inputElement.value;
-//       }
-//     }
-//   }
-// });
-// DataBase.putToDB(user, DATABASES.users.name, DATABASES.users.keyPath);
+  private static createNewUser(event: CustomEvent) {
+    const user: UserInterface = event.detail;
+    DataBase.putToDB(user, DATABASES.users.name, DATABASES.users.keyPath);
+  }
+}
 
 // DataBase.getFromDB(
 //   GAME_SETTINGS.cardsType.name,

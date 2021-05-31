@@ -21,7 +21,7 @@ export const CARDS_TYPE_QUANTITIES = {
 
 export const DATABASES = {
   users: { name: 'users', keyPath: 'email' },
-  currentUser: { name: 'currentUser', keyPath: 'gameName' },
+  currentUser: { name: 'currentUser', keyPath: 'email' },
   gameSettings: { name: 'gameSettings', keyPath: 'name' },
 };
 
@@ -45,12 +45,11 @@ export const REGISTER_FORM_INPUTS_ATTRIBUTES = [
 ];
 
 export const CUSTOM_EVENTS = {
-  gameStateChanged: 'gameStateChanged',
-  cardPanelsAppended: 'cardPanelsAppended',
+  gameStateChange: 'gameStateChange',
+  cardPanelsAppend: 'cardPanelsAppend',
+  currentUserChange: 'currentUserChange',
+  newUserAdd: 'newUserAdd',
 };
-
-// export const CUSTOM_EVENTS.gameStateChanged = 'gameStateChanged';
-// export const CUSTOM_EVENTS.cardPanelsAppended = 'cardPanelsAppended';
 
 export const CARDS_FIELD_GAP = 5; // px
 

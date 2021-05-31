@@ -1,10 +1,9 @@
-import { CurrentUserInterface } from './interfaces';
-import { DATABASES, CUSTOM_EVENTS, GAME_STATES, MM_GAME } from './constants';
+import { UserInterface } from './interfaces';
+import { DATABASES, CUSTOM_EVENTS, GAME_STATES } from './constants';
 import { DataBase } from './data-base';
 
 function resetCurrentUser(): void {
-  const currentUser: CurrentUserInterface = {
-    gameName: MM_GAME.name,
+  const currentUser: UserInterface = {
     email: '',
     firstName: '',
     lastName: '',
@@ -21,7 +20,7 @@ function resetCurrentUser(): void {
 export function exitGame(): void {
   resetCurrentUser();
   document.dispatchEvent(
-    new CustomEvent(CUSTOM_EVENTS.gameStateChanged, {
+    new CustomEvent(CUSTOM_EVENTS.gameStateChange, {
       detail: GAME_STATES.noUser,
     })
   );
