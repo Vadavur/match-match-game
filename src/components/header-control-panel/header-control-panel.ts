@@ -6,50 +6,35 @@ import { startGame } from '../shared/start-game';
 import { stopGame } from '../shared/stop-game';
 import { exitGame } from '../shared/exit-game';
 import { showPopup } from '../shared/show-popup';
-import { DataBase } from '../shared/data-base';
-import { GameStateInterface, IndexedDataType } from '../shared/interfaces';
-import {
-  DATABASES,
-  GAME_STATES,
-  MM_GAME,
-  TOGGLE_CONTROL_PANEL_EVENT,
-} from '../shared/constants';
+import { GAME_STATES, TOGGLE_CONTROL_PANEL_EVENT } from '../shared/constants';
 
 export class HeaderControlPanel extends BaseComponent {
   constructor() {
     super('div', ['header-control-panel']);
+    this.toggleControlPanel(GAME_STATES.noUser);
 
-    document.addEventListener(TOGGLE_CONTROL_PANEL_EVENT, () => {
-      this.toggleControlPanel();
+    document.addEventListener(TOGGLE_CONTROL_PANEL_EVENT, (event) => {
+      this.toggleControlPanel((event as CustomEvent).detail);
     });
   }
 
-  public toggleControlPanel(): void {
-    this.element.className = 'header-control-panel';
+  public toggleControlPanel(gameState: string): void {
+    switch (gameState) {
+      case GAME_STATES.noUser:
+        this.createNoUserControls();
+        break;
 
-    DataBase.getFromDB(
-      MM_GAME.name,
-      DATABASES.gameState.name,
-      DATABASES.gameState.keyPath,
-      (gameToggler: IndexedDataType) => {
-        switch ((gameToggler as GameStateInterface).gameState) {
-          case GAME_STATES.noUser.gameState:
-            this.createNoUserControls();
-            break;
+      case GAME_STATES.onStart:
+        this.createOnStartControls();
+        break;
 
-          case GAME_STATES.onStart.gameState:
-            this.createOnStartControls();
-            break;
+      case GAME_STATES.onGame:
+        this.createOnGameControls();
+        break;
 
-          case GAME_STATES.onGame.gameState:
-            this.createOnGameControls();
-            break;
-
-          default:
-            break;
-        }
-      }
-    );
+      default:
+        break;
+    }
   }
 
   private createNoUserControls() {

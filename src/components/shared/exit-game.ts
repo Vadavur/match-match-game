@@ -1,4 +1,4 @@
-import { CurrentUserInterface, GameStateInterface } from './interfaces';
+import { CurrentUserInterface } from './interfaces';
 import {
   DATABASES,
   TOGGLE_CONTROL_PANEL_EVENT,
@@ -25,14 +25,9 @@ function resetCurrentUser(): void {
 
 export function exitGame(): void {
   resetCurrentUser();
-  const toggleControlEvent = new Event(TOGGLE_CONTROL_PANEL_EVENT, {
-    bubbles: true,
-  });
-  DataBase.putToDB(
-    GAME_STATES.noUser as GameStateInterface,
-    DATABASES.gameState.name,
-    DATABASES.gameState.keyPath
-  ).then(() => {
-    document.dispatchEvent(toggleControlEvent);
-  });
+  document.dispatchEvent(
+    new CustomEvent(TOGGLE_CONTROL_PANEL_EVENT, {
+      detail: GAME_STATES.noUser,
+    })
+  );
 }

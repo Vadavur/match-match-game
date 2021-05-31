@@ -23,13 +23,12 @@ export const DATABASES = {
   users: { name: 'users', keyPath: 'email' },
   currentUser: { name: 'currentUser', keyPath: 'gameName' },
   gameSettings: { name: 'gameSettings', keyPath: 'name' },
-  gameState: { name: 'gameState', keyPath: 'gameName' },
 };
 
 export const GAME_STATES = {
-  noUser: { gameName: 'match-match', gameState: 'noUser' },
-  onStart: { gameName: 'match-match', gameState: 'onStart' },
-  onGame: { gameName: 'match-match', gameState: 'onGame' },
+  noUser: 'noUser',
+  onStart: 'onStart',
+  onGame: 'onGame',
 };
 
 export const ROUTE_PATHS = {

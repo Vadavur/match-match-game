@@ -4,11 +4,7 @@ import { PopupInput } from '../popup-input/popup-input';
 import { Button } from '../button/button';
 import { removePopup } from '../shared/remove-popup';
 import { DataBase } from '../shared/data-base';
-import {
-  UserInterface,
-  CurrentUserInterface,
-  GameStateInterface,
-} from '../shared/interfaces';
+import { UserInterface, CurrentUserInterface } from '../shared/interfaces';
 import {
   DATABASES,
   REGISTER_FORM_INPUTS_ATTRIBUTES,
@@ -116,17 +112,12 @@ export class PopupRegisterForm extends BaseComponent {
     if (this.isValid() && this.noOtherSameEmailUser()) {
       this.sendInputValuesToDB();
       this.setCurrentUser(event);
-      const toggleControlEvent = new Event(TOGGLE_CONTROL_PANEL_EVENT, {
-        bubbles: true,
-      });
-      DataBase.putToDB(
-        GAME_STATES.onStart as GameStateInterface,
-        DATABASES.gameState.name,
-        DATABASES.gameState.keyPath
-      ).then(() => {
-        document.dispatchEvent(toggleControlEvent);
-        removePopup(event);
-      });
+      document.dispatchEvent(
+        new CustomEvent(TOGGLE_CONTROL_PANEL_EVENT, {
+          detail: GAME_STATES.onStart,
+        })
+      );
+      removePopup(event);
     } else {
       this.showError();
     }

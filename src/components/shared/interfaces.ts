@@ -17,11 +17,6 @@ export interface CurrentUserInterface {
   avatar: string;
 }
 
-export interface GameStateInterface {
-  gameName: string;
-  gameState: 'noUser' | 'onStart' | 'onGame';
-}
-
 export interface GameSettingsInterface {
   name: string;
   option: string;
@@ -30,7 +25,6 @@ export interface GameSettingsInterface {
 export type IndexedDataType =
   | UserInterface
   | CurrentUserInterface
-  | GameStateInterface
   | GameSettingsInterface;
 
 export interface ScoreItemInterface {

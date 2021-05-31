@@ -24,6 +24,5 @@ export class HeaderField extends BaseComponent {
     this.headerControlPanel = new HeaderControlPanel();
     this.element.appendChild(this.navField.element);
     this.element.appendChild(this.headerControlPanel.element);
-    this.headerControlPanel.toggleControlPanel();
   }
 }
