@@ -1,4 +1,5 @@
 import './header-field.scss';
+import mainLogoUrl from '../../assets/images/match-match-logo.png';
 import { BaseComponent } from '../shared/base-component';
 import { NavField } from '../nav-field/nav-field';
 import { HeaderControlPanel } from '../header-control-panel/header-control-panel';
@@ -9,14 +10,12 @@ export class HeaderField extends BaseComponent {
 
   private readonly headerControlPanel: HeaderControlPanel;
 
-  MAIN_LOGO_URL = 'src/assets/images/match-match-logo.png';
-
   constructor() {
     super('div', ['header-field']);
 
     this.element.innerHTML = `
     <img
-    src="src/assets/images/match-match-logo.png"
+    src="${mainLogoUrl}"
     alt="Match-match logo"
         class="header-field__img"
         >
