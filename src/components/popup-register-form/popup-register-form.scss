@@ -5,3 +5,15 @@
   box-sizing: border-box;
   padding: 33px 19px 26px 21px;
 }
+
+.input-area {
+  width: 360px;
+  height: 70px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.input-area_correct {
+background-color: rgba(204, 219, 189, 0.575);
+}

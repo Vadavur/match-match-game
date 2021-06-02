@@ -39,9 +39,10 @@ export const ROUTE_PATHS = {
 };
 
 export const REGISTER_FORM_INPUTS_ATTRIBUTES = [
-  { placeholder: 'First Name', name: 'firstName' },
-  { placeholder: 'Last Name', name: 'lastName' },
-  { placeholder: 'E-mail', name: 'email' },
+  { type: 'text', placeholder: 'First Name', name: 'firstName', required: '' },
+  { type: 'text', placeholder: 'Last Name', name: 'lastName', required: '' },
+  { type: 'email', placeholder: 'E-mail', name: 'email', required: '' },
+  { type: 'file', placeholder: '', name: 'avatar', required: '' },
 ];
 
 export const CUSTOM_EVENTS = {

@@ -7,6 +7,7 @@ import {
 import { stopGame } from '../shared/game-controls';
 import { TimerField } from '../timer-field/timer-field';
 import { CardsField } from '../cards-field/cards-field';
+import { GameOverPopup } from '../game-over-popup/game-over-popup';
 
 export class Game {
   private readonly gameFieldElement: HTMLElement;
@@ -125,6 +126,8 @@ export class Game {
         detail: this.finalScore,
       })
     );
+    const finalPopup = new GameOverPopup(this.finalScore);
+    this.gameFieldElement.appendChild(finalPopup.element);
     // stopGame();
   }
 

@@ -13,21 +13,19 @@ import {
 import { UserDataHandler } from '../shared/user-data-handler';
 
 interface InputAttributesInterface {
-  placeholder: string;
-  name: string;
-  instance?: PopupInput;
+  [type: string]: string | PopupInput;
 }
 
 export class PopupRegisterForm extends BaseComponent {
   private readonly inputsAttributes: InputAttributesInterface[];
 
-  private readonly addUserButton: Button;
-
-  private readonly cancelButton: Button;
-
   private readonly formName: string;
 
   private userDataHandler?: UserDataHandler;
+
+  private addUserButton?: Button;
+
+  private cancelButton?: Button;
 
   constructor(name: string) {
     super('form', ['popup-register-form']);
@@ -36,12 +34,17 @@ export class PopupRegisterForm extends BaseComponent {
     this.inputsAttributes = REGISTER_FORM_INPUTS_ATTRIBUTES;
     this.element.setAttribute('name', name);
     this.setPopupInputs();
+    this.setButtons();
+  }
 
+  private setButtons() {
     this.addUserButton = new Button(
       ['button_add-user'],
       'add user'.toUpperCase(),
       (event: Event) => this.submitUserData(event)
     );
+    this.addUserButton.element.setAttribute('type', 'submit');
+
     this.cancelButton = new Button(
       ['button_cancel'],
       'cancel'.toUpperCase(),
@@ -55,12 +58,17 @@ export class PopupRegisterForm extends BaseComponent {
     this.element.appendChild(this.cancelButton.element);
   }
 
-  setPopupInputs(): void {
+  private setPopupInputs() {
     this.inputsAttributes.forEach((input) => {
-      input.instance = new PopupInput(input.placeholder);
-      input.instance.element.setAttribute('type', 'text');
-      input.instance.element.setAttribute('name', input.name);
-      this.element.appendChild(input.instance.element);
+      input.instance = new PopupInput(
+        input as {
+          [type: string]: string;
+        }
+      );
+      const newDiv = document.createElement('div');
+      newDiv.classList.add('input-area');
+      this.element.appendChild(newDiv);
+      newDiv.appendChild(input.instance.element);
     });
   }
 
@@ -99,7 +107,7 @@ export class PopupRegisterForm extends BaseComponent {
     };
     this.inputsAttributes.forEach((inputAttributes) => {
       if (inputAttributes.instance) {
-        const input = inputAttributes.instance.element;
+        const input = (inputAttributes.instance as PopupInput).element;
         if (input.tagName === 'INPUT') {
           const inputElement = input as HTMLInputElement;
           const inputName: string = inputElement.name;

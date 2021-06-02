@@ -1,0 +1,16 @@
+.game-over-popup {
+  width: 400px;
+  height: 200px;
+  position: fixed;
+  top: 0;
+  background-color: #00000070;
+  z-index: 99;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+}
+
+.game-over-popup__btn{
+  width: 100px;
+}
