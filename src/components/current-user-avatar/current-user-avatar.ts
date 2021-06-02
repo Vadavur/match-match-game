@@ -3,6 +3,7 @@ import { BaseComponent } from '../shared/base-component';
 import { DataBase } from '../shared/data-base';
 import { DATABASES } from '../shared/constants';
 import { IndexedDataType, UserInterface } from '../shared/interfaces';
+import defaultAvatarUrl from '../../assets/images/avatar-default.png';
 
 export class CurrentUserAvatar extends BaseComponent {
   constructor() {
@@ -21,9 +22,11 @@ export class CurrentUserAvatar extends BaseComponent {
       (request: IndexedDataType[]) => {
         const currentUser = request[0] as UserInterface;
         const imageElement = this.element as HTMLImageElement;
-        imageElement.src = currentUser.avatar;
+        imageElement.src =
+          currentUser.avatar === 'default'
+            ? defaultAvatarUrl
+            : defaultAvatarUrl; // currentUser.avatar;
         imageElement.alt = `${currentUser.firstName} ${currentUser.lastName} avatar`;
-        imageElement.title = `Hello, ${currentUser.firstName} ${currentUser.lastName}!`;
       }
     );
     return src;

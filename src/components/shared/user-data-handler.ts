@@ -12,7 +12,7 @@ export class UserDataHandler {
       firstName: '',
       lastName: '',
       score: 0,
-      avatar: defaultAvatarUrl,
+      avatar: 'defaultAvatar',
     };
     document.addEventListener(CUSTOM_EVENTS.newScoreAcquire, (event) => {
       this.handleNewScore((event as CustomEvent).detail);
@@ -35,11 +35,11 @@ export class UserDataHandler {
           ) {
             checkedUser.score = userInDB.score;
 
-            if (checkedUser.avatar === '') {
+            if (checkedUser.avatar === '' || checkedUser.avatar === undefined) {
               checkedUser.avatar =
-                userInDB.avatar !== defaultAvatarUrl
-                  ? userInDB.avatar
-                  : defaultAvatarUrl;
+                userInDB.avatar !== 'defaultAvatar'
+                  ? 'defaultAvatar' // userInDB.avatar
+                  : 'defaultAvatar';
             }
           }
         }

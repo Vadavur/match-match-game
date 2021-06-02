@@ -4,7 +4,6 @@ import {
   FLIPPED_STATE_TIMEOUT,
   TIMER_MESSAGES,
 } from '../shared/constants';
-import { stopGame } from '../shared/game-controls';
 import { TimerField } from '../timer-field/timer-field';
 import { CardsField } from '../cards-field/cards-field';
 import { GameOverPopup } from '../game-over-popup/game-over-popup';

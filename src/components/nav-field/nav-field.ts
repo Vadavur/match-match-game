@@ -1,4 +1,7 @@
 import './nav-field.scss';
+import aboutMeTabLogoUrl from '../../assets/images/about-me.png';
+import bestScoreTabLogoUrl from '../../assets/images/best-score.png';
+import gameSettingsTabLogoUrl from '../../assets/images/game-settings.png';
 import { BaseComponent } from '../shared/base-component';
 import { NavItem } from '../nav-item/nav-item';
 
@@ -15,17 +18,17 @@ export class NavField extends BaseComponent {
 
     this.navItems = [
       {
-        imgUrl: 'src/assets/images/about-me.png',
+        imgUrl: aboutMeTabLogoUrl,
         label: 'About me',
         dataPath: 'about-me',
       },
       {
-        imgUrl: 'src/assets/images/best-score.png',
+        imgUrl: bestScoreTabLogoUrl,
         label: 'Best Score',
         dataPath: 'best-score',
       },
       {
-        imgUrl: 'src/assets/images/game-settings.png',
+        imgUrl: gameSettingsTabLogoUrl,
         label: 'Game Settings',
         dataPath: 'game-settings',
       },

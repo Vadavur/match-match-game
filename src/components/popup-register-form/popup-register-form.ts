@@ -103,7 +103,7 @@ export class PopupRegisterForm extends BaseComponent {
       firstName: '',
       lastName: '',
       score: 0,
-      avatar: defaultAvatarUrl,
+      avatar: 'defaultAvatar',
     };
     this.inputsAttributes.forEach((inputAttributes) => {
       if (inputAttributes.instance) {
@@ -111,7 +111,7 @@ export class PopupRegisterForm extends BaseComponent {
         if (input.tagName === 'INPUT') {
           const inputElement = input as HTMLInputElement;
           const inputName: string = inputElement.name;
-          if (inputElement && inputName in user) {
+          if (inputElement.value && inputName in user) {
             user[inputName] = inputElement.value;
           }
         }

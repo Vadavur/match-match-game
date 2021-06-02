@@ -8,6 +8,7 @@ import {
   IndexedDataType,
 } from '../shared/interfaces';
 import { DATABASES, SCORE_TABLE_LIMIT } from '../shared/constants';
+import defaultAvatarUrl from '../../assets/images/avatar-default.png';
 
 export class ScoreList extends BaseComponent {
   constructor() {

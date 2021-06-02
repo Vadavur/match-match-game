@@ -11,22 +11,22 @@ export class SettingsField extends BaseComponent {
     super('div', ['settings-field']);
     Object.entries(GAME_SETTINGS).forEach((setting, index) => {
       this.gameDifficultySelectInputs.push(
-        new SelectInput(
-          setting[1].name,
-          setting[1].options,
-          SettingsField.setGameSetting
-        )
+        new SelectInput(setting[1].name, setting[1].options, () => {
+          this.setGameSettings();
+        })
       );
       this.element.appendChild(this.gameDifficultySelectInputs[index].element);
     });
   }
 
-  private static setGameSetting(event: Event) {
-    const eventElement = event.target as HTMLSelectElement;
-    DataBase.putToDB(
-      { name: eventElement.name, option: eventElement.value },
-      DATABASES.gameSettings.name,
-      DATABASES.gameSettings.keyPath
-    );
+  private setGameSettings() {
+    this.gameDifficultySelectInputs.forEach((selectInput) => {
+      const selectElement = selectInput.element as HTMLSelectElement;
+      DataBase.putToDB(
+        { name: selectElement.name, option: selectElement.value },
+        DATABASES.gameSettings.name,
+        DATABASES.gameSettings.keyPath
+      );
+    });
   }
 }

@@ -1,4 +1,4 @@
-// import {database} from ' '
+// import {DataBase} from '../shared/data-base';
 
 // export function getImageAsString(rootElement: HTMLElement): void {
 
