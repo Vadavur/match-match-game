@@ -1,7 +1,6 @@
 import { CUSTOM_EVENTS, DATABASES } from './constants';
 import { IndexedDataType, UserInterface } from './interfaces';
 import { DataBase } from './data-base';
-import defaultAvatarUrl from '../../assets/images/avatar-default.png';
 
 export class UserDataHandler {
   currentUser: UserInterface;
@@ -50,14 +49,31 @@ export class UserDataHandler {
   }
 
   public handleNewScore(score: number): void {
-    if (this.currentUser.score < score) {
-      this.currentUser.score = score;
-
-      UserDataHandler.putUserToDB(this.currentUser);
-    }
+    DataBase.getAllFromDB(
+      DATABASES.currentUser.name,
+      DATABASES.currentUser.keyPath,
+      (request: IndexedDataType[]) => {
+        const currentUser = request[0] as UserInterface;
+        if (currentUser.score < score) {
+          currentUser.score = score;
+          UserDataHandler.putUserToDB(currentUser);
+          this.setCurrentUser(currentUser);
+        }
+      }
+    );
   }
 
   private setCurrentUser(user: UserInterface) {
+    this.currentUser = user;
+
+    DataBase.putToDB(
+      this.currentUser as IndexedDataType,
+      DATABASES.currentUser.name,
+      DATABASES.currentUser.keyPath
+    );
+  }
+
+  private getCurrentUser(user: UserInterface) {
     this.currentUser = user;
 
     DataBase.putToDB(
