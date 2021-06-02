@@ -69,3 +69,13 @@ export const CARDS_CLASS_NAMES = {
   matched: 'matched',
   wronglyMatched: 'wrongly-matched',
 };
+
+export const FORBIDDEN_NAME_SYMBOLS_REGEXP = new RegExp(
+  `[\\[~!@#\\$%\\*\\(\\)_—\\+=\\|:;"'<>,\\.\\?/\\^\\d]`
+);
+
+export const CORRECT_EMAIL_NAME_REGEXP = new RegExp(
+  `^(([^<>()\\[\\]\\.,;:\\s@"]+(\\.[^<>()\\[\\]\\.,;:\\s@"]+)*)|
+  (".+"))@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}])|
+  (([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$`
+);

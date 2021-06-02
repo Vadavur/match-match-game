@@ -1,5 +1,4 @@
 import './popup-register-form.scss';
-import defaultAvatarUrl from '../../assets/images/avatar-default.png';
 import { BaseComponent } from '../shared/base-component';
 import { PopupInput } from '../popup-input/popup-input';
 import { Button } from '../button/button';
@@ -9,6 +8,8 @@ import {
   REGISTER_FORM_INPUTS_ATTRIBUTES,
   CUSTOM_EVENTS,
   GAME_STATES,
+  FORBIDDEN_NAME_SYMBOLS_REGEXP,
+  CORRECT_EMAIL_NAME_REGEXP,
 } from '../shared/constants';
 import { UserDataHandler } from '../shared/user-data-handler';
 
@@ -44,6 +45,7 @@ export class PopupRegisterForm extends BaseComponent {
       (event: Event) => this.submitUserData(event)
     );
     this.addUserButton.element.setAttribute('type', 'submit');
+    this.addUserButton.element.setAttribute('disabled', '');
 
     this.cancelButton = new Button(
       ['button_cancel'],
@@ -65,11 +67,49 @@ export class PopupRegisterForm extends BaseComponent {
           [type: string]: string;
         }
       );
+      input.instance.element.addEventListener('blur', (event) =>
+        this.checkValidity(event)
+      );
       const newDiv = document.createElement('div');
       newDiv.classList.add('input-area');
       this.element.appendChild(newDiv);
       newDiv.appendChild(input.instance.element);
     });
+  }
+
+  private checkValidity(event: Event) {
+    const inputElement = event.target as HTMLInputElement;
+    const inputArea = inputElement.parentElement;
+    if (
+      (inputElement.getAttribute('type') === 'text' &&
+        (inputElement.value.length > 30 ||
+          inputElement.value.length === 0 ||
+          FORBIDDEN_NAME_SYMBOLS_REGEXP.test(inputElement.value))) ||
+      (inputElement.getAttribute('type') === 'email' &&
+        (inputElement.value.length < 5 || !inputElement.checkValidity()))
+    ) {
+      inputArea?.classList.remove('input-area_correct');
+      inputArea?.classList.add('input-area_incorrect');
+    } else {
+      inputArea?.classList.remove('input-area_incorrect');
+      inputArea?.classList.add('input-area_correct');
+    }
+    let allInputsAreValid = true;
+
+    this.inputsAttributes.forEach((input) => {
+      const checkedInput = (input.instance as PopupInput).element;
+      const checkedInputArea = checkedInput.parentElement;
+      if (
+        !checkedInputArea?.classList.contains('input-area_correct') &&
+        checkedInput.getAttribute('type') !== 'file'
+      ) {
+        allInputsAreValid = false;
+      }
+    });
+
+    if (allInputsAreValid) {
+      this.addUserButton?.element.removeAttribute('disabled');
+    }
   }
 
   isValid(): boolean {
@@ -91,7 +131,7 @@ export class PopupRegisterForm extends BaseComponent {
           detail: GAME_STATES.onStart,
         })
       );
-      removePopup(event);
+      document.querySelector(`.popup-field`)?.remove();
     } else {
       this.showNotValidError();
     }

@@ -5,10 +5,7 @@ export function removePopup(event: Event): void {
     elementToRemove &&
     ((event.target as HTMLElement)?.classList.contains('popup-field') ||
       (event.target as HTMLElement)?.classList.contains('button_cancel') ||
-      (event.target as HTMLElement)?.classList.contains(
-        'game-over-popup__btn'
-      ) ||
-      (event.target as HTMLElement)?.classList.contains('button_add-user'))
+      (event.target as HTMLElement)?.classList.contains('game-over-popup__btn'))
   ) {
     elementToRemove.remove();
   }

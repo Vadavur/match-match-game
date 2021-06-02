@@ -1,5 +1,21 @@
+
 .popup-input {
   width: 328px;
   height: 56px;
   background-color: #21212108;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.popup-input[type="file"] {
+  width: 228px;
+  height: 228px;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background-color: lightyellow;
 }
