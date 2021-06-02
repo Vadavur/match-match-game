@@ -127,8 +127,7 @@ export class Game {
       })
     );
     const finalPopup = new GameOverPopup(this.finalScore);
-    this.gameFieldElement.appendChild(finalPopup.element);
-    // stopGame();
+    document.body.appendChild(finalPopup.element);
   }
 
   private calculateFinalScore() {

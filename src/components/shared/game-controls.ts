@@ -1,4 +1,4 @@
-import { CUSTOM_EVENTS, GAME_STATES, MM_GAME, ROUTE_PATHS } from './constants';
+import { CUSTOM_EVENTS, GAME_STATES } from './constants';
 
 export function startGame(): void {
   document.dispatchEvent(
