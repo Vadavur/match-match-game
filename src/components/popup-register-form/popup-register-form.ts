@@ -9,7 +9,6 @@ import {
   CUSTOM_EVENTS,
   GAME_STATES,
   FORBIDDEN_NAME_SYMBOLS_REGEXP,
-  CORRECT_EMAIL_NAME_REGEXP,
 } from '../shared/constants';
 import { UserDataHandler } from '../shared/user-data-handler';
 
@@ -112,29 +111,15 @@ export class PopupRegisterForm extends BaseComponent {
     }
   }
 
-  isValid(): boolean {
-    const a = 'plug';
-    return !!this.formName; // plug
-  }
-
-  showNotValidError(): boolean {
-    const a = 'plug';
-    return !!this.formName; // plug
-  }
-
   submitUserData(event: Event): void {
     event.preventDefault();
-    if (this.isValid()) {
-      this.sendInputValuesToDB();
-      document.dispatchEvent(
-        new CustomEvent(CUSTOM_EVENTS.gameStateChange, {
-          detail: GAME_STATES.onStart,
-        })
-      );
-      document.querySelector(`.popup-field`)?.remove();
-    } else {
-      this.showNotValidError();
-    }
+    this.sendInputValuesToDB();
+    document.dispatchEvent(
+      new CustomEvent(CUSTOM_EVENTS.gameStateChange, {
+        detail: GAME_STATES.onStart,
+      })
+    );
+    document.querySelector(`.popup-field`)?.remove();
   }
 
   sendInputValuesToDB(): void {

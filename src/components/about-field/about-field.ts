@@ -1,4 +1,5 @@
 import './about-field.scss';
+import aboutImageUrl from '../../assets/images/about-me-plug.png';
 import { BaseComponent } from '../shared/base-component';
 
 export class AboutField extends BaseComponent {
@@ -6,7 +7,7 @@ export class AboutField extends BaseComponent {
     super('div', ['about-field']);
     this.element.innerHTML = `
       <img
-        src="src/assets/images/about-me-plug.png"
+        src="${aboutImageUrl}"
         alt=""
         class="about-field__plug-img"
       >

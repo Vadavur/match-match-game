@@ -66,10 +66,16 @@ export class UserDataHandler {
   private setCurrentUser(user: UserInterface) {
     this.currentUser = user;
 
-    DataBase.putToDB(
-      this.currentUser as IndexedDataType,
+    DataBase.clearDB(
       DATABASES.currentUser.name,
-      DATABASES.currentUser.keyPath
+      DATABASES.currentUser.keyPath,
+      () => {
+        DataBase.putToDB(
+          this.currentUser as IndexedDataType,
+          DATABASES.currentUser.name,
+          DATABASES.currentUser.keyPath
+        );
+      }
     );
   }
 

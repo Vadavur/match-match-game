@@ -97,4 +97,25 @@ export class DataBase {
     }
     DataBase.activateDB('readwrite', storeName, keyPathName, getAllItemsFromDB);
   }
+
+  public static clearDB(
+    storeName: string,
+    keyPathName: string,
+    callback: (user: IndexedDataType[]) => void
+  ): void {
+    function removeAllItemsFromDB(store: IDBObjectStore) {
+      const request: IDBRequest = store.clear();
+
+      request.onsuccess = () => {
+        callback(request.result);
+      };
+      request.onerror = () => {};
+    }
+    DataBase.activateDB(
+      'readwrite',
+      storeName,
+      keyPathName,
+      removeAllItemsFromDB
+    );
+  }
 }
