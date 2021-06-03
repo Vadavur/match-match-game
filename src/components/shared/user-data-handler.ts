@@ -36,9 +36,9 @@ export class UserDataHandler {
 
             if (checkedUser.avatar === '' || checkedUser.avatar === undefined) {
               checkedUser.avatar =
-                userInDB.avatar !== 'defaultAvatar'
-                  ? 'defaultAvatar' // userInDB.avatar
-                  : 'defaultAvatar';
+                userInDB.avatar === 'defaultAvatar'
+                  ? 'defaultAvatar'
+                  : `data:image/jpeg;base64,${btoa(userInDB.avatar)}`;
             }
           }
         }

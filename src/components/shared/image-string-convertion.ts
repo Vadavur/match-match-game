@@ -1,4 +1,4 @@
-// import {DataBase} from '../shared/data-base';
+// import {DataBase} from './data-base';
 
 // export function getImageAsString(rootElement: HTMLElement): void {
 
@@ -61,6 +61,63 @@
 // function doImageTest() {
 //   console.log('doImageTest');
 //   let image = document.querySelector('#testImage');
+//   let recordToLoad = parseInt(
+//     document.querySelector('#recordToLoad').value,
+//     10
+//   );
+//   if (recordToLoad === '') recordToLoad = 1;
+
+//   let trans = db.transaction(['cachedForms'], 'readonly');
+//   //hard coded id
+//   let req = trans.objectStore('cachedForms').get(recordToLoad);
+//   req.onsuccess = function (e) {
+//     let record = e.target.result;
+//     console.log('get success', record);
+//     image.src = 'data:image/jpeg;base64,' + btoa(record.data);
+//   };
+// }
+// }
+
+export function setImageAsBackGround(event: Event): void {
+  const inputElement = event.target as HTMLInputElement;
+  const file = (inputElement.files as FileList)[0];
+  const reader = new FileReader();
+  reader.readAsDataURL(file);
+  reader.onload = (readerEvent) => {
+    inputElement.style.backgroundImage = `url(${readerEvent?.target?.result})`;
+    const nextReader = new FileReader();
+    nextReader.readAsBinaryString(file);
+    nextReader.onload = (nextReaderEvent) => {
+      inputElement.innerHTML = nextReaderEvent?.target?.result as string;
+    };
+  };
+}
+
+export function exportImageToString(
+  inputElement: HTMLInputElement,
+  setImageStringValue: (stringImage: string) => void
+): void {
+  const file = (inputElement.files as FileList)[0];
+  const reader = new FileReader();
+  reader.readAsBinaryString(file);
+  reader.onload = (readerEvent) => {
+    setImageStringValue(readerEvent?.target?.result as string);
+  };
+}
+
+// export function exportStringToImage(
+//   imageString: string,
+//   imageElement: HTMLImageElement
+// ): void {
+//   const file = (inputElement.files as FileList)[0];
+//   const reader = new FileReader();
+//   reader.readAsBinaryString(file);
+//   reader.onload = (readerEvent) => {
+//     setImageStringValue(readerEvent?.target?.result as string);
+//   };
+// }
+
+// function doImageTest() {
 //   let recordToLoad = parseInt(
 //     document.querySelector('#recordToLoad').value,
 //     10

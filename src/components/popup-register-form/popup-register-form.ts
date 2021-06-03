@@ -1,4 +1,5 @@
 import './popup-register-form.scss';
+import defaultAvatarUrl from '../../assets/images/avatar-default.png';
 import { BaseComponent } from '../shared/base-component';
 import { PopupInput } from '../popup-input/popup-input';
 import { Button } from '../button/button';
@@ -11,6 +12,10 @@ import {
   FORBIDDEN_NAME_SYMBOLS_REGEXP,
 } from '../shared/constants';
 import { UserDataHandler } from '../shared/user-data-handler';
+import {
+  setImageAsBackGround,
+  exportImageToString,
+} from '../shared/image-string-convertion';
 
 interface InputAttributesInterface {
   [type: string]: string | PopupInput;
@@ -66,9 +71,16 @@ export class PopupRegisterForm extends BaseComponent {
           [type: string]: string;
         }
       );
-      input.instance.element.addEventListener('blur', (event) =>
-        this.checkValidity(event)
-      );
+      if (input.instance.element.getAttribute('type') !== 'file') {
+        input.instance.element.addEventListener('blur', (event) =>
+          this.checkValidity(event)
+        );
+      } else {
+        input.instance.element.style.backgroundImage = `url(${defaultAvatarUrl})`;
+        input.instance.element.addEventListener('change', (event) =>
+          setImageAsBackGround(event)
+        );
+      }
       const newDiv = document.createElement('div');
       newDiv.classList.add('input-area');
       this.element.appendChild(newDiv);
@@ -131,17 +143,33 @@ export class PopupRegisterForm extends BaseComponent {
       avatar: 'defaultAvatar',
     };
     this.inputsAttributes.forEach((inputAttributes) => {
-      if (inputAttributes.instance) {
-        const input = (inputAttributes.instance as PopupInput).element;
-        if (input.tagName === 'INPUT') {
-          const inputElement = input as HTMLInputElement;
-          const inputName: string = inputElement.name;
-          if (inputElement.value && inputName in user) {
-            user[inputName] = inputElement.value;
-          }
+      const popupInputElement = (inputAttributes.instance as PopupInput)
+        .element as HTMLInputElement;
+      if (popupInputElement.getAttribute('type') !== 'file') {
+        const inputName: string = popupInputElement.name;
+        if (popupInputElement.value && inputName in user) {
+          user[inputName] = popupInputElement.value;
         }
       }
     });
-    this.userDataHandler = new UserDataHandler(user);
+    const fileInputElement = (
+      this.inputsAttributes.filter((input) => {
+        const popupInputElement = (input.instance as PopupInput)
+          .element as HTMLInputElement;
+        if (popupInputElement.getAttribute('type') === 'file') {
+          return popupInputElement;
+        }
+        return false;
+      })[0].instance as PopupInput
+    ).element as HTMLInputElement;
+    if (fileInputElement.value) {
+      exportImageToString(fileInputElement, (imageString) => {
+        user.avatar = imageString;
+        this.userDataHandler = new UserDataHandler(user);
+      });
+    } else {
+      user.avatar = 'default';
+      this.userDataHandler = new UserDataHandler(user);
+    }
   }
 }

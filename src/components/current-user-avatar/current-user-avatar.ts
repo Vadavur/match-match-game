@@ -9,7 +9,9 @@ export class CurrentUserAvatar extends BaseComponent {
   constructor() {
     super('img', ['current-user-avatar']);
 
-    this.getCurrentUserAvatarFromDB();
+    setTimeout(() => {
+      this.getCurrentUserAvatarFromDB();
+    }, 500);
   }
 
   private getCurrentUserAvatarFromDB() {
@@ -22,10 +24,13 @@ export class CurrentUserAvatar extends BaseComponent {
       (request: IndexedDataType[]) => {
         const currentUser = request[0] as UserInterface;
         const imageElement = this.element as HTMLImageElement;
-        imageElement.src =
-          currentUser.avatar === 'default'
-            ? defaultAvatarUrl
-            : defaultAvatarUrl; // currentUser.avatar;
+        if (currentUser.avatar === 'default') {
+          imageElement.src = defaultAvatarUrl;
+        } else {
+          imageElement.src = `data:image/jpeg;base64,${btoa(
+            currentUser.avatar
+          )}`;
+        }
         imageElement.alt = `${currentUser.firstName} ${currentUser.lastName} avatar`;
       }
     );
