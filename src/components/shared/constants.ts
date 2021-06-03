@@ -6,10 +6,12 @@ export const GAME_SETTINGS = {
   gameDifficulty: {
     name: 'gameDifficulty',
     options: ['4x4', '6x6', '8x8'],
+    dataTitle: 'Choose game difficulty:',
   },
   cardsType: {
     name: 'cardsType',
     options: ['animals', 'cars', 'programming'],
+    dataTitle: `Choose cards' images type:`,
   },
 };
 
@@ -55,7 +57,7 @@ export const CARDS_FIELD_GAP = 5; // px
 
 export const FLIPPED_STATE_TIMEOUT = 500; // ms
 
-export const SHOW_CARDS_SECONDS_PERIOD = 3; // sec
+export const SHOW_CARDS_SECONDS_PERIOD = 5; // sec
 
 export const SCORE_TABLE_LIMIT = 10; // sec
 

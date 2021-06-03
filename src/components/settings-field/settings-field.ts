@@ -5,22 +5,25 @@ import { DataBase } from '../shared/data-base';
 import { GAME_SETTINGS, DATABASES } from '../shared/constants';
 
 export class SettingsField extends BaseComponent {
-  private readonly gameDifficultySelectInputs: SelectInput[] = [];
+  private readonly gameSettingsSelectInputs: SelectInput[] = [];
 
   constructor() {
     super('div', ['settings-field']);
     Object.entries(GAME_SETTINGS).forEach((setting, index) => {
-      this.gameDifficultySelectInputs.push(
+      this.gameSettingsSelectInputs.push(
         new SelectInput(setting[1].name, setting[1].options, () => {
           this.setGameSettings();
         })
       );
-      this.element.appendChild(this.gameDifficultySelectInputs[index].element);
+      const settingTitle = document.createElement('p');
+      settingTitle.innerHTML = setting[1].dataTitle;
+      this.element.appendChild(settingTitle);
+      this.element.appendChild(this.gameSettingsSelectInputs[index].element);
     });
   }
 
   private setGameSettings() {
-    this.gameDifficultySelectInputs.forEach((selectInput) => {
+    this.gameSettingsSelectInputs.forEach((selectInput) => {
       const selectElement = selectInput.element as HTMLSelectElement;
       DataBase.putToDB(
         { name: selectElement.name, option: selectElement.value },

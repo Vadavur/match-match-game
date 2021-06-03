@@ -6,9 +6,9 @@ import defaultAvatarUrl from '../../assets/images/avatar-default.png';
 export class ScoreItem extends BaseComponent {
   constructor(itemSource: ScoreItemInterface) {
     const avatarSrc =
-      itemSource.avatar === 'default'
+      itemSource.avatar === 'defaultAvatar'
         ? defaultAvatarUrl
-        : `data:image/jpeg;base64,${btoa(itemSource.avatar)}`; // getImageFromString()
+        : `data:image/jpeg;base64,${btoa(itemSource.avatar)}`;
     super('li', ['score-item']);
     this.element.innerHTML = `
       <img class="score-item__avatar" src="${avatarSrc}" alt="${itemSource.name}'s avatar">

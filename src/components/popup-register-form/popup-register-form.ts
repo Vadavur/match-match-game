@@ -77,6 +77,7 @@ export class PopupRegisterForm extends BaseComponent {
         );
       } else {
         input.instance.element.style.backgroundImage = `url(${defaultAvatarUrl})`;
+        input.instance.element.lang = 'en';
         input.instance.element.addEventListener('change', (event) =>
           setImageAsBackGround(event)
         );
@@ -168,7 +169,7 @@ export class PopupRegisterForm extends BaseComponent {
         this.userDataHandler = new UserDataHandler(user);
       });
     } else {
-      user.avatar = 'default';
+      user.avatar = 'defaultAvatar';
       this.userDataHandler = new UserDataHandler(user);
     }
   }

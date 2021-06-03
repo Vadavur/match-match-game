@@ -34,11 +34,11 @@ export class UserDataHandler {
           ) {
             checkedUser.score = userInDB.score;
 
-            if (checkedUser.avatar === '' || checkedUser.avatar === undefined) {
+            if (checkedUser.avatar === 'defaultAvatar') {
               checkedUser.avatar =
                 userInDB.avatar === 'defaultAvatar'
                   ? 'defaultAvatar'
-                  : `data:image/jpeg;base64,${btoa(userInDB.avatar)}`;
+                  : userInDB.avatar;
             }
           }
         }

@@ -11,7 +11,7 @@ export class CurrentUserAvatar extends BaseComponent {
 
     setTimeout(() => {
       this.getCurrentUserAvatarFromDB();
-    }, 500);
+    }, 1000);
   }
 
   private getCurrentUserAvatarFromDB() {
@@ -24,7 +24,7 @@ export class CurrentUserAvatar extends BaseComponent {
       (request: IndexedDataType[]) => {
         const currentUser = request[0] as UserInterface;
         const imageElement = this.element as HTMLImageElement;
-        if (currentUser.avatar === 'default') {
+        if (currentUser.avatar === 'defaultAvatar') {
           imageElement.src = defaultAvatarUrl;
         } else {
           imageElement.src = `data:image/jpeg;base64,${btoa(
