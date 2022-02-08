@@ -22,6 +22,7 @@ A popup window appears after clicking on a registration button, where user can p
 
 - Typescript
 - SCSS
+- BEM
 - Components based design
 - Routing
 - IndexedDB
